@@ -1,6 +1,6 @@
 
 
-- [开始](/README)
+- [开始](README)
 - 算法
   - [基础](/algorithm/README)
   - [数据结构](/algorithm/DataStructure)
@@ -58,7 +58,7 @@
   - [进阶](/js/ADV)
   - [工作](/js/WORK)
 - React
-  - [基础](/React/README)
+  - [基础](/React/React)
   - [React Native](/React/React Native)
   - [React Native Library](/React/React Native Library)
 - SQL
