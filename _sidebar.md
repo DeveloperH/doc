@@ -1,6 +1,6 @@
 
 
-- [开始](README)
+- [开始](/README)
 - 算法
   - [基础](/algorithm/README)
   - [数据结构](/algorithm/DataStructure)
