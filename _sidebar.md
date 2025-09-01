@@ -89,7 +89,7 @@
   - [Pinia](/vue3/Pinia)
   - [VitePress](/vue3/VitePress)
   - [Nuxtjs](/vue3/Nuxtjs)
-  - [Vue.js 设计与实现](/vue3/Vue.js 设计与实现)
+  - [Vue.js 设计与实现](/vue3/Vue.js设计与实现)
 - [webpack](/webpack/README)
 - [AI](AI)
 - [运维](DevOps)
