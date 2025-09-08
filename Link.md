@@ -122,6 +122,8 @@
   * WebStack https://webstack.cc/
   * https://tool.lu/
   * https://www.jyshare.com/
+  * https://www.67tool.com/
+  * 快标签，识别生成条形码二维码 https://www.6label.com/work
 * 字体（宋体、黑体、仿宋、隶书、楷书 不侵权。思源黑体、阿里巴巴普惠体可商用）
   * 猫啃网-免费商用字体 https://www.maoken.com/
   * 字由-免费的字体管理工具 https://www.hellofont.cn/
