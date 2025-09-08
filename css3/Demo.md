@@ -58,6 +58,8 @@ div {
 
 ## flex: 1 省略号无效
 
+在 CSS 中，`flex: 1; width: 0;` 是一种常见的布局技巧，主要用于 **控制 Flex 子项的尺寸分配**，特别是在 **文本溢出（ellipsis）** 或 **等分布局** 时非常有用。
+
 在 `flex:1` 的盒子中，设置 `overflow: hidden;` 或 `width: 0;` 即可。
 
 ```scss
@@ -69,6 +71,7 @@ div {
 	flex: 1;
 	overflow: hidden;
 	// width: 0;
+  // min-width: 0; // 现代浏览器更推荐使用
 }
 ```
 

@@ -1185,6 +1185,21 @@ fahrenheitToCelsius(32);    // 0
 
 
 
+### 表单过滤空值
+
+```js
+const cleanedData = {
+  ...this.data.detail
+};
+for (const key in cleanedData) {
+  if (cleanedData[key] === null || cleanedData[key] === undefined) {
+    cleanedData[key] = '';
+  }
+}
+```
+
+
+
 
 
 ## 水印
