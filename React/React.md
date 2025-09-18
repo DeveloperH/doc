@@ -16,6 +16,10 @@ React 最新版本：v19.1
 
 ## JSX
 
+ JSX 允许你在 JavaScript 中嵌入标签。
+
+没有括号包裹的话，任何在 `return` 下一行的代码都将被忽略！
+
 JSX 比 HTML 更加严格。你必须闭合标签，如 `<br />`。你的组件也不能返回多个 JSX 标签。你必须将它们包裹到一个共享的父级中，比如 `<div>...</div>` 或使用空的 `<>...</>` 包裹：
 
 ```react
@@ -52,7 +56,11 @@ function AboutPage() {
 
 ### 显示数据
 
+大括号内的任何 JavaScript 表达式都能正常运行，包括函数调用。
+
 `style={{}}` 并不是一个特殊的语法，而是 `style={ }` JSX 大括号内的一个普通 `{}` 对象。当你的样式依赖于 JavaScript 变量时，你可以使用 `style` 属性。
+
+内联 `style` 属性使用驼峰命名法编写。
 
 ```react
 const user = {
@@ -99,6 +107,8 @@ return (
 );
 ```
 
+如果不想有任何东西进行渲染，可以直接返回 `null`。
+
 
 
 三元表达式方式：
@@ -122,6 +132,10 @@ return (
   {isLoggedIn && <AdminPanel />}
 </div>
 ```
+
+**切勿将数字放在 `&&` 左侧.**
+
+JavaScript 会自动将左侧的值转换成布尔类型以判断条件成立与否。然而，如果左侧是 `0`，整个表达式将变成左侧的值（`0`），React 此时则会渲染 `0` 而不是不进行渲染。
 
 
 
@@ -155,6 +169,27 @@ export default function ShoppingList() {
   );
 }
 ```
+
+
+
+如果你想让每个列表项都输出多个 DOM 节点而非一个的话，该怎么做呢？
+
+Fragment 语法的简写形式 `<> </>` 无法接受 key 值，所以你只能要么把生成的节点用一个 `<div>` 标签包裹起来，要么使用长一点但更明确的 `<Fragment>` 写法：
+
+```react
+import { Fragment } from 'react';
+
+// ...
+
+const listItems = people.map(person =>
+  <Fragment key={person.id}>
+    <h1>{person.name}</h1>
+    <p>{person.bio}</p>
+  </Fragment>
+);
+```
+
+这里的 Fragment 标签本身并不会出现在 DOM 上，这串代码最终会转换成 `<h1>`、`<p>`、`<h1>`、`<p>`…… 的列表。
 
 
 
@@ -223,12 +258,22 @@ Hook 比普通函数更为严格。你只能在你的组件（或其他 Hook）�
 
 
 
-### 组件间共享数据
+### 组件间共享数据 prop
 
 可以使用 **prop** 方式传递的信息。
 
+你不能改变 props。当你需要交互性时，你可以设置 state。
+
 ```react
 import { useState } from 'react';
+
+function MyButton({ count, onClick }) {
+  return (
+    <button onClick={onClick}>
+      点了 {count} 次
+    </button>
+  );
+}
 
 export default function MyApp() {
   const [count, setCount] = useState(0);
@@ -245,14 +290,6 @@ export default function MyApp() {
     </div>
   );
 }
-
-function MyButton({ count, onClick }) {
-  return (
-    <button onClick={onClick}>
-      点了 {count} 次
-    </button>
-  );
-}
 ```
 
 
@@ -261,9 +298,11 @@ function MyButton({ count, onClick }) {
 
 ## 组件
 
+**React 组件是一段可以 使用标签进行扩展 的 JavaScript 函数**。
+
 React 应用程序是由 **组件** 组成的。一个组件是 UI（用户界面）的一部分，它拥有自己的逻辑和外观。组件可以小到一个按钮，也可以大到整个页面。
 
-React 组件必须以大写字母开头，而 HTML 标签则必须是小写字母。
+**React 组件必须以大写字母开头**，而 HTML 标签则必须是小写字母。
 
 React 组件是返回标签的 JavaScript 函数：
 
@@ -296,7 +335,35 @@ export default function MyApp() {
 
 ### Next.js
 
+Next.js 的 App Router 是一个 React 框架，充分利用了 React 的架构，支持全栈 React 应用。
+
+```sh
+npx create-next-app@latest
+```
+
+
+
 https://github.com/vercel/next.js
+
+
+
+### React Router
+
+React Router 是 React 最流行的路由库，可以与 Vite 结合创建一个全栈 React 框架。它强调标准的 Web API 并提供了多个 可部署的模板 适用于各种 JavaScript 运行时和平台。
+
+文档：https://github.com/remix-run/react-router
+
+模板：https://github.com/remix-run/react-router-templates
+
+
+
+```sh
+# 默认模板：功能齐全的生产就绪模板，具有服务器端渲染、TypeScript、TailwindCSS 和 Docker 支持。非常适合构建具有内置资产优化和热模块更换功能的可扩展应用程序。
+npx create-react-router@latest
+
+# 默认模板的无 TypeScript 版本，提供相同的生产就绪功能，但无需类型检查。
+npx create-react-router@latest --template remix-run/react-router-templates/javascript
+```
 
 
 
@@ -306,15 +373,47 @@ https://github.com/remix-run/remix
 
 
 
+### Expo
+
+Expo 是一个 React 框架，让你可以创建支持真正原生 UI 的通用 Android、iOS 和 Web 应用。它为 React Native 提供了一个 SDK，让原生部分更易于使用。
+
+```sh
+npx create-expo-app@latest
+```
 
 
 
+https://github.com/expo/expo
+
+
+
+## React 开发者工具
+
+使用 React 开发者工具检查 React components，编辑 props 和 state，并识别性能问题。
+
+- [安装 **Chrome** 扩展](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+
+
+
+## 组件库
+
+### Chakra UI
+
+https://chakra-ui.com/
+
+
+
+### Material UI
+
+https://mui.com/material-ui/
+
+pro版本收费
 
 
 
 ## TODO
 
-https://zh-hans.react.dev/learn/installation
+https://zh-hans.react.dev/learn/adding-interactivity
 
 
 

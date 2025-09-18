@@ -458,6 +458,14 @@ Snack Player 是 Expo 创建的一个便捷工具，用于嵌入和运行 React 
 
 
 
+## Metro
+
+这是 React Native 的 JavaScript 打包工具。Metro 支持 iOS 和 Android 等平台的打包。
+
+https://github.com/facebook/metro
+
+
+
 ##  Native Directory
 
 Native Directory 网址：https://reactnative.directory/

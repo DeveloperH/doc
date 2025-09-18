@@ -3025,6 +3025,8 @@ Chance 是一个轻量级的 JavaScript 随机字符串生成器插件，可帮�
 
 UUID 是一个用于在 JavaScript 中生成符合 RFC 的 UUID 的实用程序库。
 
+https://github.com/uuidjs/uuid
+
 
 
 ### Nano ID
