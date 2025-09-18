@@ -12,6 +12,18 @@ React Native 最新版本：0.79.2
 
 
 
+运行环境
+
+\- react 19.0.0
+
+\- react-native 0.79.2
+
+\- nodejs 20.10.0
+
+\- jdk 21.0.7
+
+
+
 VS Code 插件：
 
 * [React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native)
