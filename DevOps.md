@@ -4,9 +4,9 @@
 
 # CentOS
 
-CentOS（Community Enterprise Operating System，中文意思是社区企业操作系统）是Linux发行版之一，是免费的、开源的、可以重新分发的开源操作系统。
+CentOS（Community Enterprise Operating System，中文意思是社区企业操作系统）是 Linux 发行版之一，是免费的、开源的、可以重新分发的开源操作系统。
 
-CentOS Linux发行版是一个稳定的，可预测的，可管理的和可复现的平台，源于Red Hat Enterprise Linux（RHEL）依照开放源代码（大部分是GPL开源协议）规定释出的源码所编译而成。
+CentOS Linux 发行版是一个稳定的，可预测的，可管理的和可复现的平台，源于 Red Hat Enterprise Linux（RHEL）依照开放源代码（大部分是GPL开源协议）规定释出的源码所编译而成。
 
 Red Hat软件包格式为 `.rpm` 。
 
@@ -1993,14 +1993,7 @@ nginx -s stop
 
 # 重新加载
 nginx -s reload
-
-
-
-
-
 ```
-
-
 
 
 
@@ -2101,9 +2094,8 @@ http {
     include             /etc/nginx/mime.types;
     default_type        application/octet-stream;
 
-    # Load modular configuration files from the /etc/nginx/conf.d directory.
-    # See http://nginx.org/en/docs/ngx_core_module.html#include
-    # for more information.
+    # 从 /etc/nginx/conf.d 目录加载模块化配置文件。
+    # http://nginx.org/en/docs/ngx_core_module.html#include 查看更多信息
     include /etc/nginx/conf.d/*.conf;
 
     server {
@@ -2112,7 +2104,7 @@ http {
         server_name  _;
         root         /usr/share/nginx/html;
 
-        # Load configuration files for the default server block.
+        # 加载默认 server 块的配置文件。
         include /etc/nginx/default.d/*.conf;
 
         error_page 404 /404.html;
@@ -2153,10 +2145,6 @@ http {
 
 }
 ```
-
-
-
-
 
 
 
@@ -2223,50 +2211,6 @@ server {
 为了加快网站的解析速度，可以把动态页面和静态页面由不同的服务器来解析，加快解析速度，降低原来单个服务器的压力。
 
 ![](http://qiniu.huangyihui.cn//202503252312151.jpg)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2343,20 +2287,23 @@ location / {
 
    ```sh
    # step 1: 安装必要的一些系统工具
-   sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+   yum install -y yum-utils device-mapper-persistent-data lvm2
    
    # Step 2: 添加软件源信息
-   sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+   yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
    
    # Step 3
-   sudo sed -i 's+download.docker.com+mirrors.aliyun.com/docker-ce+' /etc/yum.repos.d/docker-ce.repo
+   sed -i 's+download.docker.com+mirrors.aliyun.com/docker-ce+' /etc/yum.repos.d/docker-ce.repo
    
    # Step 4: 更新并安装Docker-CE
-   sudo yum makecache fast
-   sudo yum -y install docker-ce
+   yum makecache fast
+   yum -y install docker-ce
    
-   # Step 4: 开启Docker服务
-   sudo systemctl start docker
+   # Step 5: 开启Docker服务
+   systemctl start docker
+   
+   # Step 6: 设置开启自启
+   systemctl enable docker
    
    # 验证安装
    docker version
@@ -2379,15 +2326,12 @@ location / {
    # 重启
    systemctl restart docker
    
-   # 设置开启自启
-   systemctl enable docker
-   
    # 查看正在运行的容器
    docker ps
    ```
-
    
-
+   
+   
 5. 配置镜像加速
 
    1. 进入[阿里云](https://www.aliyun.com/)并登录，点击控制台 → 容器镜像服务→ 镜像工具 → 镜像加速器
@@ -2395,14 +2339,16 @@ location / {
    2. 根据文档操作
 
       ```sh
-      sudo mkdir -p /etc/docker
-      sudo tee /etc/docker/daemon.json <<-'EOF'
+      mkdir -p /etc/docker
+      
+      tee /etc/docker/daemon.json <<-'EOF'
       {
         "registry-mirrors": ["https://eekc7qb2.mirror.aliyuncs.com"]
       }
       EOF
-      sudo systemctl daemon-reload
-      sudo systemctl restart docker
+      
+      systemctl daemon-reload
+      systemctl restart docker
       ```
 
 
@@ -2729,7 +2675,7 @@ docker run -d \
 	-- network mynetwork \
 	nginx
 	
-	docker run -d \
+docker run -d \
 	--name nginx \
 	-p 80:80 \
 	-v /root/nginx/html:/usr/share/nginx/html \
