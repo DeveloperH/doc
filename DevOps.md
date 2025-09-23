@@ -2377,6 +2377,8 @@ Docker 会在运行镜像时创建一个隔离环境，称为**容器（containe
 
 * `docker images` ：查看本地镜像列表
 * `docker rmi 镜像名称` ：删除镜像
+* `docker image prune -a [-f]` ：删除所有未被使用的镜像
+  * `-f` ：强制删除所有未被使用的镜像（无需确认）
 * `docker run` ：创建并运行容器
   * `docker run -d --name ms -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 mysql`
 * `docker stop 容器名` ：停止容器
