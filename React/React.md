@@ -1643,6 +1643,528 @@ function Task({ task }) {
 
 
 
+## ref
+
+
+
+### 使用 ref 引用值
+
+当你希望组件“记住”某些信息，但又不想让这些信息触发新的渲染时，你可以使用 ref 。
+
+你可以用 `ref.current` 属性访问该 ref 的当前值。这个值是有意被设置为可变的，意味着你既可以读取它也可以写入它。
+
+这里的 ref 指向一个数字，但是，像 state 一样，你可以让它指向任何东西：字符串、对象，甚至是函数。与 state 不同的是，ref 是一个普通的 JavaScript 对象，具有可以被读取和修改的 `current` 属性。
+
+请注意，**组件不会在每次递增时重新渲染。** 与 state 一样，React 会在每次重新渲染之间保留 ref。但是，设置 state 会重新渲染组件，更改 ref 不会！
+
+```react
+import { useRef } from 'react';
+
+const ref = useRef(0);
+
+// useRef 返回一个这样的对象:
+{ 
+  current: 0 // 你向 useRef 传入的值
+}
+
+// 操作 ref
+ref.current = ref.current + 1;
+```
+
+
+
+### 使用 ref 操作 DOM
+
+`useRef` Hook 返回一个对象，该对象有一个名为 `current` 的属性。最初，`myRef.current` 是 `null`。当 React 为这个 `<div>` 创建一个 DOM 节点时，React 会把对该节点的引用放入 `myRef.current`。
+
+```react
+import { useRef } from 'react';
+
+export default function Form() {
+  const inputRef = useRef(null);
+
+  function handleClick() {
+    inputRef.current.focus();
+  }
+
+  return (
+    <>
+    	// 将 ref 作为 ref 属性值传递给想要获取的 DOM 节点的 JSX 标签：
+      <input ref={inputRef} />
+      <button onClick={handleClick}>
+        聚焦输入框
+      </button>
+    </>
+  );
+}
+```
+
+
+
+注意的是：避免更改由 React 管理的 DOM 节点。如果你确实修改了 React 管理的 DOM 节点，请修改 React 没有理由更新的部分。
+
+
+
+### 访问另一个组件的 DOM 节点
+
+Ref 是一个脱围机制。手动操作 **其它** 组件的 DOM 节点可能会让代码变得脆弱。
+
+你可以 像其它 prop 一样 将 ref 从父组件传递给子组件。
+
+```react
+import { useRef } from 'react';
+
+function MyInput({ ref }) {
+  return <input ref={ref} />;
+}
+
+export default function MyForm() {
+  const inputRef = useRef(null);
+
+  function handleClick() {
+    inputRef.current.focus();
+  }
+
+  return (
+    <>
+      <MyInput ref={inputRef} />
+      <button onClick={handleClick}>
+        聚焦输入框
+      </button>
+    </>
+  );
+}
+```
+
+在 `MyForm` 中创建的 `inputRef` 现在指向 `MyInput` 返回的 `<input>` DOM 元素。在 `MyForm` 中创建的点击处理程序可以访问 `inputRef` 并且调用 `focus()` 来将焦点设置在 `<input>` 上。
+
+
+
+### 使用命令句柄暴露一部分 API
+
+在上面的例子中，`MyInput` 暴露了原始的 DOM 元素 input。这让父组件可以对其调用`focus()`。然而，这也让父组件能够做其他事情 —— 例如，改变其 CSS 样式。在一些不常见的情况下，你可能希望限制暴露的功能。你可以用 `useImperativeHandle` 来做到这一点：
+
+```react
+import { useRef, useImperativeHandle } from "react";
+
+function MyInput({ ref }) {
+  const realInputRef = useRef(null);
+  useImperativeHandle(ref, () => ({
+    // 只暴露 focus，没有别的
+    focus() {
+      realInputRef.current.focus();
+    },
+  }));
+  return <input ref={realInputRef} />;
+};
+
+export default function Form() {
+  const inputRef = useRef(null);
+
+  function handleClick() {
+    inputRef.current.focus();
+  }
+
+  return (
+    <>
+      <MyInput ref={inputRef} />
+      <button onClick={handleClick}>聚焦输入框</button>
+    </>
+  );
+}
+```
+
+这里，`MyInput` 中的 `realInputRef` 保存了实际的 input DOM 节点。 但是，`useImperativeHandle` 指示 React 将你自己指定的对象作为父组件的 ref 值。 所以 `Form` 组件内的 `inputRef.current` 将只有 `focus` 方法。在这种情况下，ref “句柄”不是 DOM 节点，而是你在 `useImperativeHandle` 调用中创建的自定义对象。
+
+
+
+### 用 flushSync 同步更新 state
+
+在 React 中，state 更新是排队进行的。你可以强制 React 同步更新（“刷新”）DOM。 为此，从 `react-dom` 导入 `flushSync` 并**将 state 更新包裹** 到 `flushSync` 调用中：
+
+```react
+import { useState, useRef } from 'react';
+import { flushSync } from 'react-dom';
+
+export default function TodoList() {
+  const listRef = useRef(null);
+  const [text, setText] = useState('');
+  const [todos, setTodos] = useState(
+    initialTodos
+  );
+
+  function handleAdd() {
+    const newTodo = { id: nextId++, text: text };
+    
+    // 这将指示 React 当封装在 flushSync 中的代码执行后，立即同步更新 DOM。
+    flushSync(() => {
+      setText('');
+      setTodos([ ...todos, newTodo]);
+    });
+    listRef.current.lastChild.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest'
+    });
+  }
+
+  return (
+    <>
+      <button onClick={handleAdd}>
+        添加
+      </button>
+      <input
+        value={text}
+        onChange={e => setText(e.target.value)}
+      />
+      <ul ref={listRef}>
+        {todos.map(todo => (
+          <li key={todo.id}>{todo.text}</li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+let nextId = 0;
+let initialTodos = [];
+for (let i = 0; i < 20; i++) {
+  initialTodos.push({
+    id: nextId++,
+    text: '待办 #' + (i + 1)
+  });
+}
+```
+
+
+
+### 使用 ref 回调管理 ref 列表
+
+在上面的例子中，ref 的数量是预先确定的。但有时候，你可能需要为列表中的每一项都绑定 ref ，而你又不知道会有多少项。像下面这样做**是行不通的**：
+
+```react
+<ul>
+  {items.map((item) => {
+    // 行不通！
+    const ref = useRef(null);
+    return <li ref={ref} />;
+  })}
+</ul>
+```
+
+这是因为 **Hook 只能在组件的顶层被调用**。不能在循环语句、条件语句或 `map()` 函数中调用 `useRef` 。
+
+
+
+解决方案是**将函数传递给 `ref` 属性**。这称为 `ref` 回调。当需要设置 ref 时，React 将传入 DOM 节点来调用你的 ref 回调，并在需要清除它时传入 `null` 。这使你可以维护自己的数组或 Map，并通过其索引或某种类型的 ID 访问任何 ref。
+
+```react
+import { useRef, useState } from "react";
+
+export default function CatFriends() {
+  const itemsRef = useRef(null);
+  const [catList, setCatList] = useState(setupCatList);
+
+  function scrollToCat(cat) {
+    const map = getMap();
+    const node = map.get(cat);
+    node.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+
+  function getMap() {
+    if (!itemsRef.current) {
+      // 首次运行时初始化 Map。
+      itemsRef.current = new Map();
+    }
+    return itemsRef.current;
+  }
+
+  return (
+    <>
+      <nav>
+        <button onClick={() => scrollToCat(catList[0])}>Neo</button>
+        <button onClick={() => scrollToCat(catList[5])}>Millie</button>
+        <button onClick={() => scrollToCat(catList[8])}>Bella</button>
+      </nav>
+      <div>
+        <ul>
+          {catList.map((cat) => (
+            <li
+              key={cat.id}
+              ref={(node) => {
+                const map = getMap();
+                map.set(cat, node);
+
+                return () => {
+                  map.delete(cat);
+                };
+              }}
+            >
+              <img src={cat.imageUrl} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+}
+
+function setupCatList() {
+  const catCount = 10;
+  const catList = new Array(catCount)
+  for (let i = 0; i < catCount; i++) {
+    let imageUrl = '';
+    if (i < 5) {
+      imageUrl = "https://placecats.com/neo/320/240";
+    } else if (i < 8) {
+      imageUrl = "https://placecats.com/millie/320/240";
+    } else {
+      imageUrl = "https://placecats.com/bella/320/240";
+    }
+    catList[i] = {
+      id: i,
+      imageUrl,
+    };
+  }
+  return catList;
+}
+```
+
+
+
+## Effect
+
+有些组件需要与外部系统同步。例如，你可能希望根据 React state 控制非 React 组件、建立服务器连接或当组件在页面显示时发送分析日志。Effect 允许你在渲染结束后执行一些代码，以便将组件与 React 外部的某个系统相同步。
+
+**Effect 允许你指定由渲染自身，而不是特定事件引起的副作用**。在聊天中发送消息是一个“事件”，因为它直接由用户点击特定按钮引起。然而，建立服务器连接是一个 Effect，因为无论哪种交互致使组件出现，它都应该发生。Effect 在提交（React 把更改提交到 DOM 上）结束后、页面更新后运行。此时是将 React 组件与外部系统（如网络或第三方库）同步的最佳时机。
+
+
+
+### 声明 Effect
+
+要编写一个 Effect, 请遵循以下三个步骤：
+
+1. **声明 Effect**。通常 Effect 会在每次提交后运行。
+2. **指定 Effect 依赖**。大多数 Effect 应该按需运行，而不是在每次渲染后都运行。
+3. **必要时添加清理操作**。一些 Effect 需要指定如何停止、撤销，或者清除它们所执行的操作。例如，“连接”需要“断开”，“订阅”需要“退订”，而“获取数据”需要“取消”或者“忽略”。你将学习如何通过返回一个 **清理函数** 来实现这些。
+
+
+
+每当你的组件渲染时，React 会先更新页面，然后再运行 `useEffect` 中的代码。换句话说，**`useEffect` 会“延迟”一段代码的运行，直到渲染结果反映在页面上**。
+
+```react
+import { useEffect } from 'react';
+
+function MyComponent() {
+  useEffect(() => {
+    // 每次渲染后都会执行此处的代码
+  });
+  return <div />;
+}
+```
+
+
+
+默认情况下，Effect 会在 **每次** 渲染后运行。**正因如此，以下代码会陷入死循环**：
+
+```react
+const [count, setCount] = useState(0);
+useEffect(() => {
+  // Effect 在渲染结束后运行。更新 state 会触发重新渲染。
+  setCount(count + 1);
+});
+```
+
+
+
+### 指定 Effect 的依赖项
+
+默认情况下，Effect 会在 **每次** 渲染后运行。但往往 **这并不是你想要的**。
+
+通过在调用 `useEffect` 时指定一个 **依赖数组** 作为第二个参数，你可以让 React **跳过不必要地重新运行 Effect**。
+
+依赖数组可以包含多个依赖项。只有当你指定的 **所有** 依赖项的值都与上一次渲染时完全相同，React 才会跳过重新运行该 Effect。React 使用 `Object.is` 来比较依赖项的值。
+
+**请注意，你不能随意“选择”依赖项**。如果你指定的依赖项与 React 根据 Effect 内部代码所推断出的依赖项不匹配，你将收到来自 linter 的错误提示。这有助于捕捉代码中的许多 bug。
+
+
+
+```react
+import { useState, useRef, useEffect } from 'react';
+
+function VideoPlayer({ src, isPlaying }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (isPlaying) {
+      console.log('调用 video.play()');
+      ref.current.play();
+    } else {
+      console.log('调用 video.pause()');
+      ref.current.pause();
+    }
+  }, [isPlaying]);
+  // 指定 [isPlaying] 作为依赖数组会告诉 React：如果 isPlaying 与上次渲染时相同，就跳过重新运行 Effect。这样一来，输入框的输入不会触发 Effect 重新运行，只有按下播放/暂停按钮会触发。
+
+  return <video ref={ref} src={src} loop playsInline />;
+}
+
+export default function App() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [text, setText] = useState('');
+  return (
+    <>
+      <input value={text} onChange={e => setText(e.target.value)} />
+      <button onClick={() => setIsPlaying(!isPlaying)}>
+        {isPlaying ? '暂停' : '播放'}
+      </button>
+      <VideoPlayer
+        isPlaying={isPlaying}
+        src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+      />
+    </>
+  );
+}
+```
+
+
+
+为什么依赖数组中可以省略 ref ? 
+
+下面的 Effect 同时使用了 `ref` 与 `isPlaying` prop，但是只有 `isPlaying` 被声明为依赖项：
+
+```react
+function VideoPlayer({ src, isPlaying }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (isPlaying) {
+      ref.current.play();
+    } else {
+      ref.current.pause();
+    }
+  }, [isPlaying]);
+```
+
+这是因为 `ref` 具有 **稳定** 的标识：React 确保你在每轮渲染中调用同一个 `useRef` 时，总能获得相同的对象。ref 不会改变，所以它不会导致重新运行 Effect。因此，在依赖数组中它可有可无。把它加进去也可以。
+
+
+
+没有依赖数组和使用空数组 `[]` 作为依赖数组，行为是不同的：
+
+```react
+useEffect(() => {
+  // 这里的代码会在每次渲染后运行
+});
+
+useEffect(() => {
+  // 这里的代码只会在组件挂载（首次出现）时运行
+}, []);
+
+useEffect(() => {
+  // 这里的代码不但会在组件挂载时运行，而且当 a 或 b 的值自上次渲染后发生变化后也会运行
+}, [a, b]);
+```
+
+
+
+### 按需添加清理（cleanup）函数
+
+React 会在每次 Effect 重新运行之前调用清理函数，并在组件卸载（被移除）时最后一次调用清理函数。
+
+```react
+import { useState, useEffect } from 'react';
+import { createConnection } from './chat.js';
+
+export default function ChatRoom() {
+  useEffect(() => {
+    const connection = createConnection();
+    connection.connect();
+    return () => connection.disconnect();
+  }, []);
+  return <h1>欢迎来到聊天室！</h1>;
+}
+```
+
+```react
+export function createConnection() {
+  // 真正的实现实际上会连接到服务器
+  return {
+    connect() {
+      console.log('✅ 连接中……');
+    },
+    disconnect() {
+      console.log('❌ 连接断开。');
+    }
+  };
+}
+```
+
+
+
+## 自定义 Hook 复用逻辑
+
+Hook 的名称必须永远以 use 开头。
+
+```react
+import { useOnlineStatus } from './useOnlineStatus.js';
+
+function StatusBar() {
+  const isOnline = useOnlineStatus();
+  return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+}
+
+function SaveButton() {
+  const isOnline = useOnlineStatus();
+
+  function handleSaveClick() {
+    console.log('✅ Progress saved');
+  }
+
+  return (
+    <button disabled={!isOnline} onClick={handleSaveClick}>
+      {isOnline ? 'Save progress' : 'Reconnecting...'}
+    </button>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <SaveButton />
+      <StatusBar />
+    </>
+  );
+}
+```
+
+```react
+import { useState, useEffect } from 'react';
+
+export function useOnlineStatus() {
+  const [isOnline, setIsOnline] = useState(true);
+  useEffect(() => {
+    function handleOnline() {
+      setIsOnline(true);
+    }
+    function handleOffline() {
+      setIsOnline(false);
+    }
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+  return isOnline;
+}
+```
+
+
+
 
 
 ## 全栈框架
@@ -1884,13 +2406,9 @@ function ItemList({ artworks, onToggle }) {
 
 
 
-
-
-
-
 ## TODO
 
-https://zh-hans.react.dev/learn/referencing-values-with-refs
+https://zh-hans.react.dev/reference/react
 
 
 
