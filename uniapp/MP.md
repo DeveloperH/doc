@@ -153,27 +153,17 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 ### 纯 canvas
 
 ```
-// pages/my/poster/poster.js
-const util = require("../../../utils/util");
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    resourcesUrl: util.config.resourcesUrl,
     navData: {},
     list: [],
-    poster: [],
+    poster: ['https://demo.com/1.png'],
+  },
 
-    // img: '',
-    // bgList: [
-    //   'https://sjbz-fd.zol-img.com.cn/t_s320x510c5/g7/M00/08/06/ChMkK2L6-KeIOUkCAEC4Qsgt1fcAAGhNgJFUHgAQLha520.jpg',
-    //   'https://sjbz-fd.zol-img.com.cn/t_s320x510c5/g7/M00/01/0A/ChMkK2MRcE-IAGydADFRxLFbSKUAAHGHwNjMN4AMVHc935.jpg'
-    // ],
-
-
-    
+  onLoad(options) {
+    setTimeout(() => {
+      this.createPoster(0, 'https://demo.com/1.png')
+    }, 500)
   },
 
   rpx2px(arg) {
@@ -204,397 +194,6 @@ Page({
     cxt.fill();
     cxt.restore();
   },
-  /**该方法用来绘制圆角矩形 
-   *@param cxt:canvas的上下文环境 
-   *@param x:左上角x轴坐标 
-   *@param y:左上角y轴坐标 
-   *@param width:矩形的宽度 
-   *@param height:矩形的高度 
-   *@param radius:圆的半径 
-   *@param lineWidth:线条粗细 
-   *@param strokeColor:线条颜色 
-   **/
-  // strokeRoundRect(cxt, x, y, width, height, radius, /*optional*/ lineWidth, /*optional*/ strokeColor) {
-  //   //圆的直径必然要小于矩形的宽高          
-  //   if (2 * radius > width || 2 * radius > height) {
-  //     return false;
-  //   }
-
-  //   cxt.save();
-  //   cxt.translate(x, y);
-  //   //绘制圆角矩形的各个边  
-  //   this.drawRoundRectPath(cxt, width, height, radius);
-  //   cxt.lineWidth = lineWidth || 2; //若是给定了值就用给定的值否则给予默认值2  
-  //   cxt.strokeStyle = strokeColor || "#000";
-  //   cxt.stroke();
-  //   cxt.restore();
-  // },
-  drawRoundRectPath(cxt, width, height, radius) {
-    cxt.beginPath(0);
-    //从右下角顺时针绘制，弧度从0到1/2PI  
-    cxt.arc(width - radius, height - radius, radius, 0, Math.PI / 2);
-
-    //矩形下边线  
-    cxt.lineTo(radius, height);
-
-    //左下角圆弧，弧度从1/2PI到PI  
-    cxt.arc(radius, height - radius, radius, Math.PI / 2, Math.PI);
-
-    //矩形左边线  
-    cxt.lineTo(0, radius);
-
-    //左上角圆弧，弧度从PI到3/2PI  
-    cxt.arc(radius, radius, radius, Math.PI, Math.PI * 3 / 2);
-
-    //上边线  
-    cxt.lineTo(width - radius, 0);
-
-    //右上角圆弧  
-    cxt.arc(width - radius, radius, radius, Math.PI * 3 / 2, Math.PI * 2);
-
-    //右边线  
-    cxt.lineTo(width, height - radius);
-    cxt.closePath();
-  },
-
-  circleImg(ctx, img, x, y, r) {
-    ctx.beginPath()
-    ctx.save();
-    var d = 2 * r;
-    var cx = x + r;
-    var cy = y + r;
-    ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-    // ctx.stroke()
-    ctx.clip();
-    ctx.drawImage(img, x, y, d, d);
-    ctx.restore();
-  },
-  // rectImg(cxt, x, y, width, height, radius, /*optional*/ lineWidth, /*optional*/ strokeColor) {
-  //   //圆的直径必然要小于矩形的宽高          
-  //   if (2 * radius > width || 2 * radius > height) {
-  //     return false;
-  //   }
-
-  //   cxt.save();
-  //   cxt.translate(x, y);
-  //   //绘制圆角矩形的各个边  
-  //   this.drawRoundRectPath(cxt, width, height, radius);
-  //   cxt.lineWidth = lineWidth || 2; //若是给定了值就用给定的值否则给予默认值2  
-  //   cxt.strokeStyle = strokeColor || "#fff";
-  //   // cxt.stroke();
-  //   ctx.clip();
-  //   ctx.drawImage(img, x, y, w, h);
-  //   cxt.restore();
-  // },
-
-
-  circleImgTwo(ctx, img, x, y, w, h, r) {
-    // 画一个图形
-    if (w < 2 * r) r = w / 2;
-    if (h < 2 * r) r = h / 2;
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r);
-    ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r);
-    ctx.arcTo(x, y, x + w, y, r);
-    ctx.closePath();
-    // ctx.strokeStyle = '#FFFFFF'; // 设置绘制圆形边框的颜色
-    // ctx.stroke();
-    ctx.clip();
-    ctx.drawImage(img, x, y, w, h);
-  },
-
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-    this.getPoster()
-
-  },
-
-  getPoster() {
-    util.my_ajax({
-      url: '/poster/pagePoster',
-      data: {
-        type: 'SHOP_CART'
-      },
-      success: (res) => {
-        this.setData({
-          poster: res.items || []
-        })
-        this.navDetail()
-      }
-    })
-  },
-
-  navDetail() {
-    util.my_ajax({
-      url: '/navigation/detailNavigation',
-      data: {
-        navigationId: '466890888526692352',
-      },
-      success: (res) => {
-        this.data.navData = res.item
-        this.setData({
-          navData: res.item
-        })
-        this.data.poster.forEach((item,index)=> {
-          setTimeout(()=>{
-            this.createPoster(index, this.data.resourcesUrl + item.iconPath)
-          }, 500)
-        })
-      }
-    })
-  },
-
-  createPoster(index,url) {
-    wx.createSelectorQuery()
-    .select('#myCanvas'+index) // 在 WXML 中填入的 id
-    .fields({
-      node: true,
-      size: true
-    })
-    .exec((res) => {
-      let bgUrl = url
-
-      const canvas = res[0].node
-      const ctx = canvas.getContext('2d')
-
-      // 缩放
-      const width = res[0].width
-      const height = res[0].height
-
-      const dpr = wx.getWindowInfo().pixelRatio
-      canvas.width = width * dpr
-      canvas.height = height * dpr
-      ctx.scale(dpr, dpr)
-
-      ctx.clearRect(0, 0, width, height)
-
-      const bg = canvas.createImage()
-      bg.onload = () => {
-        // this.circleImg(ctx, bg, this.rpx2px(0), this.rpx2px(0), this.rpx2px(20))
-
-        this.circleImgTwo(ctx, bg, 0, 0, this.rpx2px(506), this.rpx2px(828), this.rpx2px(20))
-        this.fillRoundRect(ctx, this.rpx2px(20), this.rpx2px(370), this.rpx2px(466), this.rpx2px(189), this.rpx2px(10))
-        ctx.font = `${this.rpx2px(24)}px PingFang-SC-Regular`
-        ctx.fillStyle = '#3E2F24'
-        ctx.fillText(this.data.navData.nickname, this.rpx2px(132), this.rpx2px(410))
-        ctx.font = `${this.rpx2px(20)}px PingFang-SC-Regular`
-        ctx.fillStyle = '#8C7F76'
-        if(this.data.navData.type === 'WALK') {
-          ctx.fillText('刚刚完成了徒步路线', this.rpx2px(132), this.rpx2px(440))
-        }else {
-          ctx.fillText('刚刚完成了骑行路线', this.rpx2px(132), this.rpx2px(440))
-        }
-        
-        ctx.fillStyle = '#634E3F'
-        ctx.fillText('用时', this.rpx2px(58), this.rpx2px(490))
-        ctx.fillText('里程', this.rpx2px(214), this.rpx2px(490))
-        ctx.fillText('减少碳排放', this.rpx2px(357), this.rpx2px(490))
-
-        ctx.font = `${this.rpx2px(32)}px PingFang-SC-Regular`
-        ctx.fillStyle = '#3E2F24'
-        ctx.fillText(this.data.navData.time, this.rpx2px(58), this.rpx2px(530))
-        ctx.fillText(this.data.navData.mileage+'9999m', this.rpx2px(214), this.rpx2px(530))
-        ctx.fillText(parseFloat(this.data.navData.carbonEmission)+'9999g', this.rpx2px(357), this.rpx2px(530))
-
-
-        // let offset1 = ctx.measureText('21').width
-        // let offset2 = ctx.measureText('456').width
-        // let offset3 = ctx.measureText('230').width
-        // ctx.font = `${this.rpx2px(18)}px PingFang-SC-Regular`
-
-        // ctx.fillText('小时', offset1 + this.rpx2px(58), this.rpx2px(530))
-        // ctx.fillText('KM', offset2 + this.rpx2px(214), this.rpx2px(530))
-        // ctx.fillText('g', offset3 + this.rpx2px(357), this.rpx2px(530))
-
-
-        const image = canvas.createImage()
-        image.onload = () => {
-          this.circleImg(ctx, image, this.rpx2px(42), this.rpx2px(380), this.rpx2px(70 / 2))
-        }
-        image.src = this.data.navData.iconPath
-
-        // bottom
-        this.fillRoundRect(ctx, this.rpx2px(20), this.rpx2px(582), this.rpx2px(466), this.rpx2px(170), this.rpx2px(10))
-        ctx.font = `${this.rpx2px(26)}px PingFang-SC-Regular`
-        ctx.fillStyle = '#3E2F24'
-        ctx.fillText('如燕小程序', this.rpx2px(54), this.rpx2px(650))
-        ctx.font = `${this.rpx2px(22)}px PingFang-SC-Regular`
-        ctx.fillStyle = '#8C7F76'
-        ctx.fillText('如燕小程序大家都在用', this.rpx2px(54), this.rpx2px(690))
-
-        const qr = canvas.createImage()
-        qr.onload = () => {
-          ctx.drawImage(qr, this.rpx2px(320), this.rpx2px(605),this.rpx2px(124),this.rpx2px(124))
-        }
-        qr.src = 'http://szdbi.oss-cn-shenzhen.aliyuncs.com/ruyan/qr.jpg'
-
-        setTimeout(() => {
-          wx.canvasToTempFilePath({
-            canvas,
-            success: res => {
-              // 生成的图片临时文件路径
-              const tempFilePath = res.tempFilePath
-              let temp = [...this.data.list, ...[tempFilePath]]
-              this.setData({
-                list: temp
-              })
-              console.log('end')
-            },
-          })
-        }, 200);
-
-      }
-
-      bg.src = bgUrl
-      console.log('bgsrc')
-
-
-    })
-  },
-
-  saveImage(index) {
-    wx.saveImageToPhotosAlbum({
-      filePath: this.data.list[1],
-      success(res) {
-        wx.showToast({
-          title: '保存成功',
-        })
-      }
-    })
-  },
-
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
-})
-```
-
-```
-<!--pages/my/poster/poster.wxml-->
-<view>
-  <!-- <canvas id="myCanvas" type="2d" /> -->
-  <canvas wx:for="{{poster}}" wx:key="index" id="{{'myCanvas'+index}}" type="2d" style="position: absolute;left:-9999px" />
-
-  <image wx:for="{{list}}" wx:key="index" src="{{item}}" alt="" class="post-img"	show-menu-by-longpress/>
-
-  <view bindtap="saveImage">保存</view>
-</view>
-
-```
-
-
-
-```
-// pages/my/share/share.js
-const util = require("../../../utils/util");
-Page({
-  data: {
-    resourcesUrl: util.config.resourcesUrl,
-    poster: [],
-    list: [],
-    posterIndex: 0,
-  },
-
-  onLoad(options) {
-    this.getPoster()
-  },
-
-  getPoster() {
-    util.my_ajax({
-      url: '/poster/pagePoster',
-      data: {
-        type: 'ORDER'
-      },
-      success: (res) => {
-        this.setData({
-          poster: res.items || []
-        })
-        res.items.forEach((item, index) => {
-          this.createPoster(index, this.data.resourcesUrl + item.iconPath, item.content)
-        })
-      }
-    })
-  },
-
-  handlePosterChange(e) {
-    this.setData({
-      posterIndex: e.detail.current,
-    })
-  },
-
-  // 绘制canvas
-  rpx2px(arg) {
-    const info = wx.getSystemInfoSync()
-    const width = info.screenWidth
-    return arg * width / 750
-  },
-
-  /**该方法用来绘制一个有填充色的圆角矩形 
-   *@param cxt:canvas的上下文环境 
-   *@param x:左上角x轴坐标 
-   *@param y:左上角y轴坐标 
-   *@param width:矩形的宽度 
-   *@param height:矩形的高度 
-   *@param radius:圆的半径 
-   *@param fillColor:填充颜色 
-   **/
-  fillRoundRect(cxt, x, y, width, height, radius, /*optional*/ fillColor) {
-    //圆的直径必然要小于矩形的宽高          
-    if (2 * radius > width || 2 * radius > height) {
-      return false;
-    }
-    cxt.save();
-    cxt.translate(x, y);
-    //绘制圆角矩形的各个边  
-    this.drawRoundRectPath(cxt, width, height, radius);
-    cxt.fillStyle = fillColor || "rgba(255,255,255,0.85)"; //若是给定了值就用给定的值否则给予默认值  
-    cxt.fill();
-    cxt.restore();
-  },
 
   drawRoundRectPath(cxt, width, height, radius) {
     cxt.beginPath(0);
@@ -654,43 +253,7 @@ Page({
     ctx.drawImage(img, x, y, w, h);
   },
 
-  /**
-	  ctx:  canvas绘图上下文
-		 * 	str:  需要绘制的文本内容
-		 * 	draw_width:  绘制后的文字显示宽度
-		 * 	lineNum:  最大行数，多出部分用'...'表示， 如果传-1可以达到自动换行效果
-		 * 	startX:  绘制文字的起点 X 轴坐标
-		 * 	startY:  绘制文字的起点 Y 轴坐标
-		 *	steps:  文字行间距
-   */
-  toFormateStr(ctx, str, draw_width, lineNum, startX, startY, steps) {
-    var strWidth = ctx.measureText(str).width; // 测量文本源尺寸信息（宽度）
-    var startpoint = startY,
-      keyStr = '',
-      sreLN = strWidth / draw_width;
-    var liner = Math.ceil(sreLN); // 计算文本源一共能生成多少行
-    let strlen = parseInt(str.length / sreLN); // 等比缩放测量一行文本显示多少个字符
-
-    // 若文本不足一行，则直接绘制，反之大于传入的最多行数（lineNum）以省略号（...）代替
-    if (strWidth < draw_width) {
-      ctx.fillText(str, startX, startpoint);
-    } else {
-      for (var i = 1; i < liner + 1; i++) {
-        let startPoint = strlen * (i - 1);
-        if (i < lineNum || lineNum == -1) {
-          keyStr = str.substr(startPoint, strlen);
-          ctx.fillText(keyStr, startX, startpoint);
-        } else {
-          keyStr = str.substr(startPoint, strlen - 5) + '...';
-          ctx.fillText(keyStr, startX, startpoint);
-          break;
-        }
-        startpoint = startpoint + steps;
-      }
-    }
-  },
-
-  createPoster(index, url, txt) {
+  createPoster(index, url) {
     wx.createSelectorQuery()
       .select('#myCanvas' + index) // 在 WXML 中填入的 id
       .fields({
@@ -716,28 +279,51 @@ Page({
 
         const bg = canvas.createImage()
         bg.onload = () => {
-          this.circleImgTwo(ctx, bg, 0, 0, this.rpx2px(506), this.rpx2px(828), this.rpx2px(20))
-          // this.fillRoundRect(ctx, this.rpx2px(30), this.rpx2px(420), this.rpx2px(440), this.rpx2px(130), this.rpx2px(10))
-          // ctx.font = `${this.rpx2px(26)}px PingFang-SC-Regular`
-          // ctx.fillStyle = '#3E2F24'
-          // this.toFormateStr(ctx, txt, this.rpx2px(420), 2, this.rpx2px(50), this.rpx2px(470), 20)
+          // this.circleImg(ctx, bg, this.rpx2px(0), this.rpx2px(0), this.rpx2px(20))
 
-          // bottom
-          this.fillRoundRect(ctx, this.rpx2px(30), this.rpx2px(600), this.rpx2px(440), this.rpx2px(150), this.rpx2px(10))
+          this.circleImgTwo(ctx, bg, 0, 0, this.rpx2px(506), this.rpx2px(828), this.rpx2px(20))
+          this.fillRoundRect(ctx, this.rpx2px(20), this.rpx2px(370), this.rpx2px(466), this.rpx2px(189), this.rpx2px(10))
+          ctx.font = `${this.rpx2px(24)}px PingFang-SC-Regular`
+          ctx.fillStyle = '#3E2F24'
+          ctx.fillText(this.data.navData.nickname, this.rpx2px(132), this.rpx2px(410))
+          ctx.font = `${this.rpx2px(20)}px PingFang-SC-Regular`
+          ctx.fillStyle = '#8C7F76'
+          if (this.data.navData.type === 'WALK') {
+            ctx.fillText('刚刚完成了徒步路线', this.rpx2px(132), this.rpx2px(440))
+          } else {
+            ctx.fillText('刚刚完成了骑行路线', this.rpx2px(132), this.rpx2px(440))
+          }
+
+          ctx.fillStyle = '#634E3F'
+          ctx.fillText('用时', this.rpx2px(58), this.rpx2px(490))
+          ctx.fillText('里程', this.rpx2px(214), this.rpx2px(490))
+          ctx.fillText('减少碳排放', this.rpx2px(357), this.rpx2px(490))
+
+          ctx.font = `${this.rpx2px(32)}px PingFang-SC-Regular`
+          ctx.fillStyle = '#3E2F24'
+          ctx.fillText(this.data.navData.time, this.rpx2px(58), this.rpx2px(530))
+          ctx.fillText(this.data.navData.mileage + '9999m', this.rpx2px(214), this.rpx2px(530))
+          ctx.fillText(parseFloat(this.data.navData.carbonEmission) + '9999g', this.rpx2px(357), this.rpx2px(530))
+
+          const image = canvas.createImage()
+          image.onload = () => {
+            this.circleImg(ctx, image, this.rpx2px(42), this.rpx2px(380), this.rpx2px(70 / 2))
+          }
+          image.src = this.data.navData.iconPath
+
+          this.fillRoundRect(ctx, this.rpx2px(20), this.rpx2px(582), this.rpx2px(466), this.rpx2px(170), this.rpx2px(10))
+          ctx.font = `${this.rpx2px(26)}px PingFang-SC-Regular`
+          ctx.fillStyle = '#3E2F24'
+          ctx.fillText('小程序', this.rpx2px(54), this.rpx2px(650))
+          ctx.font = `${this.rpx2px(22)}px PingFang-SC-Regular`
+          ctx.fillStyle = '#8C7F76'
+          ctx.fillText('小程序大家都在用', this.rpx2px(54), this.rpx2px(690))
+
           const qr = canvas.createImage()
           qr.onload = () => {
-            ctx.drawImage(qr, this.rpx2px(60), this.rpx2px(620), this.rpx2px(100), this.rpx2px(100))
+            ctx.drawImage(qr, this.rpx2px(320), this.rpx2px(605), this.rpx2px(124), this.rpx2px(124))
           }
           qr.src = 'http://szdbi.oss-cn-shenzhen.aliyuncs.com/ruyan/qr.jpg'
-
-          ctx.font = `${this.rpx2px(18)}px PingFang-SC-Regular`
-          ctx.fillStyle = '#3E2F24'
-          // ctx.fillText('客服热线', this.rpx2px(175), this.rpx2px(590))
-          ctx.font = `${this.rpx2px(24)}px PingFang-SC-Regular`
-          ctx.fillText('心悠然 自如燕 ', this.rpx2px(175), this.rpx2px(660))
-          ctx.font = `${this.rpx2px(18)}px PingFang-SC-Regular`
-          ctx.fillText('扫一扫，开启探寻如燕之旅', this.rpx2px(175), this.rpx2px(700))
-          // ctx.fillText('大峪坪村1号 030800', this.rpx2px(175), this.rpx2px(685))
 
           setTimeout(() => {
             wx.canvasToTempFilePath({
@@ -749,51 +335,51 @@ Page({
                 this.setData({
                   list: temp
                 })
-                // console.log('end')
+                console.log('end')
               },
             })
           }, 200);
-
         }
 
         bg.src = bgUrl
-        // console.log('bgsrc')
       })
   },
 
-  handleCopy() {
-    wx.setClipboardData({
-      data: this.data.poster[this.data.posterIndex].content
-    })
-  },
-
-  saveImage() {
-    wx.showLoading({
-      title: '保存中',
-      mask: true
-    })
+  saveImage(index) {
     wx.saveImageToPhotosAlbum({
-      filePath: this.data.list[this.data.posterIndex],
+      filePath: this.data.list[1],
       success(res) {
         wx.showToast({
           title: '保存成功',
         })
-      },
-      complete() {
-        wx.hideLoading()
       }
     })
   },
 
-  onShareAppMessage() {
-
-  }
 })
 ```
 
+```
+<view>
+  <canvas wx:for="{{poster}}" wx:key="index" id="{{'myCanvas'+index}}" type="2d" style="position: absolute;left:-9999px" />
+  <image wx:for="{{list}}" wx:key="index" src="{{item}}" alt="" class="post-img"	show-menu-by-longpress/>
+  <view bindtap="saveImage">保存</view>
+</view>
+```
 
+```
+canvas {
+  width: 506rpx;
+  height: 828rpx;
+  background: transparent;
+  margin: 40rpx auto;
+}
 
-
+.post-img {
+  width: 506rpx;
+  height: 828rpx;
+}
+```
 
 
 
@@ -998,6 +584,303 @@ Page({
 文档地址：https://github.com/davidshimjs/qrcodejs
 
 文档地址：https://github.com/yingye/weapp-qrcode
+
+
+
+### weapp-qrcode
+
+文档：https://github.com/yingye/weapp-qrcode
+
+
+
+```
+const QRCode = require('../../../utils/weapp.qrcode.min.js');
+
+QRCode({
+  width: 135,
+  height: 135,
+  x: 0,
+  y: 0,
+  typeNumber: 4,
+  canvasId: 'mycanvas',
+  text: res.item.id,
+  callback(e) {
+    console.log('e: ', e)
+  }
+})
+```
+
+```
+<canvas class="qr" canvas-id="mycanvas"></canvas>
+```
+
+```
+.qr {
+  width: 135px;
+  height: 135px;
+}
+```
+
+
+
+## BLE
+
+### 搜索蓝牙列表
+
+```
+Page({
+  data: {
+    devices: [],
+    device: {},
+    deviceId: '',
+    serviceId: '',
+    characteristicId: ''
+  },
+
+  onLoad(options) {
+    this.init()
+  },
+
+  init() {
+    wx.openBluetoothAdapter({
+      mode: 'central',
+      success: res => {
+        console.log('初始化蓝牙模块', res);
+
+        wx.startBluetoothDevicesDiscovery({
+          success: res => {
+            console.log('开启查找蓝牙设备 ok', res);
+
+            wx.onBluetoothDeviceFound(
+              (res) => {
+                console.log('找到设备', res);
+                wx.getBluetoothDevices({
+                  success: res => {
+                    console.log('蓝牙设备列表', res);
+                    let devices = res.devices || []
+                    devices = devices.filter(item => {
+                      return item.localName && item.localName.includes('ble_at')
+                    })
+                    this.setData({
+                      devices: devices
+                    })
+                  },
+                  fail: err => {
+                    console.error('蓝牙设备列表失败', res);
+                  }
+                })
+              }
+            )
+          },
+          fail: err => {
+            console.error('开启查找蓝牙设备失败', err);
+          }
+        })
+      },
+      fail: err => {
+        console.error('----初始化蓝牙模块失败 err', err, err.errCode);
+        wx.showModal({
+          content: '请打开手机蓝牙',
+          confirmText: '好的',
+          showCancel: false,
+          complete: (res) => {
+            this.onBluetoothAdapterStateChange()
+          }
+        })
+      }
+    })
+  },
+
+  // 监听蓝牙开关状态
+  onBluetoothAdapterStateChange() {
+    wx.onBluetoothAdapterStateChange(
+      (res) => {
+        console.log('onBluetoothAdapterStateChange', res);
+        if (res.available) {
+          // 已打开蓝牙
+          this.init()
+        }
+      }
+    )
+  },
+
+  onConnect(e) {
+    wx.showLoading({
+      title: '连接中',
+      mask: true
+    })
+    let device = this.data.devices[e.currentTarget.dataset.index]
+    console.log(device);
+    this.setData({
+      device
+    })
+
+    // 连接蓝牙
+    wx.createBLEConnection({
+      deviceId: device.deviceId,
+      success: res => {
+        console.log('连接成功', res);
+        wx.showToast({
+          title: '连接成功',
+          mask: true
+        })
+
+        wx.stopBluetoothDevicesDiscovery({
+          success: res => {
+            console.log('停止搜索蓝牙');
+          },
+          fail: err => {
+            console.log('停止搜索蓝牙失败', err);
+          }
+        })
+
+        setTimeout(() => {
+          wx.navigateTo({
+            url: `/pages/deviceDetail/deviceDetail?id=${device.deviceId}`,
+          })
+        }, 1000);
+      },
+      fail: err => {
+        console.log('连接失败', err);
+      }
+    })
+  },
+
+})
+```
+
+
+
+### 筛选特征码发送数据
+
+```
+Page({
+  data: {
+    deviceId: '',
+    serviceId: '',
+    characteristicId: ''
+  },
+
+  onLoad(options) {
+    this.setData({
+      deviceId: options.id
+    })
+    this.getConnectInfo()
+  },
+
+  getConnectInfo() {
+    wx.getBLEDeviceServices({
+      deviceId: this.data.deviceId,
+      success: res => {
+        console.log('蓝牙service', res);
+        res.services.forEach(item => {
+          if (item.uuid.includes('0000FFF0')) {
+            this.setData({
+              serviceId: item.uuid
+            })
+            wx.getBLEDeviceCharacteristics({
+              deviceId: this.data.deviceId,
+              serviceId: this.data.serviceId,
+              success: res => {
+                console.log('characteristic 特征：', res);
+                res.characteristics.forEach(item => {
+                  if (item.properties.write) {
+                    this.setData({
+                      characteristicId: item.uuid
+                    })
+                    console.log('连接信息获取完成')
+                    console.log('deviceId', this.data.deviceId)
+                    console.log('serviceId', this.data.serviceId)
+                    console.log('characteristicId', this.data.characteristicId)
+                  }
+                })
+              },
+              fail: err => {
+                console.log('获取characteristic 特征失败：', err);
+              }
+            })
+          }
+        })
+      },
+      fail: err => {
+        console.log('获取蓝牙service失败', err);
+      }
+    })
+  },
+
+  onSend(opt, speed) {
+    console.log(opt, speed);
+    let command1 = ''
+    let command2 = ''
+    switch (opt) {
+      case 'on':
+        command1 = 0xFE
+        command2 = 0x01
+        break;
+      case 'off':
+        command1 = 0xFD
+        command2 = 0x02
+        this.reset()
+        break;
+      case 'longpress':
+        let hex = this.toHexAndInverted(speed)
+        command1 = hex.originalHex
+        command2 = hex.invertedHex
+        break;
+    }
+
+    let data = new Array(0x00, 0xFF, command1, command2);
+    let buffer = new ArrayBuffer(4);
+    let dataview = new DataView(buffer);
+    data.forEach((item, index) => {
+      dataview.setUint8(index, item);
+    })
+
+    wx.writeBLECharacteristicValue({
+      deviceId: this.data.deviceId,
+      serviceId: this.data.serviceId,
+      characteristicId: this.data.characteristicId,
+      value: buffer,
+      success: res => {
+        console.log('发送指令成功', res)
+      }
+    })
+  },
+
+  toHexAndInverted(num) {
+    // 将原始数字转换为十六进制，并保留两位
+    const hex = '0x' + num.toString(16).padStart(2, '0').toUpperCase();
+
+    // 反码操作：先将数转换为32位二进制，再进行反转，保留低8位
+    const inverted = ~num & 0xFF; // 保证反码在一个字节范围内，即0x00到0xFF
+
+    // 将反码结果转换为十六进制，确保是两位数，前面补零
+    const invertedHex = '0x' + inverted.toString(16).padStart(2, '0').toUpperCase();
+
+    // 返回原始十六进制和反码十六进制
+    return {
+      originalHex: hex,
+      invertedHex: invertedHex
+    };
+  },
+
+  onBack() {
+    wx.closeBLEConnection({
+      deviceId: this.data.deviceId,
+      success: res => {
+        console.log('离开页面，蓝牙已断开', res)
+      },
+      fail: err => {
+        console.log('离开页面，蓝牙断开失败', err)
+      }
+    })
+    wx.navigateBack()
+  },
+
+})
+```
+
+
 
 
 

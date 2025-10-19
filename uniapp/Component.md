@@ -112,6 +112,150 @@ Component({
 
 
 
+## 异形 Tabbar
+
+```
+Component({
+  properties: {},
+  data: {
+    tabbar: {
+      "backgroundColor": "#ffffff",
+      "color": "#979795",
+      "selectedColor": "#1c1c1b",
+      "list": [{
+          "pagePath": "/pages/book/book",
+          "text": "预订",
+          "iconPath": "/tabbarComponent/icon/icon_book.png",
+          "selectedIconPath": "/tabbarComponent/icon/icon_book_HL.png"
+        },
+        {
+          "pagePath": "/pages/store/store",
+          "text": "商城",
+          "iconPath": "/tabbarComponent/icon/icon_store.png",
+          "selectedIconPath": "/tabbarComponent/icon/icon_store_HL.png"
+        },
+        {
+          "pagePath": "/pages/index/index",
+          "text": "扫码",
+          "iconPath": "/tabbarComponent/icon/icon_ruyan.png",
+          "selectedIconPath": "/tabbarComponent/icon/icon_ruyan.png",
+          "isSpecial": true,
+        },
+        {
+          "pagePath": "/pages/serve/serve",
+          "text": "服务",
+          "iconPath": "/tabbarComponent/icon/icon_serve.png",
+          "selectedIconPath": "/tabbarComponent/icon/icon_serve_HL.png"
+        },
+        {
+          "pagePath": "/pages/mine/mine",
+          "text": "我的",
+          "iconPath": "/tabbarComponent/icon/icon_mine.png",
+          "selectedIconPath": "/tabbarComponent/icon/icon_mine_HL.png"
+        }
+      ]
+    }
+  },
+  lifetimes: {
+    attached() {
+      let pages = getCurrentPages();
+      let currentPageRoute = '/' + pages[pages.length - 1].route;
+      this.data.tabbar.list.forEach(item => {
+        item.selected = item.pagePath === currentPageRoute
+      })
+      this.setData({
+        tabbar: this.data.tabbar
+      })
+    }
+  },
+  methods: {}
+})
+```
+
+```
+<view class="tabbar_box iphoneX-height" style="background-color:{{tabbar.backgroundColor}}">
+  <block wx:for="{{tabbar.list}}" wx:key="index">
+    <navigator wx:if="{{item.isSpecial}}" class="tabbar_nav" hover-class="none" url="{{item.pagePath}}" style="color:{{tabbar.selectedColor}}" open-type="switchTab">
+      <view class='special-wrapper'>
+        <image class="tabbar_icon" src="{{item.iconPath}}"></image>
+      </view>
+      <image class='special-text-wrapper'></image>
+      <text>{{item.text}}</text>
+    </navigator>
+    <navigator wx:else class="tabbar_nav" hover-class="none" url="{{item.pagePath}}" style="color:{{item.selected ? tabbar.selectedColor : tabbar.color}}" open-type="switchTab">
+      <image class="tabbar_icon" src="{{item.selected ? item.selectedIconPath : item.iconPath}}"></image>
+      <text>{{item.text}}</text>
+    </navigator>
+  </block>
+</view>
+```
+
+```
+.tabbar_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 98rpx;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.tabbar_box.iphoneX-height {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tabbar_nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  height: 100%;
+  position: relative;
+}
+
+.tabbar_icon {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.special-wrapper {
+  position: absolute;
+  left: 30rpx;
+  top: -36rpx;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border-top: 2rpx solid #f2f2f3;
+  background-color: #fff;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 6rpx;
+}
+
+.special-wrapper .tabbar_icon {
+  width: 84rpx;
+  height: 84rpx;
+}
+
+.special-text-wrapper {
+  width: 56rpx;
+  height: 56rpx;
+}
+```
+
+```
+{
+  "component": true,
+  "usingComponents": {}
+}
+```
+
 
 
 ## navbar
@@ -188,9 +332,6 @@ Component({
 	options: {
 		multipleSlots: true // 在组件定义时的选项中启用多slot支持
 	},
-	/**
-	 * 组件的属性列表
-	 */
 	properties: {
 		title: {
 			type: String,
@@ -213,9 +354,6 @@ Component({
 			value: true
 		},
 	},
-	/**
-	 * 组件的初始数据
-	 */
 	data: {
 		style: ''
 	},
@@ -237,9 +375,6 @@ Component({
 			})
 		},
 	},
-	/**
-	 * 组件的方法列表
-	 */
 	methods: {
 		back() {
 			wx.navigateBack({
