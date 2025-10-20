@@ -96,6 +96,8 @@ npm install -D <package-name>
 npm install <package-name>
 npm install -g <package-name>
 npm root -g
+
+# 安装指定版本
 npm install cowsay@1.2.0
 npm install -g webpack@4.16.4
 npm install webpack@latest
@@ -125,8 +127,11 @@ npm list --depth=0 -g
 npm list cowsay
 npm list cnpm -g
 npm list minimist
-npm view cowsay version
-npm view cowsay versions
+
+# 查看 jquery 的最新的可用版本
+npm view jquery version
+# 查看 jquery 的全部版本
+npm view jquery versions
 ```
 
 > 注意：如果要查看全局安装的软件包版本，则需要加上-g
@@ -445,8 +450,6 @@ package.json 文件还可以承载命令特有的配置，例如 Babel、ESLint 
 
 
 
-
-
 ### 发布自己的软件包
 
 如果需要在npm上发布软件包时，可以在package.json文件添加属性以便公开发布。
@@ -454,9 +457,11 @@ package.json 文件还可以承载命令特有的配置，例如 Babel、ESLint 
 **注意：如果要发布模块到npm，必须把源设置为默认的，不能是其他源。**
 
 ```shell
+npm config set registry https://registry.npmmirror.com/
 npm init ：生成package.json文件
 npm init -y ：生成package.json文件，选择项全部yes
 npm adduser ：在npm资源库中注册用户（用邮箱注册）
+# 完成编写代码后发布
 npm publish ：发布模块
 npm unpublish <package>@<version> ：可以撤销发布自己发布过的某个版本代码
 ```
@@ -532,6 +537,22 @@ npm unpublish <package>@<version> ：可以撤销发布自己发布过的某个�
 * `devDependencies` 设置了作为开发依赖安装的 `npm` 软件包的列表。它们不同于 `dependencies`，因为它们只需安装在开发机器上，而无需在生产环境中运行代码。
 * `engines` 设置了此软件包/应用程序在哪个版本的 Node.js 上运行。
 * `browserslist` 用于告知要支持哪些浏览器（及其版本）。
+
+
+
+```js
+// index.js npm包代码
+function myFn() {
+	return 123;
+}
+
+module.exports = myFn
+```
+
+```js
+const myFn = require("myNpmPackage")
+console.log(myFn()) // 123
+```
 
 
 
@@ -638,9 +659,13 @@ js文件内容：console.log(`process.env.npm_package_`conf_env);
 >
 > npm install -g cnpm --registry=https://registry.npmmirror.com/ ：安装cnpm
 >
+> npm install --production ：只安装生产依赖
+>
 > npm list -g ：查看所有已全局安装的npm软件包（包括它们的依赖包）的最新版本
 >
 > npm list [模块名] ：查看本地所有已安装的npm软件包（包括它们的依赖包）的最新版本
+>
+> npm list  | grep 模块名 ：过滤出符合模块名的npm软件包
 >
 > npm view 模块名 version ：查看软件包在 npm 仓库上最新的可用版本
 >
@@ -650,8 +675,6 @@ js文件内容：console.log(`process.env.npm_package_`conf_env);
 >
 > npm uninstall 模块名 ：卸载模块
 >
-> npm update 模块名 ：更新模块
->
 > npm search 模块名 ：搜索模块
 >
 > npm help ：查看帮助，
@@ -660,7 +683,9 @@ js文件内容：console.log(`process.env.npm_package_`conf_env);
 >
 > npm -h <command> : 简写，获取某个命令的帮助信息
 >
-> `npm cache clear` ：可以清空NPM本地缓存
+> npm cache clear ：清空NPM本地缓存
+>
+> npm cache clear --force ：强制清空NPM本地缓存
 >
 > npm init ：生成package.json文件
 >
@@ -675,6 +700,8 @@ js文件内容：console.log(`process.env.npm_package_`conf_env);
 > npm run 属性名 ：运行当前目录下package.json文件中的script脚本中的指定属性
 >
 > npm outdated：检查软件包的新版本
+>
+> npm update 模块名 ：更新模块
 >
 > npm dedupe ：删除重复的包
 >
@@ -729,7 +756,9 @@ npm config set proxy=http://127.0.0.1:7897
 
 ## nvm
 
-文档：https://github.com/nvm-sh/nvm
+windows 版本：https://github.com/coreybutler/nvm-windows
+
+mac 版本：https://github.com/nvm-sh/nvm
 
 不同的项目可能对 Node.js 的版本要求不同，这时我门就需要切换不同版本的 Node.js。我们可以通过 Nvm 来管理Node.js 版本。
 
@@ -774,10 +803,6 @@ nvm list available
 ```
 
 
-
-
-
-nvm-windows下载地址：https://github.com/coreybutler/nvm-windows
 
 使用参考1：https://www.cnblogs.com/gaozejie/p/10689742.html
 
@@ -1224,6 +1249,8 @@ const port = 8080
 // 一个请求（http.IncomingMessage 对象）和一个响应（http.ServerResponse 对象）
 // 第一个对象提供了请求的详细信息。第二个对象用于返回数据给调用方。
 const server = http.createServer((req, res) => {
+  	// 获取请求地址
+  	let url = req.url
     // 设置 statusCode 属性为 200，以表明响应成功
     res.statusCode = 200
     // 设置 Content-Type 响应头
@@ -1861,6 +1888,8 @@ path.join('/', 'users', name, 'notes.txt') //'/users/joe/notes.txt'
 //可以使用 path.resolve() 获得相对路径的绝对路径计算：
 path.resolve('joe.txt') //'/Users/joe/joe.txt' 如果从主文件夹运行。
 
+path.resolve(__dirname) // 当前执行文件的路径
+
 //如果指定第二个文件夹参数，则 resolve 会使用第一个作为第二个的基础：
 path.resolve('tmp', 'joe.txt') //'/Users/joe/tmp/joe.txt' 如果从主文件夹运行。
 
@@ -2035,6 +2064,17 @@ process.on('SIGTERM', () => {
 它公开了 `argv` 属性，该属性是一个包含所有命令行调用参数的数组。
 
 * 详见：http://nodejs.cn/learn/nodejs-accept-arguments-from-the-command-line
+
+
+
+```js
+console.log(process.argv)
+console.log(process.argv.slice(2)) // [ 'aaa', 'bbb' ]
+```
+
+```sh
+node index.js aaa bbb
+```
 
 
 
@@ -3681,6 +3721,10 @@ Koa 与 Express 非常相似，在编写代码时，仍然可以享受 Express �
 一个简单的命令行工具，用于在您的本地开发环境中快速启动一个基于 HTTP 的静态文件服务器。它允许您将当前目录下的文件作为静态资源托管，并通过 HTTP 协议提供这些文件。
 
 文档地址：https://github.com/http-party/http-server
+
+```sh
+npx http-server
+```
 
 
 
