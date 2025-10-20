@@ -4074,7 +4074,72 @@ module.exports = {
 
 一个 Web 应用的记录并回放用户操作的工具，用来远程调试。
 
-文档：https://www.pagespy.org/#/
+文档：https://www.pagespy.org
+
+
+
+服务端：
+
+```sh
+npm install -g @huolala-tech/page-spy-api@latest
+
+# 运行
+page-spy-api
+
+# 运行-设置跨域
+page-spy-api --allow-origins "*"
+```
+
+
+
+web端：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>App</title>
+
+    <!-- 使用第一步：引入 SDK 文件 -->
+     <!-- 这里的地址是服务端跑起来后的LAN地址 -->
+    <script crossorigin="anonymous" src="http://192.168.17.231:6752/page-spy/index.min.js"></script>
+    <script crossorigin="anonymous" src="http://192.168.17.231:6752/plugin/data-harbor/index.min.js"></script>
+    <script crossorigin="anonymous" src="http://192.168.17.231:6752/plugin/rrweb/index.min.js"></script>
+    <!-- 使用第二步：实例化 PageSpy -->
+    <script>
+      window.$harbor = new DataHarborPlugin();
+      window.$rrweb = new RRWebPlugin();
+      [window.$harbor, window.$rrweb].forEach((p) => {
+        PageSpy.registerPlugin(p);
+      });
+
+      // 实例化的参数是可选的（通过 ESM 方式使用时，必须填写 api 和 clientOrigin）
+      window.$pageSpy = new PageSpy({
+        project: "演示",
+        autoRender: true,
+        title: "PageSpy",
+      });
+      // PageSpy 应该已经在屏幕右下角等你了，赶紧试试吧！👉
+
+      setTimeout(()=> {
+        console.log('ass')
+      }, 1000)
+
+      setInterval(()=> {
+        console.log('num:', Math.random());
+      }, 1000)
+    </script>
+  </head>
+
+  <body>
+    <h1>hello</h1>
+    <!-- <noscript> You need to enable JavaScript to run this app. </noscript> -->
+    <div id="root"></div>
+  </body>
+</html>
+```
 
 
 
