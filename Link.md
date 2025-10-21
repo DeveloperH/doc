@@ -26,6 +26,14 @@
 
 
 
+## AI
+
+* DeepSeek https://chat.deepseek.com/
+* 文心一言 https://yiyan.baidu.com/
+  * 
+
+
+
 ## 版本存储
 
 * Gradle https://mirrors.cloud.tencent.com/gradle/
@@ -134,7 +142,6 @@
   * uncut 开源，可商用 https://uncut.wtf/
 * 云服务
   * 阿里云 https://www.aliyun.com/
-  * 七牛云 https://www.qiniu.com/
   * Vercel https://vercel.com/
   * 腾讯云 https://cloud.tencent.com/
 * 图片
@@ -223,19 +230,22 @@
 ## 开放平台
 
 * 高德地图 https://lbs.amap.com/
+  * 坐标拾取器 https://lbs.amap.com/tools/picker
 * 腾讯地图 https://lbs.qq.com/
 * 百度地图 https://lbsyun.baidu.com/
 * 谷歌地图 https://developers.google.com/maps/documentation
 * Mapbox https://www.mapbox.com/
-* 应用宝 https://app.open.qq.com/
+* 腾讯应用开放平台-应用宝 https://app.open.qq.com/
 * 萤石云 https://open.ys7.com/
-* E签宝 https://open.esign.cn/
+* E签宝-电子签名认证 https://open.esign.cn/
 * 飞致云 https://www.fit2cloud.com/
   * DataEase 桌面可视化大屏 
 * 鸿蒙开发者 https://developer.huawei.com/
 * 环信 https://www.easemob.com/
 * 网易云信 https://netease.im/
 * 七牛云 https://www.qiniu.com/
+* 上海汇付 https://www.huifu.com/
+  * 斗拱 https://paas.huifu.com/
 
 
 
