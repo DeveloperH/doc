@@ -10,10 +10,11 @@
 * uni-app https://uniapp.dcloud.net.cn/
 * ECharts https://echarts.apache.org/
 * w3cschool https://www.w3cschool.cn/
-* dayjs https://dayjs.fenxianglu.cn/
 * socket.io https://socket.io/
 * leafletjs https://leafletjs.com/
 * Electron https://www.electronjs.org/
+* React https://react.dev/
+* React Native https://reactnative.dev/
 * html5plus https://www.html5plus.org/doc/
 * Android https://developer.android.google.cn/reference/packages
 * Apple https://developer.apple.com/cn/
@@ -68,7 +69,7 @@
 
 * iconfont https://www.iconfont.cn/
 * IconPark https://iconpark.oceanengine.com/
-* uiverse https://uiverse.io/
+* uiverse UI 库 https://uiverse.io/
 * NavNav+ https://navnav.co/
 * 优惠券样式 https://coupon.codelabo.cn/
 * border 生成器 https://kovart.github.io/dashed-border-generator/
@@ -91,6 +92,7 @@
 
 * ⭐️⭐️⭐️ npm https://www.npmjs.com/
 * ⭐️⭐️⭐️ 草料二维码 https://cli.im/
+* ⭐️⭐️⭐️ dayjs https://dayjs.fenxianglu.cn/
 * ⭐️⭐️⭐️ Shields.io 生成徽章 https://shields.io/
 * ⭐️⭐️⭐️ emoji 图标 https://www.emojiall.com/
 * ⭐️⭐️⭐️ Can I Use https://caniuse.com/
@@ -99,7 +101,11 @@
 * ⭐️⭐️⭐️ YOPmail 接码邮箱 https://yopmail.net/
 * ⭐️⭐️⭐️ 视频下载 datatool https://www.datatool.vip/
 * ⭐️⭐️⭐️ 安娜的档案 https://zh.annas-archive.org/
+* ⭐️⭐️⭐️ 百度识图 https://graph.baidu.com/pcpage/index
 * 将 GitHub 项目转化为结构清晰的使用手册 https://zread.ai/
+* tinyurl 转短链 https://tinyurl.com/
+* 转短链⭐️  https://www.ft12.com/
+* 图片拾色器 https://www.jyshare.com/front-end/6214/#414ef5
 * 代码转换器 https://transform.tools/html-to-jsx
 * 腾讯网址安全中心 https://urlsec.qq.com/check.html
 * 文本转语音 https://texttospeech.im/
@@ -107,27 +113,30 @@
 * 在线字体编辑器 https://font.qqe2.com/
 * 繁体字转换 https://www.aies.cn/
 * 时间戳转换 https://www.beijing-time.org/shijianchuo/
-* 编码转换工具 http://web.chacuo.net/charsetbase64
-* SCSS 转 CSS http://scss.jsrun.net/
+* base64编码转换工具 http://web.chacuo.net/charsetbase64
 * SCSS 转 CSS https://33tool.com/scss_to_css/
 * Json 对比 https://www.sojson.com/jsondiff.html
-* Json 工具 https://www.jsonla.com/
-* jwt 在线解码 https://tool.box3.cn/jwt.html
-* MD5 加解密 https://www.cmd5.com/
+* ⭐️⭐️ Json 工具 https://www.jsonla.com/
+* ⭐️⭐️ jwt 在线解码 https://tool.box3.cn/jwt.html
+* ⭐️⭐️ MD5 加解密 https://www.cmd5.com/
+* 编码加密解密 https://bianma.bmcx.com/
 * 腾讯帮小忙工具箱 https://tool.browser.qq.com/
 * UU 在线工具 https://uutool.cn/
-* 知之小工具 https://study.100xgj.com/textdiff/
+* 知之小工具-文本差异对比 https://study.100xgj.com/textdiff/
 * 懒人工具 http://www.kuquidc.com/
 * RGB 颜色转换 https://www.zxgj.cn/g/yansezhi
 * 报告或搜索 webkit 的问题 https://bugs.webkit.org/
 * Carbon 生成一张Mac风格的代码图片 https://carbon.now.sh/
 * 生成ico图标 https://www.moqu8.com/mqweb/imgtoico/index.php
+* iOS 证书在线检测 https://www.ios-p12-cert.com/
+* LCD点阵字模数据 https://www.23bei.com/tool/553.html
 * 文档处理
   * ⭐️⭐️⭐️在线PDF工具 https://tools.pdf24.org/zh/
   * PDF转Word https://superdoctranslator.com/
   * 格式转换 https://app.xunjiepdf.com/
 * 工具集
   * ⭐️⭐️⭐️ 程序员导航 http://www.cxy521.com/
+  * ⭐️⭐️ 腾讯开发工具集 https://tool.tds.qq.com/
   * Ctool 程序开发常用工具 https://ctool.dev/
   * WebStack https://webstack.cc/
   * https://tool.lu/
@@ -155,7 +164,7 @@
 * 正则
   * 正则表达式测试 https://tool.oschina.net/regex/
 * http 数据模拟
-  * http://jsonplaceholder.typicode.com/
+  * ⭐️⭐️⭐️ http://jsonplaceholder.typicode.com/
 
 
 
@@ -277,6 +286,7 @@
 
 * 张鑫旭 https://www.zhangxinxu.com/
 * 阮一峰 https://www.ruanyifeng.com/
+  * ES6 入门教程 https://es6.ruanyifeng.com/
 * iCSS 前端趣闻 https://github.com/chokcoco/iCSS
   * https://csscoco.com/inspiration/#/
 * Java 技术栈 https://www.javastack.cn/
@@ -284,6 +294,7 @@
 * 程序员小山 https://sunzsh.gitbook.io/xiaoshan.bug
 * 神秘的鱼仔 https://codeease.top/blog/
 * 花裤衩 https://juejin.cn/user/518625216445533/posts
+  * vue2 后台管理 https://github.com/PanJiaChen/vue-element-admin
 * Java 全栈知识体系 https://pdai.tech/
 * 技术爬爬虾 https://gitee.com/tech-shrimp/me
 * 许雪里Java https://github.com/xuxueli

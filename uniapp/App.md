@@ -113,3 +113,27 @@ buildscript {
 distributionUrl=https\://mirrors.cloud.tencent.com/gradle/gradle-8.4-bin.zip
 ```
 
+
+
+
+
+## Uniapp: 原生Android插件开发调试打包详细历程
+
+https://blog.51cto.com/u_16117621/6292772
+
+
+
+
+
+## ios
+
+iOS证书证书申请：https://blog.csdn.net/qq_39196447/article/details/136877424
+
+IOS隐私信息访问的许可描述：https://blog.csdn.net/2301_81028896/article/details/145042464
+
+
+
+
+
+
+

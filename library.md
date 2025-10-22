@@ -3075,7 +3075,7 @@ JavaScript 的简单快速的 MD5 哈希函数支持 UTF-8 编码。
 
 
 
-## TODO 数字
+## 数字
 
 ### currency.js 金额
 
@@ -3214,7 +3214,7 @@ Signature Pad 是一个基于 Canvas 实现的签名库，用于绘制签名。�
 
 
 
-### lucky-canvas
+### lucky-canvas 抽奖插件
 
 lucky-canvas 是一套基于 TS + Canvas 开发的【大转盘 / 九宫格 / 老虎机】抽奖插件，一套源码适配多端框架 JS / Vue / React / Taro / UniApp / 微信小程序等，奖品 / 文字 / 图片 / 颜色 / 按钮均可配置，支持同步 / 异步抽奖，概率前 / 后端可控，自动根据 dpr 调整清晰度适配移动端。
 
@@ -3668,6 +3668,14 @@ Bulma 是一个基于 Flexbox 的现代 CSS 框架 。
 
 
 
+### SpinKit loading指示器
+
+使用 CSS 动画的加载指示器的集合
+
+文档地址：https://github.com/tobiasahlin/SpinKit
+
+
+
 ## 布局
 
 ### fullPage.js
@@ -3896,8 +3904,6 @@ Vue Tour 是一个轻量级、简单且可定制的导览插件，可与 Vue.js 
 
 
 
-
-
 ## 富文本编辑器
 
 ### wangEditor
@@ -3905,6 +3911,8 @@ Vue Tour 是一个轻量级、简单且可定制的导览插件，可与 Vue.js 
 基于JavaScript和css开发的 Web富文本编辑器， 轻量、简洁、界面美观、易用、开源免费。
 
 文档：https://www.wangeditor.com/
+
+文档地址：https://github.com/wangeditor-team/wangEditor
 
 
 
@@ -4469,6 +4477,16 @@ Prism 是一个轻量级、健壮且优雅的语法高亮库。
 
 ## 地图
 
+### 高德地图
+
+开放平台：https://lbs.amap.com/
+
+示例：https://lbs.amap.com/demo/list/js-api-v2
+
+高德地图轨迹回放：https://www.jianshu.com/p/714eb1d37873
+
+
+
 ### 百度地图
 
 开放平台: https://lbsyun.baidu.com/
@@ -4573,6 +4591,24 @@ qqmapsdk.reverseGeocoder({
   }
 })
 ```
+
+
+
+### MapBox
+
+官网：https://www.mapbox.com/
+
+示例：https://docs.mapbox.com/mapbox-gl-js/example/
+
+文档：https://github.com/mapbox/mapbox-gl-js
+
+
+
+### leafletjs
+
+官网：https://leafletjs.com/
+
+Leaflet.draw 交互绘制：https://blog.csdn.net/sinat_31213021/article/details/119735922
 
 
 
