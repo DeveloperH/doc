@@ -315,15 +315,21 @@ package.json中最重要的两个字段就是name和version，它们都是必须
 #### (4) 脚本配置
 
 * scripts ：scripts 是 package.json中内置的脚本入口，是key-value键值对配置，key为可运行的命令，可以通过 npm run 来执行命令。除了运行基本的scripts命令，还可以结合pre和post完成前置和后续操作。
+  * 命令内容可以是 linux 中的命令，比如 `echo` 输出命令。可以使用 `&&` 继发执行多条命令，使用 `&` 并发执行多条命令
+  * key 如果是 `start` 或者 `test` ，可以简写为 `npm start` ，和 `npm run start` 效果一样
 * config ：用来配置scripts运行时的配置参数
 
 
 
-```
+```json
 "scripts": {
- "dev": "node index.js",
+  "dev": "node index.js",
   "predev": "node beforeIndex.js",
-  "postdev": "node afterIndex.js"
+  "postdev": "node afterIndex.js",
+  "runjs": "node script1.js && node script2.js",
+  "greeting": "echo hello",
+  "start": "node demo.js",
+  "build": "echo $npm_package_config_port"
 }
 ```
 
@@ -332,8 +338,10 @@ package.json中最重要的两个字段就是name和version，它们都是必须
 ```js
 // index.js
 console.log("scripts: index.js")
+
 // beforeIndex.js
 console.log("scripts: before index.js")
+
 // afterIndex.js
 console.log("scripts: after index.js")
 ```
@@ -350,9 +358,11 @@ scripts: after index.js
 
 
 
+npm 脚本还可以使用 npm 的内部变量。
+
 ```
 "config": {
- "port": 3000
+  "port": 3000
 }
 ```
 
@@ -735,7 +745,7 @@ npm config set proxy=http://127.0.0.1:7897
 
 * 运行 `npx commandname` 会自动地在项目的 `node_modules` 文件夹中找到命令的正确引用，而无需知道确切的路径，也不需要在全局和用户路径中安装软件包。
   * `npx cowsay "你好"`
-* `npx` 的另一个重要的特性是，无需先安装命令即可运行命令。当被下载完，则下载的代码会被擦除。
+* `npx` 的另一个重要的特性是，**无需先安装命令即可运行命令。当被下载完，则下载的代码会被擦除。**
   * 运行 `vue` CLI 工具以创建新的应用程序并运行它们：`npx @vue/cli create my-vue-app`。
   * 使用 `create-react-app` 创建新的 `React` 应用：`npx create-react-app my-react-app`。
 * 使用 @ 指定版本，可以使用不同的 Node.js 版本运行代码
@@ -743,6 +753,86 @@ npm config set proxy=http://127.0.0.1:7897
 * `npx` 并不限制使用 npm 仓库上发布的软件包，直接从 URL 运行任意代码片段
   * `npx https://gist.github.com/zkat/4bc19503fe9e9309e2bfaa2c58074d32`
   * 当然，当运行不受控制的代码时，需要格外小心，因为强大的功能带来了巨大的责任。
+
+
+
+```sh
+# 报错，找不到 gulp 命令
+gulp -v
+
+# 成功，输入 gulp 版本号
+npx gulp -v
+
+# 让 npx 强制使用本地模块，不下载远程模块
+npx --no-install http-server
+
+# 让 npx 忽略使用本地模块，强制下载远程模块
+npx --ignore-existing http-server
+```
+
+
+
+## 安装 git 上发布的包
+
+```sh
+# 这样适合安装公司内部的 git 服务器上的项目
+npm i git+https://git@github.com:DeveloperH/project.git
+
+# 或者以 ssh 的方式
+npm i git+ssh://git@github.com:DeveloperH/project.git
+```
+
+安装后，`package.json` 中的对应依赖包版本号会变成 git 地址的形式。
+
+
+
+## cross-env 使用
+
+`cross-env` 是运行跨平台设置和使用环境变量的脚本。
+
+当你使用 `NODE_ENV=production` 来设置环境变量时，Windows 命令提示将会报错，因为它不支持这种设置方式。而 `cross-env` 能够提供一个设置环境变量的 script ，让你能够以 Unix 方式设置环境变量。
+
+
+
+1. 安装 `npm i cross-env -D`
+
+2. 使用
+
+   ```json
+   "scripts": {
+     "build": "cross-env NODE_ENV=production demo.js"
+   }
+   ```
+
+3. 获取 env 值
+
+   ```js
+   const node_env = process.env.NODE_ENV
+   ```
+
+   
+
+
+
+## nrm
+
+NRM (npm registry manager) 是 npm 的镜像源管理工具，可以快速的在 npm 源间切换。
+
+```sh
+npm i nrm -g
+
+# 查看可选的源
+nrm ls
+
+# 切换源
+nrm use 源名称
+
+# 测试速度
+nrm test
+
+# 查看当前源
+npm config get registry
+```
 
 
 
