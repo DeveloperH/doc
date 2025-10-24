@@ -1850,7 +1850,7 @@ VMware Workstation Pro 16：
 
 VMware Workstation Pro 17：
 
-* [下载地址](https://download3.vmware.com/software/WKST-1701-WIN/VMware-workstation-full-17.0.1-21139696.exe)
+* [下载地址](https://api.ddooo.com/down/197461/42)
 * 密钥：JU090-6039P-08409-8J0QH-2YR7F
 
 
