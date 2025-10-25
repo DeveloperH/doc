@@ -1316,7 +1316,53 @@ xm.sayHi();
 
 
 
+```js
+// 导出
+function testModule() {
+    console.log('exports');
+}
+
+let name = 'zs';
+
+module.exports = {
+  	testModule,
+ 		name
+}
+
+
+// 导入
+const {testModule, name} = require('./MyModule');
+testModule();
+console.log(name)
+```
+
+
+
+
+
 # 内置模块
+
+## url
+
+ url 模块提供了用于 URL 解析和解析的实用程序。
+
+
+
+* `URL.parse(input[, base])` ：将字符串解析为 URL。如果提供了 `base`，则它将用作基本 URL，用于解析非绝对 URL。如果参数无法解析为有效的网址则返回 `null` 。
+  * input：要解析的绝对或相对输入 URL。如果 URL 是相对的，那么 base 是必需的。如果URL是绝对的，则 base 被忽略。如果 input 不是字符串，则首先将其转换为字符串 。
+  * base：基本 URL。
+
+
+
+```js
+const url = require('url')
+const urlStr = "https://www.baidu.com/path/index.html?a=1"
+console.log(url.parse(urlStr))
+```
+
+
+
+
 
 ## http模块
 
@@ -1377,8 +1423,14 @@ const options = {
 const req = https.request(options, res => {
     console.log(`状态码：${res.statusCode}`)
 
-    res.on('data', d => {
-        process.stdout.write(d)
+  	let data = ''
+    res.on('data', (chunk) => {
+      	data += chunk
+        process.stdout.write(chunk)
+    })
+  
+    res.on('end', () => {
+        console.log('接收完毕')
     })
 })
 
@@ -1412,8 +1464,14 @@ const options = {
 const req = https.request(options, res => {
     console.log(`状态码：${res.statusCode}`)
 
-    res.on('data', d => {
-        process.stdout.write(d)
+  	let data = ''
+    res.on('data', (chunk) => {
+      	data += chunk
+        process.stdout.write(chunk)
+    })
+  
+    res.on('end', () => {
+        console.log('接收完毕')
     })
 })
 
@@ -2848,11 +2906,19 @@ app.listen(3000)
 
 ## nodemon 进程管理工具
 
-​	nodemon是一种工具，可在检测到目录中的文件更改时通过自动重新启动节点应用程序来帮助开发基于node.js的应用程序。常用于重新启动挂起的进程，例如Web服务器。
+nodemon是一种工具，可在检测到目录中的文件更改时通过自动重新启动节点应用程序来帮助开发基于node.js的应用程序。常用于重新启动挂起的进程，例如Web服务器。
 
 * 安装 `npm install -g nodemon`
 * 使用 `nodemon js文件名`
 * 详见 https://www.npmjs.com/package/nodemon
+
+
+
+## pm2 进程管理器
+
+PM2 是 Node.js/Bun 应用程序的生产流程管理器，具有内置负载均衡器。它允许您使应用程序永远保持活动状态，在不停机的情况下重新加载它们，并简化常见的系统管理任务。
+
+文档地址：https://github.com/Unitech/pm2
 
 
 
@@ -4749,14 +4815,6 @@ node.js 中间件，用于处理 JSON, Raw, Text 和 URL 编码的数据。
 AnyProxy 是阿里的一个基于 NodeJS 的，可供插件配置的 HTTP/HTTPS 代理服务器。
 
 文档地址：https://github.com/alibaba/anyproxy
-
-
-
-### 进程管理器 pm2
-
-PM2 是 Node.js/Bun 应用程序的生产流程管理器，具有内置负载均衡器。它允许您使应用程序永远保持活动状态，在不停机的情况下重新加载它们，并简化常见的系统管理任务。
-
-文档地址：https://github.com/Unitech/pm2
 
 
 

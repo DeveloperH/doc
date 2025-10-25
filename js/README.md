@@ -3168,6 +3168,30 @@ testModule();
 
 
 
+```js
+// 导出
+function testModule() {
+    console.log('exports');
+}
+
+let name = 'zs';
+
+module.exports = {
+  	testModule,
+ 		name
+}
+
+
+// 导入
+const {testModule, name} = require('./MyModule');
+testModule();
+console.log(name)
+```
+
+
+
+
+
 #### 加载过程
 
 在  CommonJS 中，`require` 的加载过程如下：
