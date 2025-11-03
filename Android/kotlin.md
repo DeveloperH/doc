@@ -1269,6 +1269,234 @@ fun main() {
 
 
 
+### interface 接口
+
+Kotlin 中的接口可以包含抽象方法的声明以及方法实现。它们与抽象类的不同之处在于接口不能存储状态。它们可以具有属性，但这些属性需要抽象或提供访问器实现。
+
+使用关键字 `interface` 定义接口。一个类或对象可以实现一个或多个接口。
+
+```kotlin
+interface MyInterface {
+    fun bar()
+    fun foo() { }
+}
+
+class Child : MyInterface {
+    override fun bar() {
+        // body
+    }
+}
+```
+
+
+
+可以在接口中声明属性。在接口中声明的属性可以是抽象的，也可以为访问器提供实现。在接口中声明的属性不能具有幕后字段，因此在接口中声明的访问器不能引用它们。
+
+```kotlin
+interface MyInterface {
+    val prop: Int // abstract
+
+    val propertyWithImplementation: String
+        get() = "foo"
+
+    fun foo() {
+        print(prop)
+    }
+}
+
+class Child : MyInterface {
+    override val prop: Int = 29
+}
+```
+
+
+
+接口可以派生自其他接口，这意味着它既可以为其成员提供实现，也可以声明新的函数和属性。很自然地，实现此类接口的类只需要定义缺失的实现。
+
+```kotlin
+interface Named {
+    val name: String
+}
+
+interface Person : Named {
+    val firstName: String
+    val lastName: String
+
+    override val name: String get() = "$firstName $lastName"
+}
+
+data class Employee(
+    // implementing 'name' is not required
+    override val firstName: String,
+    override val lastName: String,
+    val position: Position
+) : Person
+```
+
+
+
+当您在超类型列表中声明多个类型时，您可以继承同一方法的多个实现。
+
+```kotlin
+interface A {
+    fun foo() { print("A") }
+    fun bar()
+}
+
+interface B {
+    fun foo() { print("B") }
+    fun bar() { print("bar") }
+}
+
+class C : A {
+    override fun bar() { print("bar") }
+}
+
+class D : A, B {
+    override fun foo() {
+        super<A>.foo()
+        super<B>.foo()
+    }
+
+    override fun bar() {
+        super<B>.bar()
+    }
+}
+```
+
+如果从 A 和 B 派生 D，则需要实现从多个接口继承的所有方法，并且需要指定 D 应如何实现它们。此规则既适用于继承了单个实现的方法 （bar()），也适用于继承了多个实现的方法 （foo()）。
+
+
+
+### 函数 (SAM) 接口
+
+仅具有一个抽象成员函数的接口称为函数接口或单抽象方法 （SAM Single Abstract Method ） 接口 。函数接口可以有多个非抽象成员函数，但只能有一个抽象成员函数。
+
+要在 Kotlin 中声明函数式接口，请使用 `fun` 修饰符。
+
+```kotlin
+fun interface KRunnable {
+    fun invoke()
+}
+```
+
+
+
+对于函数式接口，可以使用 SAM 转换，通过使用 lambda 表达式帮助使代码更加简洁和可读。
+
+您可以使用 lambda 表达式，而不是手动创建实现函数接口的类。通过 SAM 转换，Kotlin 可以将签名与接口单一方法的签名匹配的任何 lambda 表达式转换为代码，从而动态实例化接口实现。
+
+```kotlin
+fun interface IntPredicate {
+    fun accept(i: Int): Boolean
+}
+
+// 不使用 SAM 转换
+val isEven = object : IntPredicate {
+    override fun accept(i: Int): Boolean {
+        return i % 2 == 0
+    }
+}
+
+// SAM 转换
+val isEven = IntPredicate { it % 2 == 0 }
+```
+
+
+
+### 可见性修饰符
+
+Kotlin 中有四种可见性修饰符：`private`、`protected` 、`internal` 和 `public`。默认可见性为 `public`。
+
+类、对象、接口、构造函数和函数，以及属性及其 setter 可以具有可见性修饰符 。Getter 始终具有与其属性相同的可见性。
+
+
+
+#### package
+
+函数、属性、类、对象和接口可以直接在包内的顶层声明。
+
+* 如果您不使用可见性修饰符，则默认使用 `public`，这意味着您的声明将在任何地方可见。
+* 如果将声明标记为 `private` ，则它将仅在包含该声明的文件中可见。
+* 如果将其标记为 `internal` ，则在同一模块中的任何地方都可以看到它。
+* `protected` 修饰符不适用于顶级声明。
+
+要使用另一个包中的可见顶级声明，您应该导入它。
+
+```kotlin
+// file name: example.kt
+package foo
+
+fun baz() { }	// 默认是 public
+class Bar { }
+
+private fun foo() { ... } // 仅在 example.kt 中可见
+
+public var bar: Int = 5 // 在任何地方可见
+    private set         // setter只在 example.kt 中可见
+
+internal val baz = 6    // 只在相同 module 中可见
+```
+
+
+
+#### class 中的成员
+
+对于在类内声明的成员：
+
+* `private` 表示该成员仅在此类中可见（包括其所有成员）。
+* `protected` 意味着该成员与标记为 `private` 的成员具有相同的可见性，但它在子类中也可见。
+* `internal` 意味着此模块中任何看到声明类的客户端都会看到其 `internal ` 成员。
+* `public` 意味着任何看到声明类的客户端都会看到其 `public` 成员。
+
+在 Kotlin 中，外部类看不到其内部类的私有成员。
+
+如果覆盖 `protected` 成员或 `internal ` 成员，并且未显式指定可见性，则覆盖成员也将具有与原始成员相同的可见性。
+
+```kotlin
+open class Outer {
+    private val a = 1
+    protected open val b = 2
+    internal open val c = 3
+    val d = 4  // 默认是 public
+
+    protected class Nested {
+        public val e: Int = 5
+    }
+}
+
+class Subclass : Outer() {
+    // a is not visible
+    // b, c and d are visible
+    // Nested and e are visible
+
+    override val b = 5   // 'b' is protected
+    override val c = 7   // 'c' is internal
+}
+
+class Unrelated(o: Outer) {
+    // o.a, o.b are not visible
+    // o.c and o.d are visible (same module)
+    // Outer.Nested is not visible, and Nested::e is not visible either
+}
+```
+
+
+
+#### 构造函数
+
+使用以下语法指定类的主构造函数的可见性。
+
+```kotlin
+class C private constructor(a: Int) { }
+```
+
+默认情况下，所有构造函数都是 `public` 的，这实际上相当于它们在类可见的任何地方都可见（这意味着 `internal` 类的构造函数仅在同一模块中可见）。
+
+对于密封类，构造函数默认 `protected ` 。
+
+
+
 ### package 、 import 
 
 源文件可以以包声明开头。
@@ -1307,8 +1535,6 @@ import org.example.*
 import org.example.Message
 import org.test.Message as TestMessage
 ```
-
-
 
 
 
@@ -1477,6 +1703,212 @@ fun main() {
 ```
 
 
+
+### 扩展
+
+Kotlin 扩展允许您使用新功能扩展类或接口，而无需使用继承或设计模式（如 Decorator）。当使用无法直接修改的第三方库时，它们非常有用。创建后，您可以调用这些扩展，就好像它们是原始类或接口的成员一样。
+
+最常见的扩展形式是扩展函数和扩展属性 。
+
+重要的是，扩展不会修改它们扩展的类或接口。定义扩展时，不会添加新成员。您可以使用相同的语法使新函数可调用或新属性可访问。
+
+
+
+#### 接收器
+
+扩展总是在接收器上调用。接收方必须与要扩展的类或接口具有相同的类型。要使用扩展名，请在其前加上接收方，后跟 `.` 以及函数或属性名称。
+
+例如，标准库中的 `.appendLine()` 扩展函数扩展了 `StringBuilder` 类。所以在本例中，接收器是 `StringBuilder` 实例， 接收器类型是 `StringBuilder` 。
+
+```kotlin
+val builder = StringBuilder()
+    // Calls .appendLine() extension function on builder
+    .appendLine("Hello")
+    .appendLine()
+    .appendLine("World")
+println(builder.toString())
+// Hello
+//
+// World
+```
+
+
+
+#### 扩展方法
+
+在创建您自己的扩展函数之前，请查看您要查找的内容是否已在 Kotlin 标准库中可用。标准库为以下内容提供了许多有用的扩展函数：
+
+* 对集合进行操作：`.map()` 、`.filter()` 、`.reduce()` 、`.fold()` 、`.groupBy()` 。
+* 转换为字符串：`.joinToString()` 。
+* 处理 null 值：`.filterNotNull()` 。
+
+
+
+要创建您自己的扩展函数，请在其名称前加上接收器类型，后跟 `.` 。
+
+```kotlin
+fun String.truncate(maxLength: Int): String {
+    return if (this.length <= maxLength) this else take(maxLength - 3) + "..."
+}
+
+fun main() {
+    val shortUsername = "KotlinFan42"
+    val longUsername = "JetBrainsLoverForever"
+
+    println("Short username: ${shortUsername.truncate(15)}") 
+    // KotlinFan42
+  
+    println("Long username:  ${longUsername.truncate(15)}")
+    // JetBrainsLov...
+}
+```
+
+
+
+若要创建泛型扩展函数，请在函数名称之前声明泛型类型参数，使其在接收器类型表达式中可用。
+
+```kotlin
+fun <T> List<T>.endpoints(): Pair<T, T> {
+    return first() to last()
+}
+
+fun main() {
+    val cities = listOf("Paris", "London", "Berlin", "Prague")
+    val temperatures = listOf(21.0, 19.5, 22.3)
+
+    val cityEndpoints = cities.endpoints()
+    val tempEndpoints = temperatures.endpoints()
+
+    println("First and last cities: $cityEndpoints")
+    // (Paris, Prague)
+    println("First and last temperatures: $tempEndpoints") 
+    // (21.0, 22.3)
+}
+```
+
+
+
+由于扩展和成员函数调用具有相同的表示法，编译器如何知道要使用哪一个？扩展函数是静态调度的 ，这意味着编译器在编译时根据接收器类型确定要调用的函数。
+
+```kotlin
+fun main() {
+    open class Shape
+    class Rectangle: Shape()
+
+    fun Shape.getName() = "Shape"
+    fun Rectangle.getName() = "Rectangle"
+
+    fun printClassName(shape: Shape) {
+        println(shape.getName())
+    }
+
+    printClassName(Rectangle())
+    // Shape
+}
+```
+
+如果类具有成员函数，并且存在具有相同接收器类型、相同名称和兼容参数的扩展函数，则成员函数优先。
+
+```kotlin
+class Example {
+    fun printFunctionType() { println("Member function") }
+}
+
+fun Example.printFunctionType() { println("Extension function") }
+
+Example().printFunctionType()
+// Member function
+```
+
+但是，扩展函数可以重载具有相同名称但签名不同的成员函数：
+
+```kotlin
+class Example {
+    fun printFunctionType() { println("Member function") }
+}
+
+// Same name but different signature
+fun Example.printFunctionType(index: Int) { println("Extension function #$index") }
+
+Example().printFunctionType(1)
+// Extension function #1
+```
+
+
+
+您可以定义扩展函数，而无需为它们命名（匿名扩展函数）。当您想要避免全局命名空间混乱或需要将某些扩展行为作为参数传递时，这非常有用。
+
+```kotlin
+fun main() {
+    //sampleStart
+    data class Order(val weight: Double)
+    val calculateShipping = fun Order.(rate: Double): Double = this.weight * rate
+    
+    val order = Order(2.5)
+    val cost = order.calculateShipping(3.0)
+    println("Shipping cost: $cost") 
+    // Shipping cost: 7.5
+}
+```
+
+要将扩展行为作为参数传递，请使用带有类型注释的 lambda 表达式 。例如，假设您要检查一个数字是否在某个范围内，而无需定义命名函数：
+
+```kotlin
+val isInRange: Int.(min: Int, max: Int) -> Boolean = { min, max -> this in min..max }
+
+println(5.isInRange(1, 10))
+// true
+println(20.isInRange(1, 10))
+// false
+```
+
+
+
+#### 扩展属性
+
+Kotlin 支持扩展属性，这些属性对于执行数据转换或创建界面显示帮助程序非常有用，而不会使您正在使用的类变得混乱。
+
+要创建扩展属性，请写下要扩展的类的名称，后跟 `.` 和属性的名称。
+
+例如，假设您有一个数据类表示具有名字和姓氏的用户，并且您想要创建一个属性，该属性在访问时返回电子邮件样式的用户名。您的代码可能如下所示：
+
+```kotlin
+data class User(val firstName: String, val lastName: String)
+
+// An extension property to get a username-style email handle
+val User.emailUsername: String
+    get() = "${firstName.lowercase()}.${lastName.lowercase()}"
+
+fun main() {
+    val user = User("Mickey", "Mouse")
+    // Calls extension property
+    println("Generated email username: ${user.emailUsername}")
+    // Generated email username: mickey.mouse
+}
+```
+
+由于扩展实际上不会将成员添加到类中，因此扩展属性没有有效的方法可以具有幕后字段 。这就是扩展属性不允许使用初始值设定项的原因。你只能通过显式提供 getter 和 setter 来定义它们的行为。
+
+
+
+#### 伴生对象扩展
+
+如果类定义了伴生对象 ，您还可以为伴生对象定义扩展函数和属性。就像伴生对象的常规成员一样，可以仅使用类名作为限定符来调用它们。默认情况下，编译器将伴生对象命名为 `Companion` ：
+
+```kotlin
+class Logger {
+    companion object { }
+}
+
+fun Logger.Companion.logStartupMessage() {
+    println("Application started.")
+}
+
+fun main() {
+    Logger.logStartupMessage()
+    // Application started.
+}
+```
 
 
 
@@ -1938,7 +2370,7 @@ https://kotlinlang.org/docs/multiplatform.html
 
 ## todo
 
-https://kotlinlang.org/docs/interfaces.html
+https://kotlinlang.org/docs/data-classes.html
 
 
 
