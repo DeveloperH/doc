@@ -861,19 +861,321 @@ class FilledRectangle: Rectangle() {
 
 #### data class
 
-`data class` 提供具有以下功能的类：
+Kotlin 中的数据类主要用于保存数据。`data class` 提供具有以下功能的类：
 
 * 所有属性的 getter（如果是 var，则还包括 setter）
-* `equals()`
+* `equals()` ：仅比较计算主构造函数的属性
 * `hashCode()`
 * `toString()`
-* `copy()`
+* `copy()` ：创建实例的浅层副本，对实例内其他对象的引用是共享的。
 * `component1（）`， `component2（）`， ...，适用于所有属性
+
+
+
+为了确保生成代码的一致性和有意义的行为，数据类必须满足以下要求：
+
+* 主构造函数必须至少有一个参数。
+* 所有主构造函数参数都必须标记为 `val` 或 `var`。
+* 数据类不能是抽象的、开放的、密封的或内部的。
 
 
 
 ```kotlin
 data class Customer(val name: String, val email: String)
+
+// 编译器仅使用主构造函数中定义的属性来自动生成的函数。要从生成的实现中排除属性，请在类体中声明它：
+data class Person(val name: String) {
+    var age: Int = 0
+}
+
+// copy()
+fun copy(name: String = this.name, age: Int = this.age) = User(name, age)
+val jack = User(name = "Jack", age = 1)
+val olderJack = jack.copy(age = 2)
+
+// 为数据类生成的组件函数可以在解构声明中使用它们
+val jane = User("Jane", 35)
+val (name, age) = jane
+println("$name, $age years of age")
+// Jane, 35 years of age
+
+// 在 JVM 上，如果生成的类需要具有无参数构造函数，则必须指定属性的默认值
+data class User(val name: String = "", val age: Int = 0)
+```
+
+
+
+此外，数据类成员的生成遵循以下有关成员继承的规则：
+
+* 如果数据类体中有 `equals()` 、`hashCode()` 或 `toString()` 的显式实现，或者在超类中有 `final` 实现，则不会生成这些函数，而是使用现有实现。
+* 如果超类型具有 `open` 的 `componentN()` 函数并返回兼容类型，则会为数据类生成相应的函数并覆盖超类型的函数。如果由于签名不兼容或由于签名是最终签名而无法覆盖超类型的函数，则会报告错误。
+* 不允许为 `componentN()` 和 `copy()` 函数提供显式实现。
+
+
+
+#### sealed class 密封类和接口
+
+密封的类和接口提供类层次结构的受控继承。密封类的所有直接子类在编译时都是已知的。在定义密封类的模块和包之外，不得出现其他子类。同样的逻辑也适用于密封接口及其实现：一旦编译了具有密封接口的模块，就无法创建新的实现。
+
+直接子类是立即继承其超类的类。间接子类是从其超类的多个级别向下继承的类。
+
+将密封的类和接口与 `when` 表达式组合在一起时，可以涵盖所有可能的子类的行为，并确保不会创建新的子类来对代码产生不利影响。
+
+密封类最适合在以下情况下使用：
+
+* 需要有限的类继承： 你有一组预定义的有限子类，用于扩展一个类，所有这些子类在编译时都是已知的。
+* 需要类型安全设计： 安全性和模式匹配在您的项目中至关重要。特别是对于状态管理或处理复杂的条件逻辑。
+* 使用封闭的 API： 您需要为库提供强大且可维护的公共 API，以确保第三方客户端按预期使用 API。
+
+
+
+要声明密封的类或接口，请使用 `sealed` 修饰符：
+
+```kotlin
+// 创建一个密封接口
+sealed interface Error
+
+// 创建一个实现密封接口Error的密封类
+sealed class IOError(): Error
+
+// 定义继承密封类 IOError 的子类
+class FileReadError(val file: File): IOError()
+class DatabaseError(val source: DataSource): IOError()
+
+// 创建一个实现Error密封接口的单例对象
+object RuntimeError : Error
+```
+
+
+
+密封类本身始终是一个抽象类 ，因此无法直接实例化。但是，它可能包含或继承构造函数。这些构造函数不是用于创建密封类本身的实例，而是用于其子类。
+
+```kotlin
+sealed class Error(val message: String) {
+    class NetworkError : Error("Network failure")
+    class DatabaseError : Error("Database cannot be reached")
+    class UnknownError : Error("An unknown error has occurred")
+}
+
+fun main() {
+    val errors = listOf(Error.NetworkError(), Error.DatabaseError(), Error.UnknownError())
+    errors.forEach { println(it.message) }
+}
+// Network failure 
+// Database cannot be reached 
+// An unknown error has occurred
+```
+
+您可以在密封类中使用枚举类来使用枚举常量来表示状态并提供其他详细信息。每个枚举常量仅作为单个实例存在，而密封类的子类可能具有多个实例。
+
+```kotlin
+enum class ErrorSeverity { MINOR, MAJOR, CRITICAL }
+
+sealed class Error(val severity: ErrorSeverity) {
+    class FileReadError(val file: File): Error(ErrorSeverity.MAJOR)
+    class DatabaseError(val source: DataSource): Error(ErrorSeverity.CRITICAL)
+    object RuntimeError : Error(ErrorSeverity.CRITICAL)
+    // 此处可添加其他错误类型
+}
+```
+
+密封类的构造函数可以具有以下两种可见性之一：`protected`（默认情况下）或 `private` ：
+
+```kotlin
+sealed class IOError {
+    // 密封类的构造函数默认具有受保护的可见性。它在该类及其子类内部可见
+    constructor() { /*...*/ }
+
+    // 私有构造函数，仅在本类内部可见
+    // 在密封类中使用私有构造函数可以实现对实例化的更严格控制，从而允许在类内部执行特定的初始化流程
+    private constructor(description: String): this() { /*...*/ }
+
+    // 这将引发错误，因为密封类不允许使用公共和内部构造函数
+    // public constructor(code: Int): this() {}
+}
+```
+
+
+
+密封类和接口的直接子类必须在同一包中声明。它们可以是顶级的，也可以嵌套在任意数量的其他命名类、命名接口或命名对象中。子类可以具有任何可见性 ，只要它们与 Kotlin 中的正常继承规则兼容即可。
+
+密封类的子类必须具有正确限定的名称。它们不能是本地或匿名对象。
+
+这些限制不适用于间接子类。如果密封类的直接子类未标记为密封，则可以以其修饰符允许的任何方式扩展它。
+
+```kotlin
+// 密封接口Error仅在同一包和模块中实现
+sealed interface Error
+
+// 密封类IOError扩展了Error，并且只能在同一个包内扩展
+sealed class IOError(): Error
+
+// open 类CustomError扩展了Error，可以扩展到任何可见的地方
+open class CustomError(): Error
+```
+
+
+
+使用密封类的主要好处在 `when` 表达式中使用它们时就会发挥作用。与密封类一起使用的 `when` 表达式允许 Kotlin 编译器详尽地检查是否涵盖了所有可能的情况。在这种情况下，无需添加 `else` 子句：
+
+```kotlin
+// 密封类及其子类
+sealed class Error {
+    class FileReadError(val file: String): Error()
+    class DatabaseError(val source: String): Error()
+    object RuntimeError : Error()
+}
+
+// 记录错误的函数
+fun log(e: Error) = when(e) {
+    is Error.FileReadError -> println("Error while reading file ${e.file}")
+    is Error.DatabaseError -> println("Error while reading from database ${e.source}")
+    Error.RuntimeError -> println("Runtime error")
+    // 不需要else，因为所有情况都涵盖在内
+}
+
+// 列出所有错误
+fun main() {
+    val errors = listOf(
+        Error.FileReadError("example.txt"),
+        Error.DatabaseError("usersDatabase"),
+        Error.RuntimeError
+    )
+
+    errors.forEach { log(it) }
+}
+```
+
+
+
+##### 用例场景
+
+您可以使用密封类来表示应用程序中的不同 UI 状态。这种方法允许对 UI 更改进行结构化和安全处理。
+
+```kotlin
+sealed class UIState {
+    data object Loading : UIState()
+    data class Success(val data: String) : UIState()
+    data class Error(val exception: Exception) : UIState()
+}
+
+fun updateUI(state: UIState) {
+    when (state) {
+        is UIState.Loading -> showLoadingIndicator()
+        is UIState.Success -> showData(state.data)
+        is UIState.Error -> showError(state.exception)
+    }
+}
+```
+
+
+
+#### value class 内联值类
+
+内联类是基于值的类的子集。他们没有身份，只能持有价值观。
+
+要声明内联类，请在类名之前使用 `value` 修饰符。
+
+```kotlin
+value class Password(private val s: String)
+
+// 要为 JVM 后端声明内联类，请在类声明之前使用 value 修饰符和 @JvmInline 注释：
+@JvmInline
+value class Password(private val s: String)
+```
+
+
+
+内联类必须在主构造函数中初始化单个属性。在运行时，内联类的实例将使用此单个属性表示。
+
+这是内联类的主要特征，它启发了内联这个名称：类的数据被内联到它的用法中（类似于内联函数的内容内联到调用站点的方式）。
+
+```kotlin
+// 没有实际实例化类“Password”
+// 在运行时，“securePassword”仅包含“String”
+val securePassword = Password("Don't try this in production")
+```
+
+
+
+内联类支持常规类的某些功能。特别是，它们被允许声明属性和函数，具有 init 块和辅助构造函数。
+
+内联类属性不能有幕后字段 。它们只能具有简单的可计算属性（没有 `lateinit` / `delegated` 属性）。
+
+```kotlin
+@JvmInline
+value class Person(private val fullName: String) {
+    init {
+        require(fullName.isNotEmpty()) {
+            "Full name shouldn't be empty"
+        }
+    }
+
+    constructor(firstName: String, lastName: String) : this("$firstName $lastName") {
+        require(lastName.isNotBlank()) {
+            "Last name shouldn't be empty"
+        }
+    }
+
+    val length: Int
+        get() = fullName.length
+
+    fun greet() {
+        println("Hello, $fullName")
+    }
+}
+
+fun main() {
+    val name1 = Person("Kotlin", "Mascot")
+    val name2 = Person("Kodee")
+    name1.greet() // the `greet()` function is called as a static method
+    println(name2.length) // property getter is called as a static method
+}
+```
+
+
+
+允许内联类继承自接口。
+
+禁止内联类参与类层次结构。这意味着内联类不能扩展其他类，并且始终是 `final ` 。
+
+```kotlin
+interface Printable {
+    fun prettyPrint(): String
+}
+
+@JvmInline
+value class Name(val s: String) : Printable {
+    override fun prettyPrint(): String = "Let's $s!"
+}
+
+fun main() {
+    val name = Name("Kotlin")
+    println(name.prettyPrint()) // Still called as a static method
+}
+```
+
+
+
+允许通过委托到内联类的内联值来实现接口：
+
+```kotlin
+interface MyInterface {
+    fun bar()
+    fun foo() = "foo"
+}
+
+@JvmInline
+value class MyInterfaceWrapper(val myInterface: MyInterface) : MyInterface by myInterface
+
+fun main() {
+    val my = MyInterfaceWrapper(object : MyInterface {
+        override fun bar() {
+            // body
+        }
+    })
+    println(my.foo()) // prints "foo"
+}
 ```
 
 
@@ -1266,6 +1568,464 @@ fun main() {
     // Latest reading: 22°C, sunny
 }
 ```
+
+
+
+#### 嵌套类和内部类
+
+类可以嵌套在其他类中：
+
+```kotlin
+class Outer {
+    private val bar: Int = 1
+    class Nested {
+        fun foo() = 2
+    }
+}
+
+val demo = Outer.Nested().foo() // == 2
+```
+
+
+
+您还可以使用带有嵌套的接口。类和接口的所有组合都是可能的：您可以在类中嵌套接口，在接口中嵌套类，在接口中嵌套接口。
+
+```kotlin
+interface OuterInterface {
+    class InnerClass
+    interface InnerInterface
+}
+
+class OuterClass {
+    class InnerClass
+    interface InnerInterface
+}
+```
+
+
+
+标记为`inner` 的嵌套类可以访问其外部类的成员。内部类携带对外部类对象的引用：
+
+```kotlin
+class Outer {
+    private val bar: Int = 1
+    inner class Inner {
+        fun foo() = bar
+    }
+}
+
+val demo = Outer().Inner().foo() // == 1
+```
+
+
+
+匿名内部类实例是使用对象表达式创建的：
+
+```kotlin
+window.addMouseListener(object : MouseAdapter() {
+
+    override fun mouseClicked(e: MouseEvent) { ... }
+
+    override fun mouseEntered(e: MouseEvent) { ... }
+})
+```
+
+
+
+#### enum 枚举类
+
+枚举类最基本的用例是类型安全枚举的实现。
+
+每个枚举常量都是一个对象。枚举常量用逗号分隔。
+
+```kotlin
+enum class Direction {
+    NORTH, SOUTH, WEST, EAST
+}
+
+// 由于每个枚举都是枚举类的实例，因此可以将其初始化为：
+enum class Color(val rgb: Int) {
+    RED(0xFF0000),
+    GREEN(0x00FF00),
+    BLUE(0x0000FF)
+}
+```
+
+
+
+枚举常量可以使用相应的方法以及覆盖的基本方法声明自己的匿名类。
+
+如果枚举类定义了任何成员，请使用分号将常量定义与成员定义分开。
+
+```kotlin
+enum class ProtocolState {
+    WAITING {
+        override fun signal() = TALKING
+    },
+
+    TALKING {
+        override fun signal() = WAITING
+    };
+
+    abstract fun signal(): ProtocolState
+}
+```
+
+
+
+枚举类可以实现接口（但它不能派生自类），为所有条目提供接口成员的通用实现，或者为其匿名类中的每个条目提供单独的实现。
+
+默认情况下，所有枚举类都实现 `Comparable` 接口。枚举类中的常量按自然顺序定义。
+
+```kotlin
+import java.util.function.BinaryOperator
+import java.util.function.IntBinaryOperator
+
+enum class IntArithmetics : BinaryOperator<Int>, IntBinaryOperator {
+    PLUS {
+        override fun apply(t: Int, u: Int): Int = t + u
+    },
+    TIMES {
+        override fun apply(t: Int, u: Int): Int = t * u
+    };
+
+    override fun applyAsInt(t: Int, u: Int) = apply(t, u)
+}
+
+fun main() {
+    val a = 13
+    val b = 31
+    for (f in IntArithmetics.entries) {
+        println("$f($a, $b) = ${f.apply(a, b)}")
+    }
+}
+```
+
+
+
+Kotlin 中的枚举类具有合成属性和方法，用于列出定义的枚举常量并按其名称获取枚举常量。这些方法的签名如下（假设枚举类的名称是 `EnumClass`）。
+
+```kotlin
+EnumClass.valueOf(value: String): EnumClass
+EnumClass.entries: EnumEntries<EnumClass> // specialized List<EnumClass>
+
+
+enum class RGB { RED, GREEN, BLUE }
+
+fun main() {
+    for (color in RGB.entries) println(color.toString()) // prints RED, GREEN, BLUE
+    println("The first color is: ${RGB.valueOf("RED")}") // prints "The first color is: RED"
+}
+```
+
+如果指定的名称与类中定义的任何枚举常量不匹配，则 `valueOf()` 方法会抛出 `IllegalArgumentException`。
+
+每个枚举常量也有属性：`name` 和 `ordinal`，用于在枚举类声明中获取其名称和位置（从 0 开始）：
+
+```kotlin
+enum class RGB { RED, GREEN, BLUE }
+
+fun main() {
+    println(RGB.RED.name)    // prints RED
+    println(RGB.RED.ordinal) // prints 0
+
+}
+```
+
+
+
+您可以使用 `enumValues<T>()` 和  `enumValueOf<T>()` 函数以通用方式访问枚举类中的常量。在 Kotlin 2.0.0 中，引入了 `enumEntries<T>()` 函数作为 `enumValues<T>()`  函数的替代品。`enumEntries<T>()` 函数返回给定枚举类型 T 的所有枚举条目的列表。
+
+```kotlin
+enum class RGB { RED, GREEN, BLUE }
+
+inline fun <reified T : Enum<T>> printAllValues() {
+    println(enumEntries<T>().joinToString { it.name })
+}
+
+printAllValues<RGB>()
+// RED, GREEN, BLUE
+```
+
+
+
+#### 对象声明和表达式
+
+在 Kotlin 中，对象允许您定义一个类并在一个步骤中创建它的实例。当您需要可重用的单例实例或一次性对象时，这非常有用。为了处理这些场景，Kotlin 提供了两种关键方法：用于创建单例的对象声明和用于创建匿名一次性对象的对象表达式。
+
+单例确保一个类只有一个实例，并提供对它的全局访问点。
+
+对象声明和对象表达式最适合在以下情况下使用：
+
+* 对共享资源使用单例： 您需要确保在整个应用程序中仅存在一个类的实例。例如，管理数据库连接池。
+* 创建工厂方法： 您需要一种便捷的方法来高效地创建实例。 配套对象允许您定义与类绑定的类级函数和属性，从而简化这些实例的创建和管理。
+* 临时修改现有类行为： 您希望修改现有类的行为，而无需创建新的子类。例如，为特定作向对象添加临时功能。
+* 需要类型安全设计： 您需要使用对象表达式一次性实现接口或抽象类 。这对于按钮单击处理程序等方案非常有用。
+
+
+
+对象声明和对象表达式之间的初始化行为存在差异：
+
+* 对象表达式在使用它们时立即执行（并初始化）。
+* 对象声明在首次访问时延迟初始化。
+* 当加载（解析）与 Java 静态初始值设定项的语义匹配的相应类时，将初始化配套对象。
+
+
+
+
+
+##### 对象声明
+
+您可以使用对象声明在 Kotlin 中创建对象的单个实例，这些对象声明始终在 `object` 关键字后面有一个名称。这允许您在单个步骤中定义一个类并创建它的实例，这对于实现单例很有用：
+
+```kotlin
+// 声明一个单例对象来管理数据提供者
+object DataProviderManager {
+    private val providers = mutableListOf<DataProvider>()
+
+    // 注册一个新的数据提供程序
+    fun registerDataProvider(provider: DataProvider) {
+        providers.add(provider)
+    }
+
+    // 检索所有已注册的数据提供程序
+    val allDataProviders: Collection<DataProvider> 
+        get() = providers
+}
+
+// 数据提供者接口示例
+interface DataProvider {
+    fun provideData(): String
+}
+
+// 数据提供者示例实现
+class ExampleDataProvider : DataProvider {
+    override fun provideData(): String {
+        return "Example data"
+    }
+}
+
+fun main() {
+    // 创建一个ExampleDataProvider的实例
+    val exampleProvider = ExampleDataProvider()
+
+    // 要引用该对象，请直接使用其名称
+    DataProviderManager.registerDataProvider(exampleProvider)
+
+    // 检索并打印所有数据提供者
+    println(DataProviderManager.allDataProviders.map { it.provideData() })
+    // [Example data]
+}
+```
+
+对象声明的初始化是线程安全的，并在首次访问时完成。
+
+要引用 `object` ，请直接使用其名称：
+
+```kotlin
+DataProviderManager.registerDataProvider(exampleProvider)
+```
+
+
+
+对象声明也可以具有超类型，类似于匿名对象可以继承现有类或实现接口的方式：
+
+```kotlin
+object DefaultListener : MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) { ... }
+
+    override fun mouseEntered(e: MouseEvent) { ... }
+}
+```
+
+
+
+与变量声明一样，对象声明不是表达式，因此它们不能在赋值语句的右侧使用：
+
+```kotlin
+// Syntax error: An object expression cannot bind a name.  对象表达式无法绑定名称。
+val myObject = object MySingleton {
+    val name = "Singleton"
+}
+```
+
+对象声明不能是本地的，这意味着它们不能直接嵌套在函数中。但是，它们可以嵌套在其他对象声明或非内部类中。
+
+
+
+###### data object 数据对象
+
+在 Kotlin 中打印普通对象声明时，字符串表示形式包含其名称和 `object` 的哈希：
+
+```kotlin
+object MyObject
+
+fun main() {
+    println(MyObject) 
+    // MyObject@hashcode
+}
+```
+
+但是，通过使用 `data` 修饰符标记对象声明，您可以指示编译器在调用 `toString()` 时返回对象的实际名称，与 `data class` 的工作方式相同：
+
+```kotlin
+data object MyDataObject {
+    val number: Int = 3
+}
+
+fun main() {
+    println(MyDataObject) 
+    // MyDataObject
+}
+```
+
+
+
+此外，编译器还会为 `data object` 生成多个函数：
+
+* `toString()` 返回数据对象的名称
+* `equals()`/`hashCode()` 支持相等性检查和基于哈希的集合
+
+您无法为`data object` 提供自定义 `equals` 或 `hashCode` 实现。
+
+
+
+##### 对象表达式
+
+对象表达式声明一个类并创建该类的实例，但不命名其中任何一个。这些类对于一次性使用很有用。它们可以从头开始创建，也可以从现有类继承，也可以实现接口。这些类的实例也称为**匿名对象** ，因为它们由表达式而不是名称定义。
+
+对象表达式以 `object` 关键字开头。
+
+如果对象没有扩展任何类或实现接口，则可以直接在 `object` 关键字后面的大括号内定义对象的成员：
+
+```kotlin
+fun main() {
+    val helloWorld = object {
+        val hello = "Hello"
+        val world = "World"
+        // 对象表达式扩展了Any类，该类已经有一个toString()函数，所以它必须被重写
+        override fun toString() = "$hello $world"
+    }
+
+    print(helloWorld)
+    // Hello World
+}
+```
+
+
+
+要创建继承自某个类型（或多个类型）的匿名对象，请在`object` 和冒号 `:` 之后指定此类型。然后实现或覆盖此类的成员，就像从它继承一样：
+
+```kotlin
+window.addMouseListener(object : MouseAdapter() {
+    override fun mouseClicked(e: MouseEvent) { /*...*/ }
+
+    override fun mouseEntered(e: MouseEvent) { /*...*/ }
+})
+```
+
+如果超类型具有构造函数，请将相应的构造函数参数传递给它。可以在冒号后指定多个超类型，用逗号分隔：
+
+```kotlin
+// 创建一个具有balance属性的开放类BankAccount
+open class BankAccount(initialBalance: Int) {
+    open val balance: Int = initialBalance
+}
+
+// 定义一个名为Transaction的接口，包含一个execute()函数
+interface Transaction {
+    fun execute()
+}
+
+// 一个在BankAccount上执行特殊交易的函数
+fun specialTransaction(account: BankAccount) {
+    // 创建一个继承自BankAccount类并实现Transaction接口的匿名对象
+    // 将所提供账户的余额传递给BankAccount超类构造函数
+    val temporaryAccount = object : BankAccount(account.balance), Transaction {
+
+        override val balance = account.balance + 500  //  临时奖励
+
+        // 实现Transaction接口中的execute()函数
+        override fun execute() {
+            println("Executing special transaction. New balance is $balance.")
+        }
+    }
+    // 执行交易
+    temporaryAccount.execute()
+}
+fun main() {
+    // 创建一个初始余额为1000的BankAccount对象
+    val myAccount = BankAccount(1000)
+    //  对已创建的账户执行特殊交易
+    specialTransaction(myAccount)
+    // Executing special transaction. New balance is 1500.
+}
+```
+
+
+
+从本地或 `private` 函数或属性返回匿名对象时，可以通过该函数或属性访问该匿名对象的所有成员。
+
+```kotlin
+class UserPreferences {
+    private fun getPreferences() = object {
+        val theme: String = "Dark"
+        val fontSize: Int = 14
+    }
+
+    fun printPreferences() {
+        val preferences = getPreferences()
+        println("Theme: ${preferences.theme}, Font Size: ${preferences.fontSize}")
+    }
+}
+
+fun main() {
+    val userPreferences = UserPreferences()
+    userPreferences.printPreferences()
+    // Theme: Dark, Font Size: 14
+}
+```
+
+这允许您返回具有特定属性的匿名对象，从而提供一种封装数据或行为的简单方法，而无需创建单独的类。
+
+如果返回匿名对象的函数或属性具有 `public`、`protected` 或 `internal` 可见性，则其实际类型为：
+
+* 如果匿名对象没有声明的超类型，则为 `Any`。
+* 匿名对象的声明超类型（如果恰好有一个这样的类型）。
+* 如果有多个声明的超类型，则显式声明的类型。
+
+在所有这些情况下，在匿名对象中添加的成员都无法访问。如果重写的成员在函数或属性的实际类型中声明，则可访问它们。
+
+
+
+对象表达式主体中的代码可以访问封闭作用域中的变量：
+
+```kotlin
+import java.awt.event.MouseAdapter
+import java.awt.event.MouseEvent
+
+fun countClicks(window: JComponent) {
+    var clickCount = 0
+    var enterCount = 0
+
+    // MouseAdapter为鼠标事件函数提供了默认实现
+    // 模拟MouseAdapter处理鼠标事件
+    window.addMouseListener(object : MouseAdapter() {
+        override fun mouseClicked(e: MouseEvent) {
+            clickCount++
+        }
+
+        override fun mouseEntered(e: MouseEvent) {
+            enterCount++
+        }
+    })
+    // 在对象表达式中，clickCount和enterCount变量是可以访问的
+}
+```
+
+
+
+
 
 
 
@@ -1912,6 +2672,93 @@ fun main() {
 
 
 
+#### 委托
+
+委托模式已被证明是实现继承的一个很好的替代方案，Kotlin 原生支持它，不需要零样板代码。
+
+类 `Derived` 可以通过将其所有公共成员委托给指定对象来实现接口 `Base`：
+
+```kotlin
+interface Base {
+    fun print()
+}
+
+class BaseImpl(val x: Int) : Base {
+    override fun print() { print(x) }
+}
+
+class Derived(b: Base) : Base by b
+
+fun main() {
+    val base = BaseImpl(10)
+    Derived(base).print()
+}
+```
+
+`Derived` 超类型列表中的 `by` 子句表示 `b` 将在内部存储在 `Derived` 的对象中，编译器将生成转发到 `b` 的所有 `Base` 方法。
+
+
+
+重写委托实现的接口的成员：
+
+覆盖按预期工作：编译器将使用重`写`实现，而不是委托对象中的实现。如果要添加到 `override fun printMessage() { print("abc") }` 到 `Derived`，程序将在调用 `printMessage` 时打印 abc 而不是 10：
+
+```kotlin
+interface Base {
+    fun printMessage()
+    fun printMessageLine()
+}
+
+class BaseImpl(val x: Int) : Base {
+    override fun printMessage() { print(x) }
+    override fun printMessageLine() { println(x) }
+}
+
+class Derived(b: Base) : Base by b {
+    override fun printMessage() { print("abc") }
+}
+
+fun main() {
+    val base = BaseImpl(10)
+    Derived(base).printMessage()
+    Derived(base).printMessageLine()
+}
+```
+
+
+
+但是请注意，以这种方式重写的成员不会从委托对象的成员调用，委托对象只能访问其自己的接口成员实现：
+
+```kotlin
+interface Base {
+    val message: String
+    fun print()
+}
+
+class BaseImpl(x: Int) : Base {
+    override val message = "BaseImpl: x = $x"
+    override fun print() { println(message) }
+}
+
+class Derived(b: Base) : Base by b {
+    // This property is not accessed from b's implementation of `print`
+    override val message = "Message of Derived"
+}
+
+fun main() {
+    val b = BaseImpl(10)
+    val derived = Derived(b)
+    derived.print()
+    println(derived.message)
+}
+```
+
+
+
+
+
+
+
 ## 数据类型
 
 在 Kotlin 中，一切都是一个对象，因为您可以调用任何变量的成员函数和属性。
@@ -2370,11 +3217,11 @@ https://kotlinlang.org/docs/multiplatform.html
 
 ## todo
 
-https://kotlinlang.org/docs/data-classes.html
+https://kotlinlang.org/docs/delegated-properties.html
 
 
 
-
+https://kotlinlang.org/docs/generics.html#underscore-operator-for-type-arguments
 
 
 
