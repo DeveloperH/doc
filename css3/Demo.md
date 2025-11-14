@@ -147,6 +147,27 @@ input:-ms-input-placeholder {
 
 
 
+## 圆点数字标记
+
+```css
+.badge {
+  min-width: 40px;
+  line-height: 40px;
+  text-align: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: #FA5050;
+  color: #fff;
+  font-size: 22px;
+  position: absolute;
+  top: -10px;
+  right: 40px;
+}
+```
+
+
+
 ## 渐变
 
 ### 渐变文字
