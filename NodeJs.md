@@ -768,6 +768,10 @@ npx --no-install http-server
 
 # 让 npx 忽略使用本地模块，强制下载远程模块
 npx --ignore-existing http-server
+
+# 直接从一个代码仓库（如 GitHub、GitLab）下载一个模板或项目，而不包含其 Git 历史记录（.git 文件夹等）
+# npx degit <github-user>/<repository>#<branch> <destination-directory>
+npx degit dcloudio/uni-preset-vue#vite my-vue3-project
 ```
 
 

@@ -1,5 +1,25 @@
 # App
 
+App打包时，注意如果涉及三方sdk，需进行申请并在manifest.json里配置，否则相关功能无法使用。
+
+iOS App打包需要向Apple申请证书。
+
+
+
+`uni-app`在App侧可以使用丰富的小程序sdk，如网易云信、环信、七牛等众多sdk厂商均原厂维护其小程序sdk版本，而这些sdk均可直接用于uni-app并发布为iOS、Android的App。https://ask.dcloud.net.cn/article/35070
+
+App和web提供了renderjs，使得浏览器专用的库也可以在App和web里使用，https://uniapp.dcloud.net.cn/tutorial/renderjs.html
+
+
+
+
+
+## splash 启动页
+
+Android平台启动图使用.9.png图片：https://ask.dcloud.net.cn/article/35527
+
+Android平台签名证书(.keystore)生成指南：https://ask.dcloud.net.cn/article/35777
+
 
 
 ## Demo

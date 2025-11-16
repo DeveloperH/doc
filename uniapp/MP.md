@@ -1,5 +1,9 @@
 # 微信小程序
 
+微信小程序当前bug列表：https://developers.weixin.qq.com/community/develop/issueList
+
+
+
 
 
 ## 修改对象、数组中的值

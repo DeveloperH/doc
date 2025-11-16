@@ -6,17 +6,23 @@ uniapp 一套代码适配 ios/Android/H5/各种小程序平台。
 
 官网：https://uniapp.dcloud.net.cn/
 
-插件市场：https://ext.dcloud.net.cn/
+组件示例：https://hellouniapp.dcloud.net.cn/pages/component/view/view
 
-HBuilderX：[官方IDE下载地址](https://www.dcloud.io/hbuilderx.html)
+原生开发者支持文档：https://nativesupport.dcloud.net.cn/
+
+HTML5 产业联盟： https://www.html5plus.org/
+
+
+
+* 常见问题：https://uniapp.dcloud.net.cn/faq.html
+
+  
+
+
 
 快捷键：
 
 * `Alt + 鼠标单击` 或 `F12` ：转到定义
-
-
-
-HTML5 产业联盟： https://www.html5plus.org/
 
 
 
@@ -42,21 +48,19 @@ HTML5 产业联盟： https://www.html5plus.org/
 ### vue-cli
 
 ```sh
+# 创建 vue2 项目，需要全局安装 vue-cli 
 npm install -g @vue/cli
-
 # 使用正式版
 vue create -p dcloudio/uni-preset-vue my-project
-
 # 使用alpha版
 vue create -p dcloudio/uni-preset-vue#alpha my-alpha-project
 
-# 使用Vue3/Vite版
+# 使用Vue3/Vite版，要求 node 版本 18+、20+
 npx degit dcloudio/uni-preset-vue#vite my-vue3-project
 npx degit dcloudio/uni-preset-vue#vite-alpha my-vue3-project
 
 # 创建以 typescript 开发的工程
 npx degit dcloudio/uni-preset-vue#vite-ts my-vue3-project
-
 
 # 运行、发布uni-app
 npm run dev:%PLATFORM%
@@ -171,6 +175,8 @@ console.log(getApp().globalData.text) // 'test'
 ```
 
 
+
+### `--window-top` 和 `--window-bottom`
 
 APP 和小程序的导航栏和 `tabbar` 均是原生控件，元素区域坐标是不包含原生导航栏和 `tabbar` 的；而 H5 里导航栏和 `tabbar` 是 div 模拟实现的，所以元素坐标会包含导航栏和tabbar的高度。为了优雅的解决多端高度定位问题，`uni-app` 新增了2个css变量：`--window-top` 和 `--window-bottom`，这代表了页面的内容区域距离顶部和底部的距离。举个实例，如果你想在原生`tabbar` 上方悬浮一个菜单，之前写 `bottom:0`。这样的写法编译到 h5 后，这个菜单会和 `tabbar` 重叠，位于屏幕底部。而改为使用 `bottom:var(--window-bottom)`，则不管在 app 下还是在h5下，这个菜单都是悬浮在 `tabbar` 上浮的。这就避免了写条件编译代码。当然仍然也可以使用 H5 的条件编译处理界面的不同。
 
