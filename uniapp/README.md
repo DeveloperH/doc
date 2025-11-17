@@ -99,6 +99,25 @@ npm i @dcloudio/types @dcloudio/uni-helper-json -D
 
 
 
+```js
+// uni.$emit、 uni.$on 、 uni.$once 、uni.$off 触发的事件都是 App 全局级别的，跨任意组件，页面，nvue，vue 等
+// 使用时，注意及时销毁事件监听
+
+uni.$emit('update',{msg:'页面更新'})
+
+uni.$on('update',function(data){
+  console.log('监听到事件来自 update ，携带参数 msg 为：' + data.msg);
+})
+
+uni.$once('update',function(data){
+  console.log('监听到事件来自 update ，携带参数 msg 为：' + data.msg);
+})
+
+uni.$off('update')
+```
+
+
+
 ## pages.json配置项
 
 * pages : 设置页面的所有路径
@@ -135,6 +154,66 @@ console.log(getApp().globalData.text) // 'test'
 
 
 
+## `@/`
+
+当使用`import`语句导入代码文件或静态资源时，`@/`表示项目根目录的绝对路径。如`import { add } from "@/common/utils"` 。
+
+js 文件不支持使用`/`开头的方式引入。
+
+```js
+// 绝对路径，@指向项目根目录，在cli项目中@指向src目录
+import add from '@/common/add.js';
+// 相对路径
+import add from '../../common/add.js';
+
+// json 文件引入
+import pagesJson from '@/pages.json';
+import pagesJson from '../../common/pages.json';
+// 导入 json 文件时支持解构，此时会根据导入内容进行摇树，减小包体积
+import { pages } from '@/pages.json';
+```
+
+
+
+导入的 `json` 文件内部支持条件编译, 导入的结果是根据条件编译规则进行处理后的结果：
+
+```json
+{
+  "pages": [{
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "index"
+      }
+    },
+    // #ifdef APP
+    {
+      "path": "pages/index/app",
+      "style": {
+        "navigationBarTitleText": "app"
+      }
+    },
+    // #endif 
+    // #ifdef H5 
+    {
+      "path": "pages/index/web",
+      "style": {
+        "navigationBarTitleText": "web"
+      }
+    }
+    // #endif 
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "uniIdRouter": {}
+}
+```
+
+
+
 
 
 ## 视图模板进阶使用
@@ -153,7 +232,7 @@ console.log(getApp().globalData.text) // 'test'
 
 ## 样式
 
-* 使用 `@import` 语句可以导入外联样式表，需要使用相对路径来导入，并且 `;` 结尾。
+* 使用 `@import` 语句可以导入外联样式表，以 `;` 结尾。
 * 支持基本常用的选择器 `class、id、element` 等。非H5端不支持使用 `*` 选择器。
 * `page` 相当于 `body` 节点。body的元素选择器请改为page，同样，div和ul和li等改为view、span和font改为text、a改为navigator、img改为image。
 * 非H5端默认并未启用 scoped，如需要隔离组件样式可以在 style 标签增加 scoped 属性。
@@ -162,11 +241,18 @@ console.log(getApp().globalData.text) // 'test'
   * 字体文件小于40kb，`uni-app` 会自动将其转换为base64格式
   * 字体文件大于40kb，需开发者自己转换，否则使用将不生效
   * 字体文件的引用路径推荐以 `~@` 开头的绝对路径
+* web 平台，小于 4kb 的资源会被转换成 base64，其余不转。
 
 
 
 ```css
 @import url('./a.css');
+@import url('/common/uni.css');
+@import url('@/common/uni.css');
+
+background-image: url(/static/logo.png);
+background-image: url(@/static/logo.png);
+background-image: url(../../static/logo.png);
 
 @font-face {
 	font-family: "myfont";
@@ -176,11 +262,69 @@ console.log(getApp().globalData.text) // 'test'
 
 
 
-### `--window-top` 和 `--window-bottom`
+```VUE
+<view :style="{color:color}" />
+```
+
+
+
+### 背景图片
+
+- 支持 base64 格式图片。
+- 支持网络路径图片。
+- 小程序不支持在 css 中使用本地文件，包括本地的背景图和字体文件。需以 base64 方式方可使用。
+- 微信小程序不支持相对路径（真机不支持，开发工具支持）
+- 使用本地路径背景图片需注意：
+  1. 为方便开发者，在背景图片小于 40kb 时，`uni-app` 编译到不支持本地背景图的平台时，会自动将其转化为 base64 格式；
+  2. 图片大于等于 40kb，会有性能问题，不建议使用太大的背景图，如开发者必须使用，则需自己将其转换为 base64 格式使用，或将其挪到服务器上，从网络地址引用。
+  3. 本地背景图片的引用路径推荐使用以 `~@` 开头的绝对路径。
+
+
+
+```css
+.test2 {
+	background-image: url('~@/static/logo.png');
+}
+```
+
+
+
+
+
+### 内置 CSS 变量
+
+| CSS 变量            | 描述                   | App                                                          | 小程序 | H5                   |
+| :------------------ | :--------------------- | :----------------------------------------------------------- | :----- | :------------------- |
+| --status-bar-height | 系统状态栏高度         | [系统状态栏高度](http://www.html5plus.org/doc/zh_cn/navigator.html#plus.navigator.getStatusbarHeight) | 25px   | 0                    |
+| --window-top        | 内容区域距离顶部的距离 | 0                                                            | 0      | NavigationBar 的高度 |
+| --window-bottom     | 内容区域距离底部的距离 | 0                                                            | 0      | TabBar 的高度        |
+
+
+
+```css
+.box {
+	height: var(--status-bar-height);
+}
+```
+
+
 
 APP 和小程序的导航栏和 `tabbar` 均是原生控件，元素区域坐标是不包含原生导航栏和 `tabbar` 的；而 H5 里导航栏和 `tabbar` 是 div 模拟实现的，所以元素坐标会包含导航栏和tabbar的高度。为了优雅的解决多端高度定位问题，`uni-app` 新增了2个css变量：`--window-top` 和 `--window-bottom`，这代表了页面的内容区域距离顶部和底部的距离。举个实例，如果你想在原生`tabbar` 上方悬浮一个菜单，之前写 `bottom:0`。这样的写法编译到 h5 后，这个菜单会和 `tabbar` 重叠，位于屏幕底部。而改为使用 `bottom:var(--window-bottom)`，则不管在 app 下还是在h5下，这个菜单都是悬浮在 `tabbar` 上浮的。这就避免了写条件编译代码。当然仍然也可以使用 H5 的条件编译处理界面的不同。
 
 CSS 內使用 `vh` 单位的时候注意 `100vh` 包含导航栏，使用时需要减去导航栏和 `tabBar` 高度，部分浏览器还包含浏览器操作栏高度，使用时请注意。
+
+
+
+### 固定值
+
+`uni-app` 中以下组件的高度是固定的，不可修改：
+
+| 组件          | 描述       | App                        | H5   |
+| :------------ | :--------- | :------------------------- | :--- |
+| NavigationBar | 导航栏     | 44px                       | 44px |
+| TabBar        | 底部选项卡 | 50px。（可以自主更改高度） | 50px |
+
+各小程序平台，包括同小程序平台的 iOS 和 Android 的高度也不一样。
 
 
 
@@ -304,15 +448,20 @@ methods: {
 
 * onLoad : 监听页面加载，其参数为上个页面传递的数据，参数类型为 Object（用于页面传参）。只执行一次
 * onShow : 监听页面显示。页面每次出现在屏幕上都触发，包括从下级页面点返回到当前页面
-* onReady : 监听页面初次渲染完成。注意如果渲染速度快，会在页面进入动画完成前触发。只执行一次
+* onReady : 监听页面初次渲染完成。注意如果渲染速度快，会在页面进入动画完成前触发。只执行一次。这时可以通过 ref 获取节点
 * onHide : 监听页面隐藏
 * onUnload : 监听页面卸载
 * onResize : 监听窗口尺寸变化
 * onPullDownRefresh: 监听用户下拉动作，一般用于下拉刷新
   * 需要在 `pages.json` 里，找到的当前页面的pages节点(或者globalStyle)，并在 `style` 选项中开启 `enablePullDownRefresh`。
+* onReachBottom: 页面滚动到底部的事件，常用于下拉下一页数据。
 * onTabItemTap: 点击 tab 时触发，参数为Object
 * onShareAppMessage: 用户点击右上角分享
-* ...
+* onPageScroll：监听页面滚动，参数为Object
+  * 在webview渲染时，比如app-vue、微信小程序、H5中，也可以使用wxs监听滚动，[参考](https://uniapp.dcloud.io/tutorial/miniprogram-subject#wxs)
+* onNavigationBarButtonTap：监听原生标题栏按钮点击事件，参数为Object。App、H5 支持。
+* onBackPress： 监听页面返回，返回 event = {from:backbutton、 navigateBack} ，backbutton 表示来源是左上角返回按钮或 android 返回键；navigateBack表示来源是 uni.navigateBack。[参考](https://ask.dcloud.net.cn/article/35120)
+* `uni-app` 页面还支持 Vue 组件生命周期，比如 `created` 、`mounted` 等等。不依赖页面传参的逻辑可以直接使用 `created` 生命周期替代。
 
 
 
@@ -338,10 +487,16 @@ onShareAppMessage(){
 * created : 在实例创建完成后被立即调用。
 * beforeMount : 在挂载开始之前被调用。
 * mounted : 挂载到实例上去之后调用。
-* beforeUpdate : 数据更新时调用，发生在虚拟 DOM 打补丁之前。
-* updated : 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
+* beforeUpdate : 数据更新时调用，发生在虚拟 DOM 打补丁之前。仅H5平台支持。
+* updated : 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。仅H5平台支持。
 * beforeDestroy : 实例销毁之前调用。在这一步，实例仍然完全可用。
 * destroyed : Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+
+
+
+
+
+![](http://qiniu.huangyihui.cn/doc/202511180021351.jpg)
 
 
 
@@ -355,6 +510,11 @@ onShareAppMessage(){
 * uni.navigateBack() : 关闭当前页面，返回上一页面或多级页面。
 * uni.redirectTo() : 关闭当前页面，跳转到应用内的某个页面。
 * uni.reLaunch() : 关闭所有页面，打开到应用内的某个页面。
+
+
+
+页面返回时会自动关闭 loading 及 toast, modal 及 actionSheet 不会自动关闭。
+页面关闭时，只是销毁了页面实例，未完成的网络请求、计时器等副作用需开发者自行处理。
 
 
 
@@ -614,14 +774,46 @@ uni.getLocation({
 
 
 
-### 跨页面传递数据 getCurrentPages()
+### getApp()
+
+`getApp()` 函数用于获取当前应用实例，一般用于获取globalData。也可通过应用实例调用 `App.vue methods` 中定义的方法。
+
+不要在定义于 `App()` 内的函数中，或调用 `App` 前调用 `getApp()` ，可以通过 `this.$scope` 获取对应的app实例。
 
 ```js
-let pages = getCurrentPages(); //当前页面
-let prevPage = pages[pages.length - 2]; //上一页面
+const app = getApp()
+console.log(app.globalData)
+app.doSomething() // 调用 App.vue methods 中的 doSomething 方法
+```
 
-//直接给上一个页面赋值
+
+
+###  getCurrentPages()
+
+`getCurrentPages()` 函数用于获取当前页面栈的实例，以数组形式按栈的顺序给出，数组中的元素为页面实例，第一个元素为首页，最后一个元素为当前页面。
+
+每个页面实例的方法属性列表：
+
+| 方法                  | 描述                          | 平台说明 |
+| --------------------- | ----------------------------- | -------- |
+| page.$getAppWebview() | 获取当前页面的webview对象实例 | App      |
+| page.route            | 获取当前页面的路由            |          |
+
+
+
+#### 跨页面传递数据
+
+```js
+let pages = getCurrentPages(); // 当前页面栈
+let currentPage = pages[pages.length - 1]; // 当前页面
+let prevPage = pages[pages.length - 2]; // 上一页面
+
+// 直接给上一个页面赋值
 prevPage.name = 'abc'
+
+// 调用其他页面的方法
+prevPage.onLoad()	// 生命周期函数或其他函数
+
 // 原生小程序 
 prevPage.setData({name: 'abc'})
 
@@ -632,14 +824,51 @@ uni.navigateBack({
 
 
 
-调用其他页面的方法
+### $getAppWebview()
+
+**注意：此方法仅 App 支持**
+
+`uni-app` 在 `getCurrentPages()`获得的页面里内置了一个方法 `$getAppWebview()` 可以得到当前webview的对象实例，从而实现对 webview 更强大的控制。在 html5Plus 中，plus.webview具有强大的控制能力，可参考：[WebviewObject](http://www.html5plus.org/doc/zh_cn/webview.html#plus.webview.WebviewObject)。
+
+
+
+获取当前页面 webview 的对象实例：
 
 ```js
-let pages = getCurrentPages(); //当前页面
-let prevPage = pages[pages.length - 2]; //上一页面
-
-prevPage.onLoad()	// 生命周期函数或其他函数
+export default {
+  data() {
+    return {
+    }
+  },
+  onLoad() {
+    // #ifdef APP-PLUS
+    
+    //此对象相当于html5plus里的plus.webview.currentWebview()。在uni-app里vue页面直接使用plus.webview.currentWebview()无效
+    const currentWebview = this.$scope.$getAppWebview(); 
+    
+    //动态重设bounce效果
+    currentWebview.setBounce({position:{top:'100px'},changeoffset:{top:'0px'}}); 
+    // #endif
+  }
+}
 ```
+
+
+
+获取指定页面 webview 的对象实例：
+
+```js
+var pages = getCurrentPages();
+var page = pages[pages.length - 1];
+// #ifdef APP-PLUS
+var currentWebview = page.$getAppWebview();
+console.log(currentWebview.id);//获得当前webview的id
+console.log(currentWebview.isVisible());//查询当前webview是否可见
+);
+// #endif
+```
+
+
 
 
 
@@ -724,6 +953,12 @@ uQRCode是一款基于Javascript环境开发的二维码生成插件，适用所
 
 
 ## 组件库
+
+关于uni-app的ui库、ui框架、ui组件  https://ask.dcloud.net.cn/article/35489
+
+
+
+
 
 ### uView
 
@@ -892,6 +1127,12 @@ https://ask.dcloud.net.cn/article/166
 
 
 
+### 使用wxs监听滚动
+
+https://uniapp.dcloud.net.cn/tutorial/miniprogram-subject.html#wxs
+
+
+
 ### 更多
 
 * App权限状态判断及引导：https://ext.dcloud.net.cn/plugin?id=594
@@ -904,6 +1145,21 @@ https://ask.dcloud.net.cn/article/166
 * mpvue项目（组件）迁移指南、示例及资源汇总：https://ask.dcloud.net.cn/article/34945
 * uniapp案例：https://uniapp.dcloud.net.cn/case.html
 * 
+
+
+
+### todo
+
+* 如果想实现滚动时标题栏透明渐变，在App和H5下，可在pages.json中配置titleNView下的type为transparent，[参考](https://uniapp.dcloud.io/collocation/pages?id=app-titlenview)
+* 在webview渲染时，比如app-vue、微信小程序、H5中，也可以使用wxs监听滚动，[参考](https://uniapp.dcloud.io/tutorial/miniprogram-subject#wxs)；
+* 如果想在App端实现点击某个tabitem不跳转页面，不能使用onTabItemTap，可以使用[plus.nativeObj.view](http://www.html5plus.org/doc/zh_cn/nativeobj.html)放一个区块盖住原先的tabitem，并拦截点击事件。
+* uni-app中如何使用5+的原生界面控件（包括map、video、livepusher、barcode、nview）https://ask.dcloud.net.cn/article/35036
+* [uni-app nvue沉浸式状态栏（线性渐变色）](https://ask.dcloud.net.cn/article/35111)
+* 
+
+
+
+
 
 
 
@@ -1439,7 +1695,9 @@ handleInput() {
 
 
 
+## TODO
 
+https://uniapp.dcloud.net.cn/tutorial/vue-basics.html
 
 
 

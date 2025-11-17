@@ -487,6 +487,8 @@ display: flex;
 display: inline-flex;
 ```
 
+[阮一峰-Flex 布局教程](https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+
 
 
 ### flex容器属性
