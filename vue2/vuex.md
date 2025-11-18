@@ -57,7 +57,7 @@ Vuex 中的数据缓存在内存中，页面一刷新就没有了。
 
 
 
-![vuex](https://www.huangyihui.cn/upload/gburlimg/12305f8ba318a.png)
+![vuex](http://qiniu.huangyihui.cn/doc/202511190059977.png)
 
 
 
@@ -424,10 +424,6 @@ const moduleA = {
   }
 }
 ```
-
-
-
-
 
 
 

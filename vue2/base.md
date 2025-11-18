@@ -98,7 +98,7 @@ data() {
 
 > 在v-for遍历的时候，如果是在div标签中遍历，会生成多个div标签包裹住div中的标签。如果不想要这些多余的div标签，可以在`<template>`标签中使用v-for。
 >
-> v-for 和 v-if 一起用时，v-if 优先级更高。这意味着 `v-if` 的条件将无法访问到 `v-for` 作用域内定义的变量别名。**不推荐这样做**。如果只是为了过滤，请将 要遍历的值 替换为一个计算属性，让其返回过滤后的列表。
+> v-for 和 v-if 一起用时，`v-for` 的优先级比 `v-if` 更高，这意味着 `v-if` 将分别重复运行于每个 `v-for` 循环中。**不推荐这样做**。如果只是为了过滤，请将 要遍历的值 替换为一个计算属性，让其返回过滤后的列表。
 
 ```html
 <div id="app">
@@ -1601,6 +1601,58 @@ vue 实例将会在实例化时调用 `$watch()`，遍历 watch 对象的每一�
 注意：在变更 (不是替换) 对象或数组时，旧值将与新值相同，因为它们的引用指向同一个对象/数组。Vue 不会保留变更之前值的副本。除非开启深度监听(数组不需要)。
 
 深度侦听需要遍历被侦听对象中的所有嵌套的属性，当用于大型数据结构时，开销很大。因此请只在必要时才使用它，并且要留意性能。
+
+
+
+```vue
+<script>
+	export default {
+		data() {
+			return {
+				a: 1,
+				b: 2,
+				c: 3,
+				d: 4,
+				e: {
+					f: {
+						g: 5
+					}
+				}
+			}
+		},
+		watch: {
+			a: function(val, oldVal) {
+				console.log('new: %s, old: %s', val, oldVal)
+			},
+			// 方法名
+			b: 'someMethod',
+			// 该回调会在任何被侦听的对象的 property 改变时被调用，不论其被嵌套多深
+			c: {
+				handler: function(val, oldVal) { /* ... */ },
+				deep: true
+			},
+			// 该回调将会在侦听开始之后被立即调用
+			d: {
+				handler: 'someMethod',
+				immediate: true
+			},
+			// 你可以传入回调数组，它们会被逐一调用
+			e: [
+				'handle1',
+				function handle2(val, oldVal) { /* ... */ },
+				{
+					handler: function handle3(val, oldVal) { /* ... */ },
+					/* ... */
+				}
+			],
+			// watch vm.e.f's value: {g: 5}
+			'e.f': function(val, oldVal) { /* ... */ }
+		}
+	}
+</script>
+```
+
+
 
 
 

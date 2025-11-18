@@ -12,7 +12,7 @@ uniapp 一套代码适配 ios/Android/H5/各种小程序平台。
 
 HTML5 产业联盟： https://www.html5plus.org/
 
-
+github：https://github.com/dcloudio
 
 * 常见问题：https://uniapp.dcloud.net.cn/faq.html
 
@@ -325,6 +325,84 @@ CSS 內使用 `vh` 单位的时候注意 `100vh` 包含导航栏，使用时需�
 | TabBar        | 底部选项卡 | 50px。（可以自主更改高度） | 50px |
 
 各小程序平台，包括同小程序平台的 iOS 和 Android 的高度也不一样。
+
+
+
+### 动态绑定样式
+
+**注意：以:style=""这样的方式设置px像素值，其值为实际像素，不会被编译器转换。**
+
+```vue
+<template>
+  <view>
+    <view class="static" :class="{ active: isActive}">111</view>
+    <view class="static" :class="{ active: isActive, 'text-danger': hasError }">222</view>
+    <view v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">333</view>
+  </view>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        isActive: true,
+        hasError: false,
+        activeColor:"green",
+        fontSize:50
+      }
+    }
+  }
+</script>
+<style>
+.static{
+  color: #2C405A;
+}
+.active{
+  background-color: #007AFF;
+}
+.text-danger{
+  color: #DD524D;
+}
+</style>
+```
+
+
+
+```vue
+<template>
+	<view>
+		<view class="static" :class="[activeClass,errorClass]">111</view>
+		<view class="static" v-bind:class="[isActive ? activeClass : '', errorClass]">222</view><!-- 三元表达式 -->
+		<view class="static" v-bind:class="[{ active: isActive }, errorClass]">333</view>
+		<view v-bind:style="[{ color: activeColor, fontSize: fontSize + 'px' }]">444</view>
+	</view>
+</template>
+<script>
+	export default {
+		data() {
+			return {
+				isActive: true,
+				activeClass: 'active',
+				errorClass: 'text-danger',
+				activeColor:"green",
+				fontSize:50
+			}
+		}
+	}
+</script>
+<style>
+	.static{
+		font-size:30rpx;
+	}
+	.active{
+		background-color: #007AFF;
+	}
+	.text-danger{
+		font-size:60rpx;
+		color:#DD524D;
+	}
+</style>
+
+```
 
 
 
@@ -1117,7 +1195,142 @@ https://ext.dcloud.net.cn/plugin?id=1765
 
 ### 全局变量
 
-https://ask.dcloud.net.cn/article/35021
+* 公用模块
+* 挂载 Vue.prototype。这种方式只支持vue页面
+* globalData 全局变量
+* Vuex。uni-app 内置了 Vuex
+
+
+
+```vue
+// 创建公用模块js
+const websiteUrl = 'http://uniapp.dcloud.io';  
+export default {  
+    websiteUrl
+}
+
+<script>  
+    import helper from '@/common/helper.js';  
+    export default {  
+        data() {  
+            return {};  
+        },  
+        onLoad(){  
+            console.log('websiteUrl:' + helper.websiteUrl);  
+        },  
+        methods: {  
+        }  
+    }  
+</script>
+```
+
+```vue
+// 在 main.js 中挂载属性/方法
+Vue.prototype.websiteUrl = 'http://uniapp.dcloud.io';  
+
+<script>  
+    export default {  
+        data() {  
+            return {};  
+        },  
+        onLoad(){  
+        		// 调用
+            console.log('now:' + this.now());  
+        },  
+        methods: {  
+        }  
+    }  
+</script>
+```
+
+```vue
+<script>  
+    export default {  
+        globalData: {  
+            text: 'text'  
+        },  
+        onLaunch: function() {  
+            console.log('App Launch')  
+        },  
+        onShow: function() {  
+            console.log('App Show')  
+        },  
+        onHide: function() {  
+            console.log('App Hide')  
+        }  
+    }  
+</script>  
+
+// 赋值、取值
+getApp().globalData.text = 'test'
+console.log(getApp().globalData.text) // 'test'
+```
+
+
+
+#### vuex
+
+在 uni-app 项目根目录下新建 store 目录，在 store 目录下创建 index.js 定义状态值
+
+```js
+const store = new Vuex.Store({  
+    state: {  
+        login: false,  
+        token: '',  
+        avatarUrl: '',  
+        userName: ''  
+    },  
+    mutations: {  
+        login(state, provider) {  
+            console.log(state)  
+            console.log(provider)  
+            state.login = true;  
+            state.token = provider.token;  
+            state.userName = provider.userName;  
+            state.avatarUrl = provider.avatarUrl;  
+        },  
+        logout(state) {  
+            state.login = false;  
+            state.token = '';  
+            state.userName = '';  
+            state.avatarUrl = '';  
+        }  
+    }  
+})
+```
+
+
+
+然后，需要在 main.js 挂载 Vuex
+
+```js
+import store from './store'  
+Vue.prototype.$store = store
+```
+
+
+
+最后，在 pages/index/index.vue 使用
+
+```vue
+<script>  
+    import {  
+        mapState,  
+        mapMutations  
+    } from 'vuex';  
+
+    export default {  
+        computed: {  
+            ...mapState(['avatarUrl', 'login', 'userName'])  
+        },  
+        methods: {  
+            ...mapMutations(['logout'])  
+        }  
+    }  
+</script>
+```
+
+
 
 
 
@@ -1697,7 +1910,7 @@ handleInput() {
 
 ## TODO
 
-https://uniapp.dcloud.net.cn/tutorial/vue-basics.html
+https://uniapp.dcloud.net.cn/tutorial/compiler.html
 
 
 

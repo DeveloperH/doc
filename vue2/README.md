@@ -66,7 +66,7 @@ MVVM设计模式最大的特点就是支持数据的双向传递。View的变动
 
 
 
-![image-20220118213418610](https://www.huangyihui.cn/upload/gburlimg/4b64b97b480cf.png)
+![image-20220118213418610](http://qiniu.huangyihui.cn/doc/202511190102625.png)
 
 
 
@@ -170,7 +170,7 @@ Object.defineProperty(obj, "myname", {
 
 
 
-![data](https://www.huangyihui.cn/upload/gburlimg/4ac769e114ad9.png)
+![data](http://qiniu.huangyihui.cn/doc/202511190102842.png)
 
 
 
