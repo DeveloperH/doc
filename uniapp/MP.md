@@ -940,7 +940,9 @@ Page({
 
 
 
+## 组件触发事件
 
+`this.triggerEvent('agree')`
 
 
 
