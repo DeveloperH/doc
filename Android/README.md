@@ -8436,14 +8436,6 @@ Android sdk给我们提供了GestureDetector类，通过这个类我们可以识
 
 
 
-## kotlin
-
-
-
-
-
-
-
 ## kit
 
 ```java

@@ -170,6 +170,14 @@ QLExpress 是 Java 平台上一种功能强大、轻量级的动态语言，旨�
 
 
 
+## tika
+
+Apache Tika 工具包能够检测并提取超过一千种不同文件类型（如 PPT、XLS 和 PDF）的元数据和文本。
+
+https://github.com/apache/tika
+
+
+
 ## 日志框架
 
 ### Log4j

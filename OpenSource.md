@@ -21,6 +21,8 @@
   * [chat-uikit-uniapp 腾讯uniapp 聊天室ui](https://github.com/TencentCloud/chat-uikit-uniapp)
 * 前端项目
   * [Vue3 + Pinia 仿抖音](https://github.com/zyronon/douyin) 
+* 界面
+  * [最大的开源界面库！社区制作，免费使用。用 CSS 或 Tailwind 制作](https://github.com/uiverse-io/galaxy)
 * 文件存储
   * 危险。有投毒。[AList 支持多存储的文件列表/WebDAV程序，可用于搭建文件共享平台](https://github.com/AlistGo/alist)  
   * [MinIO 是一个高性能 oss云存储，可以快速搭建文件系统](https://github.com/minio/minio) 

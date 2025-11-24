@@ -84,7 +84,13 @@ detailValueConfig('seller_app_version').then(res => {
 
 
 
+### 离线打包app 无法安装问题
 
+HBuilder X 3.8.7-alpha开始。离线打包将安装功能独立成单独的aar `install-apk-release.aar`，上架谷歌市场不能包含此库，非谷歌市场可酌情考量。
+
+不包含此库，调用 `plus.runtime.install` 将无法安装apk文件。
+
+解决方案：把 `install-apk-release.aar` 放到项目中并引入即可。
 
 
 

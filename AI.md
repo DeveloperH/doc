@@ -1,5 +1,19 @@
 # AI
 
+## GLM
+
+General Language Model ，这是由智谱AI等机构开发的一系列大型语言模型。你可以把它理解为与 OpenAI 的 GPT、Google 的 PaLM 等模型相媲美的中国顶尖大模型。
+
+
+
+## ClaudeCode
+
+Claude Code 是一款存在于终端中的代理编码工具，能理解你的代码库，并通过自然语言命令帮助你执行例行任务、解释复杂代码和处理 git 工作流程，从而加快编码速度。
+
+https://github.com/anthropics/claude-code
+
+
+
 ## GPT
 
 * ⭐️⭐️gpt：https://aichatru.ru/zh-CN
@@ -10,6 +24,8 @@
 * chatgpt 官网：https://chatgpt.com/
 * 通义千问 https://tongyi.aliyun.com/
 * deepseek https://www.deepseek.com/
+
+
 
 
 
@@ -91,6 +107,16 @@ AI 日常对话语音生成模型。
 
 
 
+## 英博云 (收费)
+
+高效益、多样化的GPU智算产品及服务
+
+https://www.ebcloud.com/
+
+
+
+
+
 ## cherry-studio 桌面客户端
 
 Cherry Studio 是一个支持多个LLM提供商的桌面客户端。支持 deepseek-r1。
@@ -156,3 +182,33 @@ chatgpt ui
 ## vscode 插件
 
 * BLACKBOXAI：排名第一的编码代理。数百万开发者使用。免费，无需注册
+
+
+
+
+
+## github 开源
+
+* [集合了带有 AI 代理和 RAG 的优秀大型语言模型应用，使用 OpenAI、Anthropic、Gemini 和开源模型](https://github.com/Shubhamsaboo/awesome-llm-apps)
+* [PandaWiki 是一款 AI 大模型驱动的开源知识库搭建系统，帮助你快速构建智能化的 产品文档、技术文档、FAQ、博客系统，借助大模型的力量为你提供 AI 创作、AI 问答、AI 搜索等能力](https://github.com/chaitin/PandaWiki)
+
+
+
+
+
+## MCP
+
+Model Context Protocol（模型上下文协议），MCP 是一个**开放标准**，旨在让 AI 模型（如大语言模型）能够安全、标准化地连接到外部数据源、API 和工具。
+
+
+
+* Context7 MCP 服务器——为大型语言模型和人工智能代码编辑器提供最新的代码文档：https://github.com/upstash/context7
+* Playwright 是一个用于网络测试和自动化的框架。它允许用单一 API 测试 Chromium、Firefox 和 WebKit。 https://github.com/microsoft/playwright
+* 探索海量可用的 MCP Servers https://www.mcpworld.com/
+
+
+
+
+
+
+

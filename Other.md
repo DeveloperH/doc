@@ -2,6 +2,18 @@
 
 
 
+## 趣谈
+
+[一人公司方法论](https://github.com/easychen/one-person-businesses-methodology)
+
+[ GitHub中文排行榜，各语言分设「软件 | 资料」榜单，精准定位中文好项目](https://github.com/GrowingGit/GitHub-Chinese-Top-Charts)
+
+
+
+
+
+
+
 rustdesk：专为自托管而设计的开源远程桌面应用程序，作为 TeamViewer 的替代方案。
 
 https://github.com/rustdesk/rustdesk
