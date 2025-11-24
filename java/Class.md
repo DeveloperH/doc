@@ -1364,7 +1364,7 @@ public class Demo {
 
 
 
-![IO流体系.drawio](https://www.huangyihui.cn/upload/gburlimg/cce507e2ec821.png)
+![IO流体系.drawio](http://qiniu.huangyihui.cn/doc/202511250123120.png)
 
 
 

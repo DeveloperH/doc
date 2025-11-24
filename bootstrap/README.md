@@ -347,7 +347,7 @@ Bootstrap 修改了默认列表标签的样式，让列表显示更加美观。
 
 
 
-![image-20210902225140879](https://www.huangyihui.cn/upload/gburlimg/a525877dbe125.png)
+![image-20210902225140879](http://qiniu.huangyihui.cn/doc/202511250058276.png)
 
 
 
@@ -444,7 +444,7 @@ Bootstrap 修改了默认列表标签的样式，让列表显示更加美观。
 
 使用 `.input-group` 将整个 `<input>` 包裹起来，并对要放进去的内容添加 `.input-group-addon` 。
 
-![image-20210903121740991](https://www.huangyihui.cn/upload/gburlimg/54bd944585b84.png)
+![image-20210903121740991](http://qiniu.huangyihui.cn/doc/202511250058554.png)
 
 ```html
 <form class="form-inline">
@@ -471,7 +471,7 @@ Bootstrap 修改了默认列表标签的样式，让列表显示更加美观。
 
 
 
-![image-20210903172655007](https://www.huangyihui.cn/upload/gburlimg/79b50993fb63c.png)
+![image-20210903172655007](http://qiniu.huangyihui.cn/doc/202511250058227.png)
 
 
 
@@ -601,7 +601,7 @@ Bootstrap 对表单控件的校验状态，如 error、warning 和 success 状�
 
 
 
-![image-20210903183459234](https://www.huangyihui.cn/upload/gburlimg/7879bdca731d9.png)
+![image-20210903183459234](http://qiniu.huangyihui.cn/doc/202511250059532.png)
 
 
 
@@ -655,7 +655,7 @@ Bootstrap 对表单控件的校验状态，如 error、warning 和 success 状�
 
 
 
-![image-20210903191936454](https://www.huangyihui.cn/upload/gburlimg/227414477141c.png)
+![image-20210903191936454](http://qiniu.huangyihui.cn/doc/202511250059662.png)
 
 
 
@@ -691,7 +691,7 @@ Bootstrap 对表单控件的校验状态，如 error、warning 和 success 状�
 
 **为水平排列的表单和内联表单设置可选的图标**
 
-![image-20210903192855175](https://www.huangyihui.cn/upload/gburlimg/21bac8f76e98e.png)
+![image-20210903192855175](http://qiniu.huangyihui.cn/doc/202511250059114.png)
 
 
 
@@ -802,7 +802,7 @@ Bootstrap 对表单控件的校验状态，如 error、warning 和 success 状�
 
 
 
-![image-20210903212222117](https://www.huangyihui.cn/upload/gburlimg/89883f148dc49.png)
+![image-20210903212222117](http://qiniu.huangyihui.cn/doc/202511250100196.png)
 
 
 
@@ -826,7 +826,7 @@ Bootstrap 对表单控件的校验状态，如 error、warning 和 success 状�
 
 
 
-![image-20210903212657369](https://www.huangyihui.cn/upload/gburlimg/07f7ec7d55e7b.png)
+![image-20210903212657369](http://qiniu.huangyihui.cn/doc/202511250100603.png)
 
 ```html
 <p>
@@ -874,7 +874,7 @@ Bootstrap 对表单控件的校验状态，如 error、warning 和 success 状�
 
 
 
-![image-20210903215903174](https://www.huangyihui.cn/upload/gburlimg/03662d68894d6.png)
+![image-20210903215903174](http://qiniu.huangyihui.cn/doc/202511250100702.png)
 
 ```html
 <div class="myimg center-block">
@@ -896,7 +896,7 @@ Bootstrap 对表单控件的校验状态，如 error、warning 和 success 状�
 
 
 
-![image-20210903220728060](https://www.huangyihui.cn/upload/gburlimg/7779c4e7d00f7.png)
+![image-20210903220728060](http://qiniu.huangyihui.cn/doc/202511250101836.png)
 
 ```html
 <p>默认文本颜色</p>
@@ -918,7 +918,7 @@ Bootstrap 对表单控件的校验状态，如 error、warning 和 success 状�
 
 
 
-![image-20210903221207040](https://www.huangyihui.cn/upload/gburlimg/de45ad54b4fd9.png)
+![image-20210903221207040](http://qiniu.huangyihui.cn/doc/202511250101862.png)
 
 ```html
 <p class="bg-primary">bg-primary</p>
@@ -1022,7 +1022,7 @@ Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，�
 
 
 
-![image-20210904003155461](https://www.huangyihui.cn/upload/gburlimg/159737795614c.png)
+![image-20210904003155461](http://qiniu.huangyihui.cn/doc/202511250101422.png)
 
 
 
@@ -1066,7 +1066,7 @@ Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，�
 
 如果在一个 `.row` 内包含的列（column）大于12个，包含多余列（column）的元素将作为一个整体单元被另起一行排列。
 
-![image-20210904005529942](https://www.huangyihui.cn/upload/gburlimg/3690ddfa84447.png)
+![image-20210904005529942](http://qiniu.huangyihui.cn/doc/202511250102650.png)
 
 ```html
 <div class="row">
@@ -1082,9 +1082,9 @@ Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，�
 
 在某些阈值时，某些列可能会出现比别的列高的情况。为了克服这一问题，建议联合使用 `.clearfix` 和 响应式工具类。
 
-![image-20210904010457463](https://www.huangyihui.cn/upload/gburlimg/e7768b88e2e1.png)
+![image-20210904010457463](http://qiniu.huangyihui.cn/doc/202511250102923.png)
 
-![image-20210904010604279](https://www.huangyihui.cn/upload/gburlimg/7ebb935ebb5bc.png)
+![image-20210904010604279](http://qiniu.huangyihui.cn/doc/202511250102047.png)
 
 ```html
 <div class="row">
@@ -1186,7 +1186,7 @@ Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，�
 
 
 
-![image-20210904135255835](https://www.huangyihui.cn/upload/gburlimg/e19a70f0ae49b.png)
+![image-20210904135255835](http://qiniu.huangyihui.cn/doc/202511250103721.png)
 
 ```html
 <div class="container">
@@ -1294,7 +1294,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-![image-20210904212931029](https://www.huangyihui.cn/upload/gburlimg/db3e2a883f0d1.png)
+![image-20210904212931029](http://qiniu.huangyihui.cn/doc/202511250103323.png)
 
 
 
@@ -1391,7 +1391,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-![image-20210904214938487](https://www.huangyihui.cn/upload/gburlimg/bb05e70343403.png)
+![image-20210904214938487](http://qiniu.huangyihui.cn/doc/202511250103475.png)
 
 
 
@@ -1449,7 +1449,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-![image-20210905150214384](https://www.huangyihui.cn/upload/gburlimg/8c8149d97568c.png)
+![image-20210905150214384](http://qiniu.huangyihui.cn/doc/202511250103609.png)
 
 
 
@@ -1548,7 +1548,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 各路径间的分隔符已经自动通过 CSS 的 `:before` 和 `content` 属性添加了。
 
-![image-20210906120207757](https://www.huangyihui.cn/upload/gburlimg/efe7300496137.png)
+![image-20210906120207757](http://qiniu.huangyihui.cn/doc/202511250103311.png)
 
 ```html
 <ol class="breadcrumb">
@@ -1572,7 +1572,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-![image-20210906121601139](https://www.huangyihui.cn/upload/gburlimg/81f5501e7e43d.png)
+![image-20210906121601139](http://qiniu.huangyihui.cn/doc/202511250104717.png)
 
 ```html
 <ul class="pagination">
@@ -1590,7 +1590,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
  ### 简单翻页
 
-![image-20210906121852171](https://www.huangyihui.cn/upload/gburlimg/aa3799884b9d7.png)
+![image-20210906121852171](http://qiniu.huangyihui.cn/doc/202511250104868.png)
 
 在默认的翻页中，链接居中对齐。但是可以添加 `.previous` 和 `.next` 让链接向两端对齐。
 
@@ -1605,7 +1605,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 ### 标签
 
-![image-20210906122350212](https://www.huangyihui.cn/upload/gburlimg/8e28174bd5962.png)
+![image-20210906122350212](http://qiniu.huangyihui.cn/doc/202511250104240.png)
 
 用下面的任何一个类即可改变标签的外观。
 
@@ -1626,7 +1626,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 如果徽章中不包含任何内容，徽章组件能够自动隐藏。
 
-![image-20210906123026309](https://www.huangyihui.cn/upload/gburlimg/0afba05dc8796.png)
+![image-20210906123026309](http://qiniu.huangyihui.cn/doc/202511250105312.png)
 
 ```html
 <a href="#">未读 <span class="badge">12</span></a>
@@ -1640,7 +1640,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 ### 巨幕
 
-![image-20210906124312420](https://www.huangyihui.cn/upload/gburlimg/469c69849f39f.png)
+![image-20210906124312420](http://qiniu.huangyihui.cn/doc/202511250105709.png)
 
 ```html
 <div class="container">
@@ -1674,7 +1674,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-![image-20210906124811108](https://www.huangyihui.cn/upload/gburlimg/6cb37c41a9277.png)
+![image-20210906124811108](http://qiniu.huangyihui.cn/doc/202511250105883.png)
 
 ```html
 <div class="page-header">
@@ -1734,7 +1734,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-![image-20210906145835408](https://www.huangyihui.cn/upload/gburlimg/181852646ea55.png)
+![image-20210906145835408](http://qiniu.huangyihui.cn/doc/202511250105343.png)
 
 ```html
 <div class="alert alert-success">成功</div>
@@ -1766,7 +1766,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-![image-20210906152239718](https://www.huangyihui.cn/upload/gburlimg/2b10c2bf77ad9.png)
+![image-20210906152239718](http://qiniu.huangyihui.cn/doc/202511250106567.png)
 
 ```html
 <div class="progress">
@@ -1847,7 +1847,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-![image-20210906155535370](https://www.huangyihui.cn/upload/gburlimg/a4db5b795dabe.png)
+![image-20210906155535370](http://qiniu.huangyihui.cn/doc/202511250106863.png)
 
 
 
@@ -1916,7 +1916,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 ### 列表组
 
-![image-20210906161611659](https://www.huangyihui.cn/upload/gburlimg/c62404a334a85.png)
+![image-20210906161611659](http://qiniu.huangyihui.cn/doc/202511250106418.png)
 
 ```html
 <ul class="list-group">
@@ -1981,7 +1981,7 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 ### 面板
 
-![image-20210906164220077](https://www.huangyihui.cn/upload/gburlimg/b2782ce4e6051.png)
+![image-20210906164220077](http://qiniu.huangyihui.cn/doc/202511250106822.png)
 
 如果需要将某些 DOM 内容放到一个盒子里。对于这种情况，可以试试面板组件。
 
@@ -2071,17 +2071,13 @@ Bootstrap 自带了大量可复用的组件，包括字体图标、下拉菜单�
 
 
 
-
-
-
-
 ### well 嵌入效果
 
 把 Well 用在元素上，就能有嵌入（inset）的简单效果。
 
 
 
-![image-20210906162537792](https://www.huangyihui.cn/upload/gburlimg/062f4ac9a048b.png)
+![image-20210906162537792](http://qiniu.huangyihui.cn/doc/202511250107144.png)
 
 * `.well` : 嵌入效果
 * `.well-lg` `.well-sm` : 控制此组件的内补（padding）和圆角的设置。
@@ -2111,7 +2107,7 @@ Bootstrap 中的导航组件都依赖同一个 `.nav` 类，状态类也是共�
 
 
 
-![image-20210905153440222](https://www.huangyihui.cn/upload/gburlimg/612d06ad53672.png)
+![image-20210905153440222](http://qiniu.huangyihui.cn/doc/202511250107777.png)
 
 ```html
 <ul class="nav nav-tabs">
@@ -2269,7 +2265,7 @@ JavaScript 插件可以单个引入（使用 Bootstrap 提供的单个 `*.js` �
 
 
 
-![image-20210909153716183](https://www.huangyihui.cn/upload/gburlimg/4c3c95f0d753b.png)
+![image-20210909153716183](http://qiniu.huangyihui.cn/doc/202511250056411.png)
 
 
 
@@ -2572,7 +2568,7 @@ $('#myTabs a').click(function (e) {
 
 如果没有活动的选项卡，那么hide.bs.tab和hidden.bs.tab事件将不会被触发。
 
-![image-20210909214753054](https://www.huangyihui.cn/upload/gburlimg/b034b69ce0e17.png)
+![image-20210909214753054](http://qiniu.huangyihui.cn/doc/202511250057905.png)
 
 
 
@@ -2750,7 +2746,7 @@ $('.mypopover').popover()
 
 
 
-![image-20210911100110615](https://www.huangyihui.cn/upload/gburlimg/04dd83f1abbd6.png)
+![image-20210911100110615](http://qiniu.huangyihui.cn/doc/202511250057442.png)
 
 
 
@@ -2968,7 +2964,7 @@ $('#myalert').on('closed.bs.alert', function(){
 
 扩展默认的折叠行为以使用面板组件创建手风琴。
 
-![image-20210912122144180](https://www.huangyihui.cn/upload/gburlimg/18e1375810b08.png)
+![image-20210912122144180](http://qiniu.huangyihui.cn/doc/202511250057999.png)
 
 ```html
 <div class="panel-group" id="accordion">
@@ -3044,7 +3040,7 @@ $('#myalert').on('closed.bs.alert', function(){
 
 ### 轮播图
 
-![image-20210912124831767](https://www.huangyihui.cn/upload/gburlimg/7023f6d83e98d.png)
+![image-20210912124831767](http://qiniu.huangyihui.cn/doc/202511250057184.png)
 
 ```html
 <!-- 需要在最外层的 .carousel 中添加一个 id 。以便carousel控件能够正常工作 -->

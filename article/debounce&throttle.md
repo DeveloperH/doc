@@ -36,7 +36,7 @@ window.onscroll = debounce(function () {
 
 
 
-![image-20210828210030914](https://www.huangyihui.cn/upload/gburlimg/c8a07791fd7d.png)
+![image-20210828210030914](http://qiniu.huangyihui.cn/doc/202511250055838.png)
 
 
 
@@ -75,7 +75,7 @@ window.onscroll = throttle(function () {
 
 
 
-![image-20210828214230407](https://www.huangyihui.cn/upload/gburlimg/d35af40e0bf96.png)
+![image-20210828214230407](http://qiniu.huangyihui.cn/doc/202511250055995.png)
 
 
 

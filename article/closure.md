@@ -48,7 +48,7 @@ test()  // 10
 
 
 
-![](https://www.huangyihui.cn/upload/gburlimg/531ef39c98756.png)
+![](http://qiniu.huangyihui.cn/doc/202511250054921.png)
 
 
 

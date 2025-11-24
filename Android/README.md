@@ -1005,7 +1005,7 @@ CompoundButton 类是抽象的复合按钮，由它派生而来的子类包括�
 
 
 
-![未命名绘图 (2)](https://www.huangyihui.cn/upload/gburlimg/ebee5de398021.png)
+![未命名绘图 (2)](http://qiniu.huangyihui.cn/doc/202511250052341.png)
 
 CompoundButton 在 XML 文件中的属性：
 
@@ -3824,15 +3824,9 @@ public class BlankFragment extends Fragment {
 
 
 
-
-
-
-
-
-
 ### 生命周期
 
-![BaiduShurufa_2024-4-29_10-10-54](https://www.huangyihui.cn/upload/gburlimg/9fb79773dac87.png)
+![BaiduShurufa_2024-4-29_10-10-54](http://qiniu.huangyihui.cn/doc/202511250052182.png)
 
 
 
@@ -4085,7 +4079,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-![](https://www.huangyihui.cn/upload/uploads/202403311103992.png)
+![](http://qiniu.huangyihui.cn/doc/202511250053468.png)
 
 
 

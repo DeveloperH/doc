@@ -28,7 +28,7 @@ $ git config --global user.name "yihui"
 $ git config --global user.email "285134242@qq.com"
 ```
 
-![img](https://www.huangyihui.cn/upload/gburlimg/3e83598c1eb88.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250111672.png)
 
 
 
@@ -68,7 +68,7 @@ $ cd G:/git/repository
 $ git init
 ```
 
-![img](https://www.huangyihui.cn/upload/gburlimg/13aa9490229d2.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250111782.png)
 
 
 
@@ -112,31 +112,31 @@ git commit --amend --no-edit
 
 第一步：
 
-![img](https://www.huangyihui.cn/upload/gburlimg/4e74f8c6ba469.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250111854.png)
 
 
 
 第二步：
 
-![img](https://www.huangyihui.cn/upload/gburlimg/2c569ae311b09.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250112592.png)
 
 
 
 第三步：
 
-![img](https://www.huangyihui.cn/upload/gburlimg/20fb7485b24f7.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250112083.png)
 
 
 
 第四步：
 
-![img](https://www.huangyihui.cn/upload/gburlimg/ac6df741803ef.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250112297.png)
 
 
 
 第五步：
 
-![img](https://www.huangyihui.cn/upload/gburlimg/c236aa9d40de7.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250112486.png)
 
 
 
@@ -170,31 +170,31 @@ $ git reflog
 
 查看提交记录
 
-![img](https://www.huangyihui.cn/upload/gburlimg/b8073facb8aad.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250113214.png)
 
 
 
 查看提交记录
 
-![img](https://www.huangyihui.cn/upload/gburlimg/4cfe346d9f38d.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250113121.png)
 
 
 
 回退到上一个版本
 
-![img](https://www.huangyihui.cn/upload/gburlimg/3290d58cd3484.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250113320.png)
 
 
 
 回退到指定版本
 
-![img](https://www.huangyihui.cn/upload/gburlimg/3f65ca821628b.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250113261.png)
 
 
 
 查看历史命令，可以看到以前所有的提交和回退记录
 
-![img](https://www.huangyihui.cn/upload/gburlimg/1770ae350b6f9.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250113542.png)
 
 
 
@@ -212,7 +212,7 @@ $ git reflog
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/535a28f69eb09.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250114379.png)
 
 
 
@@ -243,7 +243,7 @@ $ git diff head -- readme.txt
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/28537ed8f3b43.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250114157.png)
 
 
 
@@ -288,19 +288,19 @@ $ git reset --hard HEAD^
 
 第一种情况，数据只存在工作区
 
-![img](https://www.huangyihui.cn/upload/gburlimg/7563ae1cd58b7.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250114614.png)
 
 
 
 第二种情况：数据使用add添加到了暂存区
 
-![img](https://www.huangyihui.cn/upload/gburlimg/6f3e44641d744.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250114015.png)
 
 
 
 第三种情况：数据使用add添加到暂存区并commit到版本库
 
-![img](https://www.huangyihui.cn/upload/gburlimg/88fdc3254048d.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250115429.png)
 
 
 
@@ -340,7 +340,7 @@ $ git commit -m 删除hello.java文件
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/e10e720d9b0d1.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250115442.png)
 
 
 
@@ -387,19 +387,19 @@ $ git checkout dev
 
 创建dev分支，并切换到dev分支
 
-![img](https://www.huangyihui.cn/upload/gburlimg/e5195319d5ade.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250115909.png)
 
 
 
 查看当前分支
 
-![img](https://www.huangyihui.cn/upload/gburlimg/4a2c509c76e77.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250115293.png)
 
 
 
 删除分支
 
-![img](https://www.huangyihui.cn/upload/gburlimg/b5483834fad87.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250115908.png)
 
 
 
@@ -417,7 +417,7 @@ $ git merge dev
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/dcbf8247b72ae.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250116388.png)
 
 
 
@@ -427,11 +427,11 @@ $ git merge dev
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/427ae8571acdd.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250116216.png)
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/32b75358e4ec7.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250116615.png)
 
 
 
@@ -521,7 +521,7 @@ $ git merge --no-ff -m "合并dev并禁用FastForward" dev
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/2cbf60b8e5c7b.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250116612.png)
 
 
 
@@ -575,31 +575,31 @@ $ git stash pop
 
 储藏工作现场
 
-![img](https://www.huangyihui.cn/upload/gburlimg/7797fed33f847.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250116309.png)
 
 
 
 创建issue分支修复Bug
 
-![img](https://www.huangyihui.cn/upload/gburlimg/fb5d9540ea4d4.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250117278.png)
 
 
 
 修复Bug后删除issue分支
 
-![img](https://www.huangyihui.cn/upload/gburlimg/710609fb98486.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250117982.png)
 
 
 
 查看工作现场储藏列表
 
-![img](https://www.huangyihui.cn/upload/gburlimg/c3e5b8937cc23.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250117056.png)
 
 
 
 恢复上一次工作现场
 
-![img](https://www.huangyihui.cn/upload/gburlimg/8709106bd5f08.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250117688.png)
 
 
 
@@ -659,19 +659,19 @@ $ git push -u origin master
 
 第一步：创建SSH Key
 
-![img](https://www.huangyihui.cn/upload/gburlimg/5dcd1a3243213.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250118208.png)
 
 
 
 第二步：得到密钥和公钥
 
-![img](https://www.huangyihui.cn/upload/gburlimg/1ae3e7804f015.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250118102.png)
 
 
 
 第三步：gitee中填写公钥内容
 
-![img](https://www.huangyihui.cn/upload/gburlimg/4d44fa14d4486.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250118247.png)
 
 
 
@@ -679,13 +679,13 @@ $ git push -u origin master
 
 第四步：创建仓库repository
 
-![img](https://www.huangyihui.cn/upload/gburlimg/1b2218990a5d9.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250118974.png)
 
 
 
 第五步：关联远程库
 
-![img](https://www.huangyihui.cn/upload/gburlimg/70acee4d944fe.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250118027.png)
 
 
 
@@ -695,17 +695,17 @@ $ git push -u origin master
 
 详见：https://blog.csdn.net/qq_42469247/article/details/90757708
 
-![img](https://www.huangyihui.cn/upload/gburlimg/6e76940bf0ae.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250119046.png)
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/a69e1b7088dc8.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250119204.png)
 
 
 
 第七步：推送最新修改到远程仓库
 
-![img](https://www.huangyihui.cn/upload/gburlimg/9bce18a64de7.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250119377.png)
 
 
 
@@ -740,15 +740,15 @@ $ git push origin dev
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/fc7c95825911b.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250119725.png)
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/b96867bdb5b2f.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250119350.png)
 
 
 
-![img](https://www.huangyihui.cn/upload/gburlimg/da3e2b3e55f74.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250120631.png)
 
 
 
@@ -840,19 +840,19 @@ $ git branch --set-upstream-to=origin/dev dev
 
 出现问题：
 
-![img](https://www.huangyihui.cn/upload/gburlimg/f8869d37a1c05.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250120333.png)
 
 
 
 抓取远程库的最新提交：
 
-![img](https://www.huangyihui.cn/upload/gburlimg/f2f8f5a080a59.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250120269.png)
 
 
 
 解决冲突后再次推送到远程版本库：
 
-![img](https://www.huangyihui.cn/upload/gburlimg/7e6be4e82b12f.png)
+![img](http://qiniu.huangyihui.cn/doc/202511250120644.png)
 
 
 
@@ -916,13 +916,7 @@ Git 中 warning: LF will be replaced by CRLF in readme.txt.问题解决
 
 
 
-
-
-
-
-
-
-![git命令](https://www.huangyihui.cn/upload/gburlimg/c970bb79bc57f.png)
+![git命令](http://qiniu.huangyihui.cn/doc/202511250121722.png)
 
 
 

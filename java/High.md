@@ -436,7 +436,7 @@ maven 中可以通过 `<modules>` 设置当前聚合工程所包含的子模块�
 
 
 
-![私服资源上传和下载.drawio](https://www.huangyihui.cn/upload/gburlimg/556ce2dbf60f4.png)
+![私服资源上传和下载.drawio](http://qiniu.huangyihui.cn/doc/202511250131172.png)
 
 
 

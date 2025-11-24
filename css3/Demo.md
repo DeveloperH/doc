@@ -418,7 +418,7 @@ h1 {
 }
 ```
 
-![640](https://www.huangyihui.cn/upload/gburlimg/f8c7f36c467bc.png)
+![640](http://qiniu.huangyihui.cn/doc/202511250109209.png)
 
 
 
@@ -434,7 +434,7 @@ h1 {
 }
 ```
 
-![640 (1)](https://www.huangyihui.cn/upload/gburlimg/60d7f4e95c1a8.png)
+![640 (1)](http://qiniu.huangyihui.cn/doc/202511250109281.png)
 
 ## 文本强调效果
 
@@ -444,7 +444,7 @@ h1 {
 }
 ```
 
-![640 (3)](https://www.huangyihui.cn/upload/gburlimg/841d95a8ea0e7.png)
+![640 (3)](http://qiniu.huangyihui.cn/doc/202511250109874.png)
 
 ## 扩大点击范围
 
@@ -493,7 +493,7 @@ h1 {
 }
 ```
 
-![640 (2)](https://www.huangyihui.cn/upload/gburlimg/ffce6ef7828b8.png)
+![640 (2)](http://qiniu.huangyihui.cn/doc/202511250109093.png)
 
 
 
@@ -518,7 +518,7 @@ img:hover {
 }
 ```
 
-![640](https://www.huangyihui.cn/upload/gburlimg/4da656cc3a05c.png)
+![640](http://qiniu.huangyihui.cn/doc/202511250109034.png)
 
 
 

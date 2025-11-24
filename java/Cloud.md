@@ -6,11 +6,11 @@
 
 ## 体系
 
-![image-20240908235456070](https://www.huangyihui.cn/upload/gburlimg/8e868c7e2d23a.png)
+![image-20240908235456070](http://qiniu.huangyihui.cn/doc/202511250123824.png)
 
 
 
-![image-20240908235651191](https://www.huangyihui.cn/upload/gburlimg/414dd2042b1a9.png)
+![image-20240908235651191](http://qiniu.huangyihui.cn/doc/202511250124468.png)
 
 
 
@@ -45,7 +45,7 @@
 
 
 
-![image-20210713202807818](https://www.huangyihui.cn/upload/gburlimg/229b5ebd82427.png)
+![image-20210713202807818](http://qiniu.huangyihui.cn/doc/202511250124690.png)
 
 
 
@@ -64,7 +64,7 @@
 
 
 
-![image-20210713203124797](https://www.huangyihui.cn/upload/gburlimg/8761f78ecda0b.png)
+![image-20210713203124797](http://qiniu.huangyihui.cn/doc/202511250124989.png)
 
 
 
@@ -89,13 +89,13 @@
 
 
 
-![image-20210713203753373](https://www.huangyihui.cn/upload/gburlimg/67e3cf843268d.png)
+![image-20210713203753373](http://qiniu.huangyihui.cn/doc/202511250125839.png)
 
 
 
 
 
-![image-20240908235932510](https://www.huangyihui.cn/upload/gburlimg/9f613ca1540a5.png)
+![image-20240908235932510](http://qiniu.huangyihui.cn/doc/202511250125849.png)
 
 
 
@@ -107,13 +107,13 @@ SpringCloud 集成了各种微服务功能组件，并基于 SpringBoot 实现�
 
 其中常见的组件包括：
 
-![image-20210713204155887](https://www.huangyihui.cn/upload/gburlimg/6cdcc118bd129.png)
+![image-20210713204155887](http://qiniu.huangyihui.cn/doc/202511250125111.png)
 
 
 
 另外，SpringCloud底层是依赖于SpringBoot的，并且有版本的兼容关系，如下：
 
-![image-20210713205003790](https://www.huangyihui.cn/upload/gburlimg/01b1e8151dc61.png)
+![image-20210713205003790](http://qiniu.huangyihui.cn/doc/202511250126053.png)
 
 
 
@@ -133,7 +133,7 @@ SpringCloud 集成了各种微服务功能组件，并基于 SpringBoot 实现�
 
 
 
-![image-20210713210800950](https://www.huangyihui.cn/upload/gburlimg/7a2c262e82732.png)
+![image-20210713210800950](http://qiniu.huangyihui.cn/doc/202511250126058.png)
 
 
 
@@ -152,7 +152,7 @@ SpringCloud 集成了各种微服务功能组件，并基于 SpringBoot 实现�
 
 ### 作用
 
-![image-20210713220104956](https://www.huangyihui.cn/upload/gburlimg/dd5ad74d8e494.png)
+![image-20210713220104956](http://qiniu.huangyihui.cn/doc/202511250126181.png)
 
 
 
@@ -267,9 +267,11 @@ SpringCloud 集成了各种微服务功能组件，并基于 SpringBoot 实现�
 
 3. 启动多个user-service实例
 
-   ![image-20210713222656562](https://www.huangyihui.cn/upload/gburlimg/dc859ef7e6783.png)
+   ![image-20210713222656562](http://qiniu.huangyihui.cn/doc/202511250126907.png)
 
-   ![image-20210713222757702](https://www.huangyihui.cn/upload/gburlimg/5d2c7ab9e667b.png)
+   
+
+   ![image-20210713222757702](http://qiniu.huangyihui.cn/doc/202511250126028.png)
 
    
 
@@ -379,7 +381,7 @@ SpringCloud 集成了各种微服务功能组件，并基于 SpringBoot 实现�
 
 SpringCloud底层其实是利用了一个名为Ribbon的组件，来实现负载均衡功能的。
 
-![image-20210713224517686](https://www.huangyihui.cn/upload/gburlimg/3e20877f1247e.png)
+![image-20210713224517686](http://qiniu.huangyihui.cn/doc/202511250127348.png)
 
 
 
@@ -393,7 +395,7 @@ SpringCloud底层其实是利用了一个名为Ribbon的组件，来实现负载
 
 #### 1）LoadBalancerIntercepor
 
-![1525620483637](https://www.huangyihui.cn/upload/gburlimg/c4f45f4ff126.png)
+![1525620483637](http://qiniu.huangyihui.cn/doc/202511250127208.png)
 
 
 
@@ -409,7 +411,7 @@ SpringCloud底层其实是利用了一个名为Ribbon的组件，来实现负载
 
 #### 2）LoadBalancerClient
 
-![1525620787090](https://www.huangyihui.cn/upload/gburlimg/b34584932243f.png)
+![1525620787090](http://qiniu.huangyihui.cn/doc/202511250127458.png)
 
 代码是这样的：
 
@@ -420,7 +422,7 @@ SpringCloud底层其实是利用了一个名为Ribbon的组件，来实现负载
 
 放行后，再次访问并跟踪，发现获取的是8081：
 
-![1525620835911](https://www.huangyihui.cn/upload/gburlimg/489a287e5790a.png)
+![1525620835911](http://qiniu.huangyihui.cn/doc/202511250127567.png)
 
 果然实现了负载均衡。
 
@@ -430,19 +432,19 @@ SpringCloud底层其实是利用了一个名为Ribbon的组件，来实现负载
 
 在刚才的代码中，可以看到获取服务使通过一个`getServer`方法来做负载均衡:
 
-![1525620835911](https://www.huangyihui.cn/upload/gburlimg/489a287e5790a.png)
+![1525620835911](http://qiniu.huangyihui.cn/doc/202511250129405.png)
 
-![1544361421671](https://www.huangyihui.cn/upload/gburlimg/3418f99f8e511.png)
+![1544361421671](http://qiniu.huangyihui.cn/doc/202511250129841.png)
 
-![1525622652849](https://www.huangyihui.cn/upload/gburlimg/ea633b2dc3a9.png)
+![1525622652849](http://qiniu.huangyihui.cn/doc/202511250129463.png)
 
-![1525622699666](https://www.huangyihui.cn/upload/gburlimg/11f4db9f1eec5.png)
+![1525622699666](http://qiniu.huangyihui.cn/doc/202511250129427.png)
 
 
 
 这里的rule默认值是一个`RoundRobinRule`，看类的介绍：
 
-![1525622754316](https://www.huangyihui.cn/upload/gburlimg/0433fbff48cd.png)
+![1525622754316](http://qiniu.huangyihui.cn/doc/202511250130519.png)
 
 这不就是轮询的意思嘛。
 
@@ -454,7 +456,7 @@ SpringCloud底层其实是利用了一个名为Ribbon的组件，来实现负载
 
 SpringCloudRibbon的底层采用了一个拦截器，拦截了RestTemplate发出的请求，对地址做了修改。
 
-![image-20210713224724673](https://www.huangyihui.cn/upload/gburlimg/e6ba25e6fa1ec.png)
+![image-20210713224724673](http://qiniu.huangyihui.cn/doc/202511250130191.png)
 
 
 
@@ -475,7 +477,7 @@ SpringCloudRibbon的底层采用了一个拦截器，拦截了RestTemplate发出
 
 负载均衡的规则都定义在IRule接口中，而IRule有很多不同的实现类：
 
-![image-20210713225653000](https://www.huangyihui.cn/upload/gburlimg/64f71b0cfd68d.png)
+![image-20210713225653000](http://qiniu.huangyihui.cn/doc/202511250130718.png)
 
 
 
@@ -706,7 +708,7 @@ Nacos就将同一机房内的实例 划分为一个**集群**。
 
 微服务互相访问时，应该尽可能访问同集群实例，因为本地访问速度更快。当本集群内不可用时，才访问其它集群。
 
-![image-20210713232522531](https://www.huangyihui.cn/upload/gburlimg/eeead2d94f5a1.png)
+![image-20210713232522531](http://qiniu.huangyihui.cn/doc/202511250130596.png)
 
 
 
@@ -846,7 +848,7 @@ spring:
 
 Nacos和Eureka整体结构类似，服务注册、服务拉取、心跳等待，但是也存在一些差异：
 
-![image-20210714001728017](https://www.huangyihui.cn/upload/gburlimg/7c4eb7eca6761.png)
+![image-20210714001728017](http://qiniu.huangyihui.cn/doc/202511250130024.png)
 
 
 
