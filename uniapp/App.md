@@ -94,6 +94,16 @@ HBuilder X 3.8.7-alpha开始。离线打包将安装功能独立成单独的aar 
 
 
 
+### 跳转到系统蓝牙
+
+```js
+let main = plus.android.runtimeMainActivity();
+let Intent = plus.android.importClass("android.content.Intent");
+main.startActivity(new Intent('android.settings.BLUETOOTH_SETTINGS'));
+```
+
+
+
 ## 离线打包
 
 文档：https://nativesupport.dcloud.net.cn/AppDocs/usesdk/android.html

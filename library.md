@@ -3862,6 +3862,53 @@ new Vue({ i18n }).$mount('#app')
 
 
 
+#### 插入动态值
+
+```vue
+<template>
+  <div>
+    <!-- 命名占位符 在双花括号中直接使用 -->
+    <p>{{ $t('common.gotIt', { name: userName }) }}</p>
+      
+    <!-- 列表占位符，注意是用 [] -->
+    <p>{{ $t('common.welcome', [count]) }}</p>
+    
+    <!-- 多个占位符 -->
+    <p>{{ $t('common.message', {name: 'John', count: 5, date: '2023-10-01'}) }}</p>
+    
+    <!-- 在属性中使用 -->
+    <button :title="$t('common.itemsSelected', { count: itemCount })">
+      {{ $t('button.submit') }}
+    </button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      userName: '张三',
+      itemCount: 5,
+      count: 10
+    }
+  }
+}
+</script>
+```
+
+```json
+{
+  "common": {
+    "gotIt": "明白了，{name}！",
+    "itemsSelected": "已选择 {count} 个项目",
+    "welcome": "欢迎，{0}！",
+    "message": "Hello {name}, you have {count} new messages since {date}"
+  }
+}
+```
+
+
+
 ### i18next
 
 i18next 是一个用 JavaScript 编写的国际化框架**。**它不仅仅提供标准的 i18n 功能，例如（复数、上下文、插值、格式）。它提供了一个完整的解决方案，可以将产品从 Web 本地化到移动和桌面。支持多种框架。
