@@ -103,7 +103,7 @@ Live Sass Compiler 是 VSCode 中的扩展，可以实时地将 Sass/Scss 文件
 
 
 
-![image-20220702164648767](https://www.huangyihui.cn/upload/gburlimg/9ac50c7c5504b.png)
+![image-20220702164648767](http://qiniu.huangyihui.cn/doc/202511262257270.png)
 
 
 
@@ -117,7 +117,7 @@ Live Sass Compiler 是 VSCode 中的扩展，可以实时地将 Sass/Scss 文件
 
 在嵌套 css 规则时，有时也需要直接使用嵌套外层的父选择器，例如，当给某个元素设定 hover 样式时，或者当 body 元素有某个 classname 时，可以使用 `&` 代表嵌套规则外层的父选择器。
 
-![2022-07-03_131153](https://www.huangyihui.cn/upload/gburlimg/090fe8b574ec9.png)
+![2022-07-03_131153](http://qiniu.huangyihui.cn/doc/202511262257085.png)
 
 
 
@@ -127,7 +127,7 @@ Live Sass Compiler 是 VSCode 中的扩展，可以实时地将 Sass/Scss 文件
 
 注意的是，属性嵌套的后面需要加一个空格。
 
-![image-20220703132221028](https://www.huangyihui.cn/upload/gburlimg/41ae2fa4c9051.png)
+![image-20220703132221028](http://qiniu.huangyihui.cn/doc/202511262257391.png)
 
 
 
@@ -137,13 +137,13 @@ Live Sass Compiler 是 VSCode 中的扩展，可以实时地将 Sass/Scss 文件
 
 **占位符选择器 `%foo` 必须通过 `@extend` 使用。**
 
-![image-20220703134006472](https://www.huangyihui.cn/upload/gburlimg/5d88c62a524af.png)
+![image-20220703134006472](http://qiniu.huangyihui.cn/doc/202511262257175.png)
 
 
 
 占位符选择器在没有使用时，会被自动忽略。
 
-![image-20220703134146967](https://www.huangyihui.cn/upload/gburlimg/1255fa1ce63b2.png)
+![image-20220703134146967](http://qiniu.huangyihui.cn/doc/202511262257424.png)
 
 
 
@@ -170,7 +170,7 @@ Sass 支持两种注释方式：
 
 
 
-![image-20220704010644732](https://www.huangyihui.cn/upload/gburlimg/e355ab591161.png)
+![image-20220704010644732](http://qiniu.huangyihui.cn/doc/202511262258760.png)
 
 
 
@@ -182,7 +182,7 @@ Sass 支持两种注释方式：
 
 
 
-![image-20220704011329663](https://www.huangyihui.cn/upload/gburlimg/953b0ec8764e6.png)
+![image-20220704011329663](http://qiniu.huangyihui.cn/doc/202511262258513.png)
 
 
 
@@ -200,13 +200,13 @@ Sass 支持 6 种主要的数据类型：
 
 
 
-![image-20220704013548846](https://www.huangyihui.cn/upload/gburlimg/6ff188333e2d6.png)
+![image-20220704013548846](http://qiniu.huangyihui.cn/doc/202511262258679.png)
 
 
 
 ### 默认值 !default
 
-![image-20220704014010702](https://www.huangyihui.cn/upload/gburlimg/c0a99a74c6c3e.png)
+![image-20220704014010702](http://qiniu.huangyihui.cn/doc/202511262258441.png)
 
 
 
@@ -311,11 +311,11 @@ body {
 
 
 
-![image-20220705002237757](https://www.huangyihui.cn/upload/gburlimg/3b4b77282665e.png)
+![image-20220705002237757](http://qiniu.huangyihui.cn/doc/202511262258510.png)
 
 
 
-![image-20220705002813866](https://www.huangyihui.cn/upload/gburlimg/36f4059a2d2a7.png)
+![image-20220705002813866](http://qiniu.huangyihui.cn/doc/202511262259341.png)
 
 
 
@@ -332,11 +332,11 @@ body {
 
 
 
-![image-20220705004525729](https://www.huangyihui.cn/upload/gburlimg/80d4cb1ad77ef.png)
+![image-20220705004525729](http://qiniu.huangyihui.cn/doc/202511262259931.png)
 
-![image-20220705005124115](https://www.huangyihui.cn/upload/gburlimg/eebecab13cbe.png)
+![image-20220705005124115](http://qiniu.huangyihui.cn/doc/202511262259188.png)
 
-![image-20220705005706107](https://www.huangyihui.cn/upload/gburlimg/018366dfd2a0f.png)
+![image-20220705005706107](http://qiniu.huangyihui.cn/doc/202511262259615.png)
 
 
 
@@ -364,11 +364,11 @@ body {
 
 
 
-![image-20220708001640755](https://www.huangyihui.cn/upload/gburlimg/cb0cc448623f7.png)
+![image-20220708001640755](http://qiniu.huangyihui.cn/doc/202511262259193.png)
 
 
 
-![image-20220708003452244](https://www.huangyihui.cn/upload/gburlimg/91332f2c6701b.png)
+![image-20220708003452244](http://qiniu.huangyihui.cn/doc/202511262259311.png)
 
 
 
@@ -384,7 +384,7 @@ body {
 
 
 
-![image-20220708002533187](https://www.huangyihui.cn/upload/gburlimg/cc0c680d075fd.png)
+![image-20220708002533187](http://qiniu.huangyihui.cn/doc/202511262300937.png)
 
 对比上面的继承示例，可以看到使用占位符选择器后，该选择器不会以类的形式编译到 css 代码中。
 
@@ -401,7 +401,7 @@ body {
 
 所有数据类型都支持等号运算符。
 
-![image-20220708004350360](https://www.huangyihui.cn/upload/gburlimg/ab5ec5ecc358e.png)
+![image-20220708004350360](http://qiniu.huangyihui.cn/doc/202511262300949.png)
 
 
 
@@ -412,7 +412,7 @@ body {
 * `<=` 小于等于 
 * `>=` 大于等于
 
-![image-20220708004752604](https://www.huangyihui.cn/upload/gburlimg/4de3f4ef1c066.png)
+![image-20220708004752604](http://qiniu.huangyihui.cn/doc/202511262300750.png)
 
 
 
@@ -422,7 +422,7 @@ body {
 * `or` 逻辑或
 * `not` 逻辑非
 
-![image-20220708005211236](https://www.huangyihui.cn/upload/gburlimg/ed78c0178b04b.png)
+![image-20220708005211236](http://qiniu.huangyihui.cn/doc/202511262300799.png)
 
 
 
@@ -445,7 +445,7 @@ body {
 
 
 
-![image-20220708011811645](https://www.huangyihui.cn/upload/gburlimg/9cbc1e784ef5e.png)
+![image-20220708011811645](http://qiniu.huangyihui.cn/doc/202511262300832.png)
 
 
 
@@ -459,7 +459,7 @@ body {
 
 
 
-![image-20220708012914582](https://www.huangyihui.cn/upload/gburlimg/c7e4b76c40a38.png)
+![image-20220708012914582](http://qiniu.huangyihui.cn/doc/202511262301532.png)
 
 
 
@@ -471,7 +471,7 @@ body {
 
 
 
-![image-20220710142241770](https://www.huangyihui.cn/upload/gburlimg/c7979b399e3f6.png)
+![image-20220710142241770](http://qiniu.huangyihui.cn/doc/202511262301027.png)
 
 
 
@@ -515,7 +515,7 @@ background-color: opacify(rgba(#5c7a29, 0.1), 0.5);
 
 
 
-![image-20220710175706468](https://www.huangyihui.cn/upload/gburlimg/13efc62739d4f.png)
+![image-20220710175706468](http://qiniu.huangyihui.cn/doc/202511262301505.png)
 
 
 
@@ -530,7 +530,7 @@ background-color: opacify(rgba(#5c7a29, 0.1), 0.5);
 * `percentage(num)` : 将无单位的数值转换为百分比
 * `round(num)` : 将数字四舍五入为最接近的整数
 
-![image-20220711230702477](https://www.huangyihui.cn/upload/gburlimg/4d618aac11e5.png)
+![image-20220711230702477](http://qiniu.huangyihui.cn/doc/202511262301640.png)
 
 
 
@@ -554,7 +554,7 @@ background-color: opacify(rgba(#5c7a29, 0.1), 0.5);
 
   
 
-![image-20220711231507589](https://www.huangyihui.cn/upload/gburlimg/bf6d21f51474.png)
+![image-20220711231507589](http://qiniu.huangyihui.cn/doc/202511262301042.png)
 
 
 
@@ -569,7 +569,7 @@ background-color: opacify(rgba(#5c7a29, 0.1), 0.5);
 
 
 
-![image-20220711233201459](https://www.huangyihui.cn/upload/gburlimg/81c8a2e788e12.png)
+![image-20220711233201459](http://qiniu.huangyihui.cn/doc/202511262302387.png)
 
 
 
@@ -578,7 +578,7 @@ background-color: opacify(rgba(#5c7a29, 0.1), 0.5);
 * `selector-append(selector1, selector2, ...)` : 可以把一个选择符附加到另一个选择符
 * `selector-unify(selector1, selector2)` : 将两组选择器合成一个复合选择器
 
-![image-20220711234034451](https://www.huangyihui.cn/upload/gburlimg/6f55daa3e08d8.png)
+![image-20220711234034451](http://qiniu.huangyihui.cn/doc/202511262302529.png)
 
 
 
@@ -588,7 +588,7 @@ background-color: opacify(rgba(#5c7a29, 0.1), 0.5);
 * `mixin-exists(name)` : 检查某个 mixin 是否存在
 * `feature-exists(name)` : 检查当前 Sass 版本是否存在某个特性
 
-![image-20220711234640472](https://www.huangyihui.cn/upload/gburlimg/c113865f1d129.png)
+![image-20220711234640472](http://qiniu.huangyihui.cn/doc/202511262302172.png)
 
 
 
@@ -746,7 +746,7 @@ $column: 5;
 
 
 
-![image-20220712002054129](https://www.huangyihui.cn/upload/gburlimg/0d0b4f469a895.png)
+![image-20220712002054129](http://qiniu.huangyihui.cn/doc/202511262302762.png)
 
 
 
@@ -796,7 +796,7 @@ $column: 5;
 
 
 
-![image-20220712004025330](https://www.huangyihui.cn/upload/gburlimg/92e0cebdf0c35.png)
+![image-20220712004025330](http://qiniu.huangyihui.cn/doc/202511262302912.png)
 
 
 

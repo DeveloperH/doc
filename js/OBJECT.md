@@ -139,7 +139,7 @@ p.say()	// 'hello'
 
 
 
-![image-20210707233956125](https://www.huangyihui.cn/upload/gburlimg/d693255f7f52a.png)
+![image-20210707233956125](http://qiniu.huangyihui.cn/doc/202511262246610.png)
 
 
 
@@ -150,11 +150,11 @@ obj -> Object.prototype -> null
 p -> Person.prototype -> Object.prototype -> null
 ```
 
-![](https://www.huangyihui.cn/upload/gburlimg/9db4d7cb7705e.png)
+![](http://qiniu.huangyihui.cn/doc/202511262247733.png)
 
 
 
-![](https://www.huangyihui.cn/upload/gburlimg/6538ae5c3ef2f.png)
+![](http://qiniu.huangyihui.cn/doc/202511262247965.png)
 
 
 
@@ -179,7 +179,7 @@ var obj = Object.create(null)   // 创建空对象，里面不会有prototype属
 
 **undefined 和 null 也不会继承 `Object.prototype` 。**
 
-![image-20220223173614025](https://www.huangyihui.cn/upload/gburlimg/4a97596905e2f.png)
+![image-20220223173614025](http://qiniu.huangyihui.cn/doc/202511262247946.png)
 
 
 
@@ -849,7 +849,7 @@ Math.clz32(1000) // 22
 
 ### Array 数组对象
 
-![640](https://www.huangyihui.cn/upload/gburlimg/d844e6a822f75.png)
+![640](http://qiniu.huangyihui.cn/doc/202511262247283.png)
 
 
 

@@ -851,7 +851,7 @@ Session 和 cookie 都是由服务器生成的，都是用来存储特定的值(
 
 
 
-![session 和 cookie](https://www.huangyihui.cn/upload/gburlimg/1831cd5353a2.png)
+![session 和 cookie](http://qiniu.huangyihui.cn/doc/202511262242395.png)
 
 ### token
 
@@ -892,7 +892,7 @@ JavaScript 提供了一些 API 来处理文件或原始文件数据，例如：F
 
 
 
-![640](https://www.huangyihui.cn/upload/gburlimg/e00508f9fba49.png)
+![640](http://qiniu.huangyihui.cn/doc/202511262242125.png)
 
 
 
@@ -927,7 +927,7 @@ new Blob(array, options);
 
 常见的 MIME 类型如下：
 
-![640 (1)](https://www.huangyihui.cn/upload/gburlimg/c0c013e337837.png)
+![640 (1)](http://qiniu.huangyihui.cn/doc/202511262243859.png)
 
 
 
@@ -1215,7 +1215,7 @@ ArrayBuffer 本身就是一个黑盒，不能直接读写所存储的数据，�
 - **TypedArray**：用来生成内存的视图，通过9个构造函数，可以生成9种数据格式的视图。
 - **DataViews**：用来生成内存的视图，可以自定义格式和字节序。
 
-![640 (2)](https://www.huangyihui.cn/upload/gburlimg/4c95c8d8a1872.png)
+![640 (2)](http://qiniu.huangyihui.cn/doc/202511262243137.png)
 
 
 

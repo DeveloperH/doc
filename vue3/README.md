@@ -2264,7 +2264,7 @@ console.log(i18n.greetings.hello)
 
 ### CSS 过渡 class
 
-![transition-classes.2BufuvZR](https://www.huangyihui.cn/upload/gburlimg/98efaf57215a2.png)
+![transition-classes.2BufuvZR](http://qiniu.huangyihui.cn/doc/202511262253488.png)
 
 
 

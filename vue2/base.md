@@ -1298,7 +1298,7 @@ Vue中可以通过 `v-bind` 指令给class属性绑定值。Vue 专门为 `class
 
 声明周期图示：
 
-![lifecycle](https://www.huangyihui.cn/upload/gburlimg/a332a02281b34.png)
+![lifecycle](http://qiniu.huangyihui.cn/doc/202511262251183.png)
 
 
 

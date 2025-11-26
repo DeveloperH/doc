@@ -510,7 +510,7 @@ process.env.VUE_APP_BASE_API
 
 5. 构建完成后，将chrome文件夹拖进Chrome浏览器中的扩展程序即可。
 
-![image-20210515173709952](https://www.huangyihui.cn/upload/gburlimg/2a0481a2dcd32.png)
+![image-20210515173709952](http://qiniu.huangyihui.cn/doc/202511262252558.png)
 
 
 

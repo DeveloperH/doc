@@ -519,7 +519,7 @@ context.stroke()
 
 
 
-![Canvas 矩形](https://www.huangyihui.cn/upload/gburlimg/dc4d894dfaf39.png)
+![Canvas 矩形](http://qiniu.huangyihui.cn/doc/202511262240373.png)
 
 
 
@@ -533,7 +533,7 @@ context.stroke()
 
 
 
-![画圆示意图](https://www.huangyihui.cn/upload/gburlimg/9517ee079aeab.png)
+![画圆示意图](http://qiniu.huangyihui.cn/doc/202511262240663.png)
 
 ```js
 var canvas = document.getElementById('canvas')
@@ -598,9 +598,9 @@ context.stroke()
 
 
 
-![textAlign](https://www.huangyihui.cn/upload/gburlimg/ab9d0b35ed468.png)
+![textAlign](http://qiniu.huangyihui.cn/doc/202511262240807.png)
 
-![textBaseline](https://www.huangyihui.cn/upload/gburlimg/15e81721c95be.png)
+![textBaseline](http://qiniu.huangyihui.cn/doc/202511262241550.png)
 
 ```js
 // 设置字体属性
@@ -695,7 +695,7 @@ img.onload = function() {
 }
 ```
 
-![像素点](https://www.huangyihui.cn/upload/gburlimg/a87d3d841334.png)
+![像素点](http://qiniu.huangyihui.cn/doc/202511262241717.png)
 
 
 
@@ -730,7 +730,7 @@ context.strokeStyle = gradient
 context.strokeText('今天天气好好，出去happy', 0, 400, 500)
 ```
 
-![image-20220228220522428](https://www.huangyihui.cn/upload/gburlimg/2e91f348f8377.png)
+![image-20220228220522428](http://qiniu.huangyihui.cn/doc/202511262241742.png)
 
 
 

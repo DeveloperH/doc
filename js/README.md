@@ -364,7 +364,7 @@ console.log(Boolean('false'))   // true
 
 ### 加法运算规则
 
-![未命名绘图 (5)](https://www.huangyihui.cn/upload/gburlimg/1674fb72eeb73.png)
+![未命名绘图 (5)](http://qiniu.huangyihui.cn/doc/202511262248327.png)
 
 
 
@@ -382,7 +382,7 @@ console.log(({ n: 1 }).toString())  // [object Object]
 
 ### == 隐式转换规则
 
-![未命名绘图 (6)](https://www.huangyihui.cn/upload/gburlimg/f3e2dd97dc09a.png)
+![未命名绘图 (6)](http://qiniu.huangyihui.cn/doc/202511262248017.png)
 
 
 

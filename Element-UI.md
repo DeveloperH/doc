@@ -70,6 +70,7 @@ Vue.use(ElementUI)
    import {Pagination} from 'element-ui'
    Vue.use(Pagination)
    // 这里就不用再引入样式文件了
+   ```
 ```
    
    
@@ -80,7 +81,7 @@ Vue.use(ElementUI)
 
 1. 安装组件
 
-   ```
+```
    vue add element
    ```
 
@@ -95,8 +96,8 @@ Vue.use(ElementUI)
    import {Pagination} from 'element-ui'
    Vue.use(Pagination)
    // 这里就不用再引入样式文件了
-```
-   
+   ```
+
    
 
 
@@ -184,7 +185,7 @@ export default {
 
 高级用法：[async-validator](https://github.com/yiminghe/async-validator)
 
-![image-20230116143153036](https://www.huangyihui.cn/upload/gburlimg/258dda1e79938.png)
+![image-20230116143153036](http://qiniu.huangyihui.cn/doc/202511262255727.png)
 
 
 
@@ -270,16 +271,6 @@ export default {
 };
 </script>
 ```
-
-
-
-
-
-
-
-
-
-
 
 
 

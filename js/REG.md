@@ -138,7 +138,7 @@ for (const match of 'abcabc'.matchAll(/a/g)) {
 
 
 
-![](https://www.huangyihui.cn/upload/gburlimg/ae9c4c5464029.png)
+![](http://qiniu.huangyihui.cn/doc/202511262249413.png)
 
 ```js
 var str = 'hell421lleajs445sj541xjnnaa9472aaend323endax1'

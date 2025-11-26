@@ -242,7 +242,7 @@ package.json 位于模块的目录下，用于定义包的属性，也是项目�
 
 
 
-![640](https://www.huangyihui.cn/upload/gburlimg/2855f56c0f83a.png)
+![640](http://qiniu.huangyihui.cn/doc/202511262256517.png)
 
 
 
@@ -2519,10 +2519,6 @@ console.log("程序执行完毕");
 
 
 
-
-
-
-
 ### 管道流pipe()
 
 管道提供了一个输出流到输入流的机制。通常我们用于从一个流中获取数据并将数据传递给另一个流中。
@@ -3765,7 +3761,7 @@ http.createServer(function(req, res) {
 
 
 
-![image-20230116141134355](https://www.huangyihui.cn/upload/gburlimg/9f717d8d68122.png)
+![image-20230116141134355](http://qiniu.huangyihui.cn/doc/202511262256313.png)
 
 
 

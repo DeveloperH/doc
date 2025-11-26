@@ -99,11 +99,11 @@ mysql-5.7.44 安装步骤：
 
 
 
-![image-20240615150446812](https://www.huangyihui.cn/upload/gburlimg/b4b139a9ac49d.png)
+![image-20240615150446812](http://qiniu.huangyihui.cn/doc/202511262249769.png)
 
 
 
-![image-20240615150517186](https://www.huangyihui.cn/upload/gburlimg/fa68d06f9866b.png)
+![image-20240615150517186](http://qiniu.huangyihui.cn/doc/202511262250425.png)
 
 
 

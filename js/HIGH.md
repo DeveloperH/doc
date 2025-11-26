@@ -247,10 +247,6 @@ fun3();	// 2
 
 
 
-![](https://www.huangyihui.cn/upload/gburlimg/531ef39c98756.png)
-
-
-
 **作用域链：当访问一个变量时，代码解释器会首先在当前的作用域查找，如果没找到，就去父级作用域去查找，直到找到该变量或者不存在父级作用域中，这样的链路就是作用域链。**
 
 
@@ -741,9 +737,7 @@ stu.say()     // 调用子类方法
 
 
 
-![](https://www.huangyihui.cn/upload/gburlimg/d7b0fce2fa469.png)
-
-
+![](http://qiniu.huangyihui.cn/doc/202511262245076.png)
 
 
 
@@ -1170,14 +1164,6 @@ input.addEventListener(
 
 
 
-
-
-
-
-![image-20210828210030914](https://www.huangyihui.cn/upload/gburlimg/c8a07791fd7d.png)
-
-
-
 ## 函数节流
 
 在一定时间内，一个函数被触发多次，只执行第一个，不执行后面的。当一定时间过去后，如果这个函数又被多次触发，还是像上面一样，只执行第一个，不执行后面的。以此类推。
@@ -1210,10 +1196,6 @@ window.onscroll = throttle(function () {
   console.log('调用了1次')
 }, 500)
 ```
-
-
-
-![image-20210828214230407](https://www.huangyihui.cn/upload/gburlimg/d35af40e0bf96.png)
 
 
 
@@ -1990,7 +1972,7 @@ onmessage = function(event) {
 
 先来看看 Chrome 浏览器的多进程架构：
 
-![640](https://www.huangyihui.cn/upload/gburlimg/541693e00228f.png)
+![640](http://qiniu.huangyihui.cn/doc/202511262245796.png)
 
 
 
@@ -1998,7 +1980,7 @@ onmessage = function(event) {
 
 由于渲染机制比较复杂，所以渲染模块在执行过程中会被划分为很多子阶段，输入的静态资源经过这些子阶段，最后输出页面。我们将一个处理流程称为渲染流水线，其大致流程如下图所示：
 
-![640 (1)](https://www.huangyihui.cn/upload/gburlimg/ca342e147c063.png)
+![640 (1)](http://qiniu.huangyihui.cn/doc/202511262246416.png)
 
 
 
@@ -2014,7 +1996,7 @@ onmessage = function(event) {
 
 下图为渲染引擎工作流程中各个步骤所对应的模块：
 
-![640 (2)](https://www.huangyihui.cn/upload/gburlimg/54665594894e8.png)
+![640 (2)](http://qiniu.huangyihui.cn/doc/202511262246211.png)
 
 
 
