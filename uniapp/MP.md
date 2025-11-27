@@ -150,6 +150,32 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 
 
 
+## 强制更新提示
+
+```js
+const updateManager = wx.getUpdateManager()
+updateManager.onCheckForUpdate(res => {
+  console.log(res.hasUpdate)
+})
+updateManager.onUpdateReady((res) => {
+  console.log('onUpdateReady', res)
+  wx.showModal({
+    title: '更新提示',
+    content: '新版本已就绪，请重启应用',
+    confirmText: '好的',
+    showCancel: false,
+    success: res => {
+      if (res.confirm) {
+        updateManager.applyUpdate()
+      }
+    }
+  })
+})
+updateManager.onUpdateFailed((err) => {
+  console.log('onUpdateFailed', err)
+})
+```
+
 
 
 ## Canvas 海报
