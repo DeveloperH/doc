@@ -1,5 +1,15 @@
 # 基础
 
+CSS 全称是 Cascading Style Sheets 层叠样式表，顾名思义，就是样式可以层层累加。
+
+
+
+* 1996年12月17日：CSS 1
+* 1998年5月12日：CSS 2
+* 2007年：CSS 2.1
+
+
+
 ## CSS使用方式
 
 * 使用`<link>`标签链入外部CSS样式表（链接式）（推荐）
@@ -781,7 +791,7 @@ alpha 参数是介于 0.0（完全透明）和 1.0（完全不透明）之间的
 ## 边框样式
 
 * border : 边框简写，可以同时设置边框的宽度、样式(必需)和颜色。
-* border-width : 边框宽度，也可以设置一到四个值（用于上边框、右边框、下边框和左边框）
+* border-width : 边框宽度，也可以设置一到四个值（用于上边框、右边框、下边框和左边框）。默认是 3px。
 * border-style : 边框样式，也可以设置一到四个值（用于上边框、右边框、下边框和左边框）
   * solid(实线) / dashed(虚线) / dotted(点线) / double(双线) / ridge(突起) / none(无边框)
 * border-color : 边框颜色，也可以设置一到四个值（用于上边框、右边框、下边框和左边框）
@@ -954,6 +964,7 @@ div {
 **注意点:**
 
 * margin允许负值，padding不允许负值。
+* padding 的百分比值无论是水平方向还是垂直方向都是相对于宽度计算的。
 * 由于每个浏览器的内外边距默认值不同，我们需要将所有内外边距都设置为0 `*{ margin: 0; padding: 0; }`
 * 使用padding时，会改变原设置的width，这是我们不希望看到的。可以使用`box-sizing`属性，使元素保持其宽度。如果增加内边距，则可用的内容空间会减少。
 
@@ -986,6 +997,10 @@ div {
     padding-top: 10px;
     box-sizing: border-box;
   }
+  
+  div{
+    padding: 50%; /* 实现一个正方形 */
+  }
 </style>
 ```
 
@@ -993,16 +1008,18 @@ div {
 
 ### margin 合并
 
+块级元素的上外边距与下外边距有时会合并为单个外边距，这样的现象成为 “margin” 合并。注意：它只发生在块级元素和在垂直方向。
+
 * 相邻兄弟元素 margin 合并
   * 第一行的 margin-bottom 和 第二行的 margin-top 合并在一起了
 * 父级和第一个/最后一个子元素
   * 对于 margin-top 合并，可以进行如下操作(满足一个条件即可)
-    * 父元素设置为块状格式化上下文元素 `overflow:hidden`
+    * 父元素设置为块状格式化上下文元素  `overflow:hidden`
     * 父元素设置 border-top 值
     * 父元素设置 padding-top 值
     * 父元素和第一个子元素之间添加内联元素进行分隔
   * 对于 margin-bottom 合并，可以进行如下操作(满足一个条件即可)
-    * 父元素设置为块状格式化上下文元素
+    * 父元素设置为块状格式化上下文元素  `overflow:hidden`
     * 父元素设置 border-bottom 值
     * 父元素设置 padding-bottom 值
     * 父元素和最后一个子元素之间添加内联元素进行分隔
@@ -1012,7 +1029,7 @@ div {
 
 
 
-**margin合并的计算规则：正正取大值、正负值相加、负负最负值。**
+**margin 合并的计算规则：正正取大值、正负值相加、负负最负值。**
 
 
 
@@ -1035,20 +1052,16 @@ margin: auto 的填充规则：
 }
 
 .son {
-  width: 200px;
-  height: 100px;
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+   width: 200px;
+  height: 100px;
   margin: auto;
 }
 ```
-
-
-
-
 
 
 
@@ -1105,7 +1118,7 @@ width/height 的默认值是 auto。max- 系列的初始值是 none。min- 系�
 
 <style>
 .box {
-  min-width: 250px;
+  min-width: 250px;  /* 会超越 max-width */
   max-width: 200px;
   width: 300px !important;
   height: 100px;
@@ -1400,7 +1413,7 @@ width/height 的默认值是 auto。max- 系列的初始值是 none。min- 系�
 
 
 
-## TDO布局样式
+## 布局样式
 
 * display : 将元素设置为块级元素或内联元素
   * block(块级元素) / inline(行内元素) / none(隐藏对象，不保留物理空间) / inline-block(行内块元素，可以设置宽高且不独占一行) / flex(弹性盒)

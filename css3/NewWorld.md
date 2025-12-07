@@ -12,7 +12,7 @@ https://www.cssworld.cn/
 
 编写 CSS 的 "鑫三无准则" : 无宽度、无图片、无浮动。
 
-无宽度：布局会更灵活，容错性会更强。表现为 "外部尺寸" 的块级元素一旦设置了宽度，流动性就丢失了。
+无宽度：布局会更灵活，容错性会更强。表现为 "外部尺寸" 的块级元素一旦设置了 width，流动性就丢失了。
 
 
 
@@ -99,6 +99,32 @@ https://www.cssworld.cn/
 
 
 
+## 格式化宽度
+
+格式化宽度仅出现在 “绝对定位模型” 中，也就是出现在 position 属性值为 absolute 或 fixed 的元素中。在默认情况下，绝对定位元素的宽度表现是 “包裹性”，宽度由内部尺寸决定。
+
+但是对于非替换元素，当 left / top 或 top / bottom 对立方位的属性值同时存在的时候，元素的宽度表现为 “格式化宽度”，其宽度大小相对于最近的具有定位特性（postion 属性值不是 static ）的祖先元素计算。
+
+格式化宽度和普通的流一样，具有完全的流动性，也就是 margin、border、padding 和 content 内容区域同样会自动分配水平（和垂直）空间。
+
+
+
+```css
+.father {
+	width: 100px;
+	position: relative;
+}
+
+/* 宽度是60：100-20-20 */
+.son {
+	position: absolute;
+	left: 20px;
+	right: 20px;
+}
+```
+
+
+
 
 
 
@@ -179,7 +205,7 @@ https://www.cssworld.cn/
 }
 
 .box:active {
-  max-height: 666px;
+  max-height: 666px; /* 一个比内容高度大的值。应该设置合理的最大高度，不然动画会造成视觉延迟 */
 }
 ```
 
