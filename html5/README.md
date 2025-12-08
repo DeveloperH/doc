@@ -317,15 +317,23 @@
 <a href="/example/html/nextpage.html">
 	<img border="0" src="/imgs/next.gif" />
 </a>
+  
+<a href="#">返回顶部</a>
 ```
 
 ```html
-<!-- 锚点 -->
+<!-- 锚点 href + name -->
 <a href="#here">跳到页面指定位置</a>
-...
-...
 <h2><a name="here">我在这里</a></h2>
 ```
+
+```html
+<!-- 锚点 href + id -->
+<a href="#1">跳到页面指定位置</a>
+<h2 id="1">我在这里</h2>
+```
+
+
 
 在所有浏览器中，链接的默认外观是：
 

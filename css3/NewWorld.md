@@ -279,7 +279,64 @@ img {
 
 
 
+### 基于 vertical-align 属性的水平垂直居中弹框
 
+```html
+<div class="container">
+	<div class="dialog"></div>
+</div>
+
+<style>
+.container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0,0,0, .5);
+	text-align: center;
+	font-size: 0;
+	white-space: nowrap;
+	overflow: auto;
+}
+
+.container:after{
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.dialog {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+	font-size: 14px;
+	white-space: normal;
+}
+</style>
+```
+
+
+
+### 让页面滚动条不发生晃动
+
+```css
+html {
+	overflow-y: scroll; /* for IE8 */
+}
+:root {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+:root body {
+	position: absolute;
+}
+body {
+	width: 100vw;
+	overflow: hidden;
+}
+```
 
 
 

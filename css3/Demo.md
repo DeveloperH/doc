@@ -29,10 +29,10 @@
 
 ```css
 div {
-  width: 200px;
-  white-space: nowrap;
+	text-overflow: ellipsis;
   overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
   word-break: break-all;
 }
 ```
@@ -45,10 +45,10 @@ div {
 
 ```css
 div {
-  width: 200px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  width: 200px;
   overflow: hidden;
   word-break: break-all;
 }
@@ -779,6 +779,39 @@ p {
 
 
 ## 自定义滚动条
+
+* 整体部分：`::-webkit-scrollbar`
+* 两端按钮：`::-webkit-scrollbar-button`
+* 外层轨道：`::-webkit-scrollbar-track`
+* 内层轨道：`::-webkit-scrollbar-track-piece`
+* 滚动滑块：`::-webkit-scrollbar-thumb`
+* 边角：`::-webkit-scrollbar-corner`
+
+
+
+```css
+/* 滚动条宽度 */
+::-webkit-scrollbar {
+  width: 8px;
+	height: 8px;
+}
+
+/* 滚动条背景轨道 */
+::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background-color: #ddd;
+}
+
+/* 拖动条 */
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgba(0,0,0,.3);
+}
+```
+
+
+
+
 
 ```html
 <div class="wrapper">

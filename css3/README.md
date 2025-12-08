@@ -964,7 +964,7 @@ div {
 **注意点:**
 
 * margin允许负值，padding不允许负值。
-* padding 的百分比值无论是水平方向还是垂直方向都是相对于宽度计算的。
+* padding、margin 的百分比值无论是水平方向还是垂直方向都是相对于宽度计算的。
 * 由于每个浏览器的内外边距默认值不同，我们需要将所有内外边距都设置为0 `*{ margin: 0; padding: 0; }`
 * 使用padding时，会改变原设置的width，这是我们不希望看到的。可以使用`box-sizing`属性，使元素保持其宽度。如果增加内边距，则可用的内容空间会减少。
 
@@ -1287,13 +1287,14 @@ width/height 的默认值是 auto。max- 系列的初始值是 none。min- 系�
   * `vertical-lr`：垂直方向内内容从上到下，水平方向从左到右
   * `sideways-rl`：内容垂直方向从上到下排列
   * `sideways-lr`：内容垂直方向从下到上排列
-* line-height : 行间距/行高
+* line-height : 行间距/行高。它是相对于 font-size 计算的
 * letter-spacing : 字符间距
 * word-spacing : 文本中单词之间的间距
 * white-space : 指定元素内部空白的处理方式。
   * normal(默认，自动换行) / pre(按原格式，可能会超出界限) / pre-wrap(按原格式，并且不够一行时自动换号)/ nowrap(禁用换行，强制在同一行显示)
 * vertical-align : 垂直对齐方式。只能作用在 display 计算值为 `inline、inline-block、inline-table、inline-cell` 元素上。
-  * top / middle / bottom / sub / super / baseline / text-top / text-bottom
+  * baseline(默认值) / bottom / top / middle / sub / super / text-top / text-bottom / 数值(如 20px、2em、20%)
+  * 百分比值是相对于 line-height 的计算值计算的
 * direction : 文本方向
   * ltr(默认，左向右) / rtl(右向左)
 * unicode-bidi : 配合direction使用，更改元素的文本方向：
@@ -1453,7 +1454,9 @@ width/height 的默认值是 auto。max- 系列的初始值是 none。min- 系�
 * overflow : 溢出，设置当对象的内容超过其指定高度及宽度时如何管理内容。一般会给父元素添加该属性。
   * visible : 默认值，不剪切内容也不添加滚动条
   * auto : 看内容来显示上下或左右滚动条
-  * hidden : 不显示超过对象尺寸的内容
+  * hidden : 不显示超过对象尺寸的内容。
+    * 普通流体元素设置了后，会自动填满容器中除了浮动元素以外的剩余空间，形成自适应布局效果
+    * 设置了 hidden 的元素也是可滚动的（发生在锚点定位情况下），跟 auto 和 scroll 的差别就在于有没有那个滚动条
   * scroll : 总是显示滚动条
 * overflow-x : 指定如何处理溢出内容的左/右边缘。
 * overflow-y : 指定如何处理溢出内容的上/下边缘。
@@ -1661,8 +1664,23 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/clip-path
 * vmin : 相对于视口较小尺寸的 1％
 * vmax : 相对于视口较大尺寸的 1％
 * smaller(小一号) / larger(大一号)
+* ex : 相对于字体和字号的单位。一个x的高度
 
 **视口（Viewport）= 浏览器窗口的尺寸。如果视口为 50 厘米宽，则 1vw = 0.5 厘米。**
+
+
+
+```css
+/* ex 实现图标和文字中间位置对齐 */
+.icon-arrow {
+	display: inline-block;
+	width: 20px;
+	height: 1ex;
+	background: url(arrow.png) no-repeat center;
+}
+```
+
+
 
 
 
@@ -2064,9 +2082,7 @@ select {
 
 ### BFC
 
-BFC - Block format context（块级格式化上下文）
-
-
+Block format context（块级格式化上下文）
 
 具有BFC特性的元素可以看作是隔离了的独立容器，容器里面的元素不受外部元素影响。
 
@@ -2081,14 +2097,21 @@ BFC - Block format context（块级格式化上下文）
 
 **触发BFC条件：**
 
-1. `display`属性值为`inline-block`、`table-cell`、`flex`
-2. `float`属性不为`none`
-3. `position`属性值为`absolute`、`fixed`
-4. `overflow`属性值不为`visible`
+1. `<html>` 根元素
+
+2. `float` 属性不为 `none`
+
+3. `overflow`属性值为 `auto` 、`scroll` 、`hidden`
+
+4. `display` 属性值为 `inline-block`、`table-cell`、`flex`
+
+5. `position`属性值不为 `relative`、`static`
+
+   
 
 **常见的利用BFC解决问题：**
 
-1. `margin`塌陷
+1. `margin` 塌陷
 2. 自适应布局（float+overflow）
 3. 清除浮动
 
