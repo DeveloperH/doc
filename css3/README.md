@@ -1423,6 +1423,7 @@ width/height 的默认值是 auto。max- 系列的初始值是 none。min- 系�
   * visible(默认，可见) / hidden(不可见) / collapse(当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 "hidden"。)
 * float : 浮动方式
   * none(默认不浮动) / left(左浮动) / right(右浮动)
+  * 它具有：包裹性、块状化并格式化上下文、破坏文档流、没有任何 margin 合并
 * clear : 清除浮动
   * none(默认允许两边都可以有浮动对象)
   * both(左右两边不允许有浮动对象)
@@ -1434,6 +1435,7 @@ width/height 的默认值是 auto。max- 系列的初始值是 none。min- 系�
     * left / right / top / bottom
   * absolute : 绝对定位，将对象从文档流中分离出来，并设置四个方向的偏移值来进行绝对定位。
     * left / right / top / bottom
+    * 当 left 和 right 同时存在，它表现为 “格式化宽度”，宽度大小自适应与 它的包含块的 padding box
   * fixed : 相对于视口定位的，这意味着即使滚动页面，它也始终位于同一位置。
   * sticky : 粘性定位。粘性元素根据滚动位置在相对（relative）和固定（fixed）之间切换。起先它会被相对定位，直到在视口中遇到给定的偏移位置为止 - 然后将其"粘贴"在适当的位置。
   * 粘性布局 sticky 不起作用大概率只有两个原因：
