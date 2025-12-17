@@ -61,6 +61,14 @@ Trae 是国内首个 AI IDE，深度理解中文开发场景。AI 高度集成�
 
 
 
+## Kiro
+
+Kiro 是亚马逊公司推出的 AI IDE，帮助开发者从概念到开发高效交付。
+
+https://kiro.dev/
+
+
+
 ## 通义大模型 Qwen2
 
 文档：https://github.com/QwenLM/Qwen
@@ -191,6 +199,7 @@ chatgpt ui
 
 * [集合了带有 AI 代理和 RAG 的优秀大型语言模型应用，使用 OpenAI、Anthropic、Gemini 和开源模型](https://github.com/Shubhamsaboo/awesome-llm-apps)
 * [PandaWiki 是一款 AI 大模型驱动的开源知识库搭建系统，帮助你快速构建智能化的 产品文档、技术文档、FAQ、博客系统，借助大模型的力量为你提供 AI 创作、AI 问答、AI 搜索等能力](https://github.com/chaitin/PandaWiki)
+* [《Agentic Design Patterns》中文翻译版](https://github.com/ginobefun/agentic-design-patterns-cn) 
 
 
 

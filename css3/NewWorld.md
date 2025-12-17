@@ -319,6 +319,25 @@ img {
 
 
 
+### 水平垂直居中
+
+利用绝对定位元素的流体特性和 margin 的自动分配特性实现居中。
+
+```css
+.container {
+	width: 300px;
+	height: 200px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+}
+```
+
+
+
 ### 让页面滚动条不发生晃动
 
 ```css
