@@ -265,6 +265,7 @@
 
 * cdnjs https://cdnjs.com/
 * jsdelivr https://www.jsdelivr.com/
+* unpkg https://unpkg.com/
 * bootcdn https://www.bootcdn.cn/
 
 

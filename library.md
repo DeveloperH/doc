@@ -2885,13 +2885,352 @@ FormKit 是一个面向 Vue 开发人员的表单创作框架，它使构建高�
 
 
 
-## TODO 图表
+## 图表
 
 ### Apache ECharts
 
-Apache ECharts 是一款基于Javascript的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。它是用纯 JavaScript 编写的，基于zrender，是一个全新的轻量级画布库。!
+Apache ECharts 是一款基于Javascript的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。它是用纯 JavaScript 编写的，基于zrender，是一个全新的轻量级画布库。
+
+除了已经内置的包含了丰富功能的图表，ECharts 还提供了[自定义系列](https://echarts.apache.org/zh/option.html#series-custom)，只需要传入一个*renderItem*函数，就可以从数据映射到任何你想要的图形。
 
 文档地址：https://github.com/apache/echarts
+
+官网：https://echarts.apache.org/zh/index.html
+
+awesome-echarts：https://github.com/ecomfe/awesome-echarts
+
+自定义图表-睡眠阶段图：https://github.com/apache/echarts-custom-series?tab=readme-ov-file
+
+
+
+
+
+#### html
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'));
+
+      // 指定图表的配置项和数据
+      var option = {
+        title: {
+          text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+          data: ['销量']
+        },
+        xAxis: {
+          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        },
+        yAxis: {},
+        series: [
+          {
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>
+```
+
+
+
+![](http://qiniu.huangyihui.cn/doc/202512242307996.png)
+
+
+
+#### npm
+
+安装依赖：`npm install echarts --save`
+
+```vue
+<template>
+  <div>
+    <div id="main" style="width: 600px; height: 400px"></div>
+  </div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+
+export default {
+  mounted() {
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById("main"));
+    // 绘制图表
+    myChart.setOption({
+      title: {
+        text: "ECharts 入门示例",
+      },
+      tooltip: {},
+      legend: {
+        data: ['销量']
+      },
+      xAxis: {
+        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+      },
+      yAxis: {},
+      series: [
+        {
+          name: "销量",
+          type: "bar",
+          data: [5, 20, 36, 10, 10, 20],
+        },
+      ],
+    });
+  },
+};
+</script>
+```
+
+
+
+
+
+#### 示例
+
+##### 设置深色模式
+
+```js
+var myChart = echarts.init(document.getElementById("main"), 'dark');
+```
+
+
+
+##### 监听系统深色模式并改变图表主题
+
+```js
+const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+function updateDarkMode() {
+    const isDarkMode = darkModeMediaQuery.matches;
+    for (const chart of charts) {
+        chart.setTheme(isDarkMode ? 'dark' : 'default');
+    }
+}
+darkModeMediaQuery.addEventListener('change', () => {
+    updateDarkMode();
+});
+```
+
+
+
+##### 监听图表容器的大小并改变图表大小
+
+可以监听页面的 `resize` 事件获取浏览器大小改变的事件，然后调用 `echartsInstance.resize` 改变图表的大小。
+
+```js
+var myChart = echarts.init(document.getElementById('main'));
+window.addEventListener("resize", function () {
+  myChart.resize();
+});
+```
+
+
+
+##### 事件和交互
+
+文档：https://echarts.apache.org/zh/api.html#events
+
+```js
+// 基于准备好的dom，初始化ECharts实例
+// var myChart = echarts.init(document.getElementById('main'));
+
+// 指定图表的配置项和数据
+var option = {
+  xAxis: {
+    data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+  },
+  yAxis: {},
+  series: [
+    {
+      name: '销量',
+      type: 'bar',
+      data: [5, 20, 36, 10, 10, 20]
+    }
+  ]
+};
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+// 处理点击事件并且跳转到相应的百度搜索页面
+myChart.on('click', function(params) {
+  window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+});
+```
+
+
+
+所有的鼠标事件包含参数 `params`，这是一个包含点击图形的数据信息的对象，如下格式：
+
+```typescript
+type EventParams = {
+  // 当前点击的图形元素所属的组件名称，
+  // 其值如 'series'、'markLine'、'markPoint'、'timeLine' 等。
+  componentType: string;
+  // 系列类型。值可能为：'line'、'bar'、'pie' 等。当 componentType 为 'series' 时有意义。
+  seriesType: string;
+  // 系列在传入的 option.series 中的 index。当 componentType 为 'series' 时有意义。
+  seriesIndex: number;
+  // 系列名称。当 componentType 为 'series' 时有意义。
+  seriesName: string;
+  // 数据名，类目名
+  name: string;
+  // 数据在传入的 data 数组中的 index
+  dataIndex: number;
+  // 传入的原始数据项
+  data: Object;
+  // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，
+  // dataType 的值会是 'node' 或者 'edge'，表示当前点击在 node 还是 edge 上。
+  // 其他大部分图表中只有一种 data，dataType 无意义。
+  dataType: string;
+  // 传入的数据值
+  value: number | Array;
+  // 数据图形的颜色。当 componentType 为 'series' 时有意义。
+  color: string;
+};
+```
+
+
+
+##### 空数据
+
+在 ECharts 中，我们使用字符串 `'-'` 表示空数据，这对其他系列的数据也是适用的。
+
+```js
+option = {
+  xAxis: {
+    data: ['A', 'B', 'C', 'D', 'E']
+  },
+  yAxis: {},
+  series: [
+    {
+      data: [0, 22, '-', 23, 19],
+      type: 'line'
+    }
+  ]
+};
+```
+
+
+
+##### loading 动画
+
+ECharts 默认有提供了一个简单的加载动画。只需要调用 `showLoading` 方法显示。数据加载完成后再调用 `hideLoading` 方法隐藏加载动画。
+
+```js
+myChart.showLoading();
+$.get('data.json').done(function (data) {
+    myChart.hideLoading();
+    myChart.setOption(...);
+});
+```
+
+
+
+##### 异步加载和动态更新数据
+
+`ECharts` 中实现异步数据的更新非常简单，在图表初始化后不管任何时候只要通过 jQuery 等工具异步获取数据后通过 `setOption` 填入数据和配置项就行。
+
+ECharts 由数据驱动，数据的改变驱动图表展现的改变，因此动态数据的实现也变得异常简单。
+
+所有数据的更新都通过 setOption实现，你只需要定时获取数据，setOption 填入数据，而不用考虑数据到底产生了哪些变化，ECharts 会找到两组数据之间的差异然后通过合适的动画去表现数据的变化。
+
+
+
+```js
+var myChart = echarts.init(document.getElementById('main'));
+
+$.get('data.json').done(function(data) {
+  // data 的结构:
+  // {
+  //     categories: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
+  //     values: [5, 20, 36, 10, 10, 20]
+  // }
+  myChart.setOption({
+    title: {
+      text: '异步数据加载示例'
+    },
+    tooltip: {},
+    legend: {},
+    xAxis: {
+      data: data.categories
+    },
+    yAxis: {},
+    series: [
+      {
+        name: '销量',
+        type: 'bar',
+        data: data.values
+      }
+    ]
+  });
+});
+```
+
+或者先设置完其它的样式，显示一个空的直角坐标轴，然后获取数据后填入数据。
+
+```js
+var myChart = echarts.init(document.getElementById('main'));
+// 显示标题，图例和空的坐标轴
+myChart.setOption({
+  title: {
+    text: '异步数据加载示例'
+  },
+  tooltip: {},
+  legend: {
+    data: ['销量']
+  },
+  xAxis: {
+    data: []
+  },
+  yAxis: {},
+  series: [
+    {
+      name: '销量',
+      type: 'bar',
+      data: []
+    }
+  ]
+});
+
+// 异步加载数据
+$.get('data.json').done(function(data) {
+  // 填入数据
+  myChart.setOption({
+    xAxis: {
+      data: data.categories
+    },
+    series: [
+      {
+        // 根据名字对应到相应的系列
+        name: '销量',
+        data: data.data
+      }
+    ]
+  });
+});
+```
+
+ECharts 中在更新数据的时候需要通过`name`属性对应到相应的系列，上面示例中如果`name`不存在也可以根据系列的顺序正常更新，但是更多时候推荐更新数据的时候加上系列的`name`数据。
+
+
 
 
 
@@ -2924,6 +3263,16 @@ Trois 是一个基于 Three.JS 的 Vue 3 可视化库，它是一个流行的 We
 `uCharts`是一款基于`canvas API`开发的适用于所有前端应用的图表库，开发者编写一套代码，可运行到 Web、iOS、Android（基于 uni-app / taro ）、以及各种小程序（微信/支付宝/百度/头条/飞书/QQ/快手/钉钉/淘宝/京东/360）、快应用等更多支持 canvas API 的平台。
 
 文档：https://www.ucharts.cn/v2/#/
+
+
+
+### echarts-for-weixin
+
+基于 Apache ECharts 的微信小程序图表库。
+
+文档：https://github.com/ecomfe/echarts-for-weixin
+
+
 
 
 
