@@ -263,7 +263,33 @@ input:-ms-input-placeholder {
 
 
 
+## 加载中...效果
 
+```css
+/* 定义动画：循环切换点点的数量 */
+@keyframes dot-animation {
+  0% {
+    content: '';
+  }
+
+  33% {
+    content: '.';
+  }
+
+  66% {
+    content: '..';
+  }
+
+  100% {
+    content: '...';
+  }
+}
+
+.text::after {
+  content: '';
+  animation: dot-animation 2s infinite step-start;
+}
+```
 
 
 

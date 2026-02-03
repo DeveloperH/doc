@@ -130,6 +130,7 @@
 * 生成ico图标 https://www.moqu8.com/mqweb/imgtoico/index.php
 * iOS 证书在线检测 https://www.ios-p12-cert.com/
 * LCD点阵字模数据 https://www.23bei.com/tool/553.html
+* 邓白氏编码申请 https://www.dnb.com.cn/
 * 文档处理
   * ⭐️⭐️⭐️ 文件转换器 https://cloudconvert.com/
   * ⭐️⭐️⭐️ 在线PDF工具 https://tools.pdf24.org/zh/
