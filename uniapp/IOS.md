@@ -114,15 +114,39 @@ brew install cocoapods
 
 
 
+## ios 申请证书
+
+申请步骤：
+
+1. Mac 中打开钥匙串访问
+2. 选择证书助理 → 从证书颁发机构请求证书，获取 CSR 文件并保存到磁盘
+3. 在 [Apple developer](https://developer.apple.com/) 中申请证书，选择刚才的 CSR 文件，完成后下载 cer 文件
+4. 在 Mac 中双击 cer 文件后，在钥匙串访问中选择这个证书，右键选择导出，并设置证书密码，最终存储为 p12 文件
+
+注意：开发版和正式版不能共用一个 CSR 文件。
 
 
 
+## 提交审核
 
+步骤：
 
+1. 在 [App Store Connect](https://appstoreconnect.apple.com/) 中创建 App
 
+2. 准备至少 4  张 1320 × 2868px 的截屏 jpg 图片，只有前 3 张截屏将用于 App 安装表。
 
+3. 准备官网地址、隐私政策网址
 
+4. Mac 中打开 Transporter，拖入打包好的 ipa 文件，验证通过后，点击交付
 
+5. App Store Connect 中构建版本里选择上传的应用，完善各类资料后提交审核
+
+   
+
+阿里云 ICP 备案：
+
+1. 提供以下资料：营业执照、负责人身份证、负责人人脸识别、承诺书签字盖章、2 个手机号、1 个邮箱、在公司名下的域名、iOS 证书的公钥和 SHA1 、Android 证书公钥和 MD5
+2. 提交备案后，等待审核
 
 
 
