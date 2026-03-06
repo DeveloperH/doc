@@ -133,7 +133,7 @@ brew install cocoapods
 
 1. 在 [App Store Connect](https://appstoreconnect.apple.com/) 中创建 App
 
-2. 准备至少 4  张 1320 × 2868px 的截屏 jpg 图片，只有前 3 张截屏将用于 App 安装表。
+2. 准备至少 4  张 1320 × 2868px 的 App 介绍 jpg 图片，只有前 3 张截屏将用于 App 安装表。
 
 3. 准备官网地址、隐私政策网址
 
@@ -145,10 +145,17 @@ brew install cocoapods
 
 阿里云 ICP 备案：
 
-1. 提供以下资料：营业执照、负责人身份证、负责人人脸识别、承诺书签字盖章、2 个手机号、1 个邮箱、在公司名下的域名、iOS 证书的公钥和 SHA1 、Android 证书公钥和 MD5
+1. 提供以下资料：营业执照图片、负责人身份证正反面、负责人人脸识别、承诺书签字盖章、2 个手机号、1 个邮箱、在公司名下的域名、iOS 证书的公钥和 SHA1 、Android 证书公钥和 MD5
 2. 提交备案后，等待审核
 
 
 
+## 原生插件开发
 
+* 下载 sdk 文件，解压后选择 HBuilder-uniPluginDemo 目录下的 `.xcodeproj` 打开项目。注意：SDK 目录文件一定要有
+* 将离线打包的项目文件放入 `Pandora/apps` 目录下，修改 `control` 中的 appid，并且去掉 `syncDebug="true"`
+* 在 `HBuilder-uniPlugin-Info` 中填入申请的离线 key
+* 在 Target → Build Settings  →  Packaging  → Product Bundle Identifier 填入包名（同样是 ios app 的包名）
+* 运行项目
 
+ 

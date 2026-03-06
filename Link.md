@@ -128,6 +128,7 @@
 * 报告或搜索 webkit 的问题 https://bugs.webkit.org/
 * Carbon 生成一张Mac风格的代码图片 https://carbon.now.sh/
 * 生成ico图标 https://www.moqu8.com/mqweb/imgtoico/index.php
+* favicon 生成 https://favicon.net.cn/
 * iOS 证书在线检测 https://www.ios-p12-cert.com/
 * LCD点阵字模数据 https://www.23bei.com/tool/553.html
 * 邓白氏编码申请 https://www.dnb.com.cn/
