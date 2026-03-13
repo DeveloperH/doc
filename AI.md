@@ -219,5 +219,29 @@ Model Context Protocol（模型上下文协议），MCP 是一个**开放标准*
 
 
 
+## 鱼皮 AI
+
+
+
+* [程序员鱼皮的 AI 资源大全](https://github.com/liyupi/ai-guide) 
+* [鱼皮 AI 导航](https://ai.codefather.cn/) 
+* [程序员技术练兵场](https://github.com/liyupi/coder-test) 
+* [2026 全栈编程学习路线汇总：AI/Java/Go/前端（保姆级）](https://www.codefather.cn/course/1789189862986850306) 
+* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

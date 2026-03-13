@@ -92,6 +92,8 @@
 - TypeScript
   - [README](/TypeScript/README)
   - [基础](/TypeScript/BASE)
+- AI
+  - [VibeCoding](/ai/VibeCoding)
 - [webpack](/webpack/README)
 - [AI](AI)
 - [运维](DevOps)
