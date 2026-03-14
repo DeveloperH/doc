@@ -99,9 +99,11 @@
 * ⭐️⭐️⭐️ 占位图片 https://dummyimage.com/
 * ⭐️⭐️⭐️ NATAPP 内网穿透 https://natapp.cn/
 * ⭐️⭐️⭐️ YOPmail 接码邮箱 https://yopmail.net/
-* ⭐️⭐️⭐️ 视频下载 datatool https://www.datatool.vip/
+* ⭐️ 视频下载 datatool https://www.datatool.vip/
+* ⭐️⭐️⭐️ 视频下载 snapany https://snapany.com/zh/bilibili
 * ⭐️⭐️⭐️ 安娜的档案 https://zh.annas-archive.org/
 * ⭐️⭐️⭐️ 百度识图 https://graph.baidu.com/pcpage/index
+* ⭐️⭐️⭐️ 改图宝 https://www.gaitubao.com/
 * 将 GitHub 项目转化为结构清晰的使用手册 https://zread.ai/
 * tinyurl 转短链 https://tinyurl.com/
 * 转短链⭐️  https://www.ft12.com/
