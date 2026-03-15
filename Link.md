@@ -97,6 +97,7 @@
 * ⭐️⭐️⭐️ emoji 图标 https://www.emojiall.com/
 * ⭐️⭐️⭐️ Can I Use https://caniuse.com/
 * ⭐️⭐️⭐️ 占位图片 https://dummyimage.com/
+* 占位图片 https://picsum.photos/
 * ⭐️⭐️⭐️ NATAPP 内网穿透 https://natapp.cn/
 * ⭐️⭐️⭐️ YOPmail 接码邮箱 https://yopmail.net/
 * ⭐️⭐️⭐️ 视频下载 datatool https://www.datatool.vip/
@@ -154,8 +155,12 @@
   * uncut 开源，可商用 https://uncut.wtf/
 * 云服务
   * 阿里云 https://www.aliyun.com/
-  * Vercel https://vercel.com/
   * 腾讯云 https://cloud.tencent.com/
+  * Vercel 支持免费部署 https://vercel.com/
+  * EdgeOne Pages 国产部署平台 https://pages.edgeone.ai
+  * Netlify 支持免费部署 https://www.netlify.com/
+  * GitHub Pages https://pages.github.com/
+  * cloudflare https://www.cloudflare-cn.com/
 * 图片
   * Pixabay 可中文搜索的免费可商用图库 https://pixabay.com/zh/
   * Cupcake https://cupcake.nilssonlee.se/
@@ -303,6 +308,7 @@
 * 技术爬爬虾 https://gitee.com/tech-shrimp/me
 * 许雪里Java https://github.com/xuxueli
 * 程序员鱼皮 https://github.com/liyupi
+  * 编程教程 https://www.codefather.cn/course/1789189862986850306
 * 狂神 https://www.kuangstudy.com/
 * Vite世界指南 https://www.bilibili.com/video/BV1GN4y1M7P5
 * 风的小站—程序员的黑洞 https://www.unfbx.com/

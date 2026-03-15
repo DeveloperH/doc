@@ -2651,6 +2651,26 @@ spring.task.scheduling.pool.size = 256
 
 
 
+# Spring AI
+
+**Spring AI 是 Spring 官方推出的、面向 Java/Spring 生态的 AI 应用开发框架**，核心是把 Spring 的**可移植、模块化、POJO 优先**等设计理念带入 AI 工程，让 Java 开发者能像开发普通 Spring 应用一样，低成本、低复杂度地集成大语言模型、向量数据库、RAG 等 AI 能力Springdocs.springframework.org.cn。
+
+
+
+基础环境（硬性要求）
+1. JDK 版本
+Spring AI 1.x（主流稳定版）：JDK 17+（必须，不支持 8/11/16）
+Spring AI 2.0+：JDK 21+（强制要求，基于 Spring Boot 4.0）
+2. Spring Boot 版本
+Spring AI 1.x：Spring Boot 3.2.x / 3.3.x / 3.4.x（推荐 3.3.x）
+Spring AI 2.0+：Spring Boot 4.0+
+3. 构建工具
+Maven 3.8+ 或 Gradle 7.5+
+4. IDE（推荐）
+IntelliJ IDEA（支持 Spring Initializr 快速创建）
+
+
+
 
 
 # Redis

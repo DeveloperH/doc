@@ -9,7 +9,7 @@
   * Vue 3 Snippets ：包含了所有的 Vue2 和 Vue3 的 api 对应的代码片段。
   * `vue-helper` ：增强vue开发体验，支持 Element-UI、Element-Plus、Ant Design Vue。支持快速跳转到组件。只支持 vue2。
 * Git 集成
-  * GitLens ：增强了 VS Code 中的 Git，并从每个存储库中释放隐藏数据。可以快速查看代码的编写者、轻松导航和探索 Git 存储库、通过丰富的可视化效果和强大的比较命令获取有效信息，以及执行更多操作。
+  * **GitLens** ：增强了 VS Code 中的 Git，并从每个存储库中释放隐藏数据。可以快速查看代码的编写者、轻松导航和探索 Git 存储库、通过丰富的可视化效果和强大的比较命令获取有效信息，以及执行更多操作。
   * Git History ：用于查看 Git 日志和文件历史记录并比较分支或提交。
   * Git Extension Pack ：提供一组常用的 Git 工具和功能，以便更方便地进行版本控制和协作开发。该插件包含了多个与 Git 相关的扩展。
   * Git Graph ：用于可视化查看存储库的 Git 操作，并从图形中轻松执行Git操作。
@@ -20,12 +20,17 @@
 * 功能强化
   * `Auto Rename Tag` ：自动重命名 HTML 标签的开始和结束标签。
   * `Auto Close Tag` ：自动添加结束标签。
+  * **ESLint 和 Prettier** ：ESLint 是代码质量检查工具，Prettier 是代码格式化工具。这两个插件能帮你保持代码规范，避免 AI 生成的代码出现格式问题。
+  * Error Lens ： 能让错误信息直接高亮显示在代码行尾，一眼就能看到哪里有问题。
+  * Console Ninja ：能让你在编辑器里直接看到代码的运行结果，不用频繁切换到浏览器控制台。
   * TODO Highlight ：会在代码注释中突出显示某些关键字，如 `FIXME:` 和 `TODO:` 以提醒注意事项或尚未完成的事情。
   * Path intellisense ：用于自动补全文件名。当 import 其它文件时，能够对文件进行提示，快速补全要引入的文件名。
   * CSS Peek ：选择某个 class 或者 id 名称按住 `Ctrl键+鼠标左键` 可以直接定位到该名称的CSS的位置。
   * Vue Peek ：选择某个组件名称按住 `Ctrl键+鼠标左键` 可以直接定位到组件源码位置。
   * Live Server ：本地开发服务器，可以作为一个实时服务器实时查看开发的网页或项目效果。
   * Nested Comments ：嵌套注释。`Ctrl + Alt + /` 。可以在 html 注释中快速的嵌套注释。
+* 文档
+  * **Office Viewer** ：能在编辑器里直接预览和编辑各种文档，包括 Markdown、Excel、Word、PDF 等，不用来回切换窗口。
 * 网络请求
   * Thunder Client ：发送网络请求，可以自定义请求方式，请求体等
   * REST Client ：允许发送 HTTP 请求并直接在 VS Code 中查看响应

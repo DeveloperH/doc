@@ -856,13 +856,39 @@ $ git branch --set-upstream-to=origin/dev dev
 
 
 
+## 常用命令
+
+下面是几个最常用的命令，学会这几个命令，就能应付 90% 的日常开发了。
+
+```sh
+# 克隆项目
+git clone https://github.com/xxx/ai-guide.git
+
+# 查看状态
+git status
+
+# 添加文件
+git add .
+
+# 提交
+git commit -m "添加了新功能"
+
+# 推送到远程
+git push
+
+# 拉取最新代码
+git pull
+
+# 查看历史，找到想回退的版本号
+git log
+git reset --hard 版本号
+```
+
 
 
 ## 实用技巧
 
 拷贝最近一次的记录，文件会小一点 `git clone (git项目网址.git结尾) project-name --depth 1    `
-
-
 
 
 

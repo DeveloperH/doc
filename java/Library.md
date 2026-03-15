@@ -178,6 +178,14 @@ https://github.com/apache/tika
 
 
 
+## AI 应用
+
+### LangChain4j
+
+[LangChain4j](https://docs.langchain4j.dev/intro) 是专为 Java 生态设计的开源 LLM 应用框架， Java 版的 LangChain，支持声明式语法，开发体验巨爽，适合构建复杂 Agent。
+
+
+
 ## 日志框架
 
 ### Log4j
