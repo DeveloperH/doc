@@ -114,6 +114,19 @@ brew install cocoapods
 
 
 
+## 权限许可描述
+
+```
+<key>NSPhotoLibraryUsageDescription</key>
+<string>用于扫描设备二维码完成绑定</string>
+<key>NSUserTrackingUsageDescription</key>
+<string>请放心，开启权限不会获取您在其他站点的隐私信息，该权限仅用于标识设备并保障服务安全与提示浏览体验</string>
+```
+
+
+
+
+
 ## ios 申请证书
 
 申请步骤：
@@ -159,3 +172,30 @@ brew install cocoapods
 * 运行项目
 
  
+
+
+
+## objc
+
+### 原生弹窗
+
+```objc
+  // ios原生弹出提示
+  UIAlertController *alert = [UIAlertController
+      alertControllerWithTitle:@"连接成功"
+                       message:[NSString stringWithFormat:
+                                             @"设备名称: %@\nMAC: %@",
+                                             BleDevice.blueName,
+                                             BleDevice.Mac]
+                preferredStyle:UIAlertControllerStyleAlert];
+  [alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                            style:UIAlertActionStyleDefault
+                                          handler:nil]];
+  [[UIApplication sharedApplication].keyWindow.rootViewController
+      presentViewController:alert
+                   animated:YES
+                 completion:nil];
+```
+
+
+
