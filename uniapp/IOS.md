@@ -114,6 +114,52 @@ brew install cocoapods
 
 
 
+## Mac
+
+### 查看ipa的devices
+
+在 Mac 中，把 ipa 文件放到桌面，名字改成：`app.ipa` ，打开终端，执行以下命令：
+
+```sh
+cd ~/Desktop && unzip -q app.ipa "Payload/*.app/embedded.mobileprovision" -d . && security cms -D -i $(find Payload -name embedded.mobileprovision) | grep -A 50 ProvisionedDevices
+```
+
+
+
+然后你会直接看到：
+
+```xml
+<key>ProvisionedDevices</key>
+<array>
+<string>00000000-0000000000000000</string>
+<string>11111111-1111111111111111</string>
+<string>客户的UDID</string>
+</array>
+```
+
+
+
+### 设置SDK软链接
+
+```sh
+# 1. 移动 SDK 到新位置（所有项目共用）
+mv /Users/a1234/Desktop/dev/code/BloodSugar/SDK /Users/a1234/Desktop/dev/SDK
+
+# 2. 在原位置创建软链接
+ln -s /Users/a1234/Desktop/dev/SDK /Users/a1234/Desktop/dev/code/BloodSugar/SDK
+```
+
+
+
+### 显示隐藏文件
+
+```
+打开访达，按一下：
+shift + command + .
+```
+
+
+
 ## 权限许可描述
 
 ```
