@@ -132,7 +132,24 @@ main.startActivity(new Intent('android.settings.BLUETOOTH_SETTINGS'));
     keytool -list -v -keystore test.keystore  
     ```
 
-* 
+
+
+
+
+查看证书报错：keytool 错误: java.io.IOException: Invalid keystore format。
+
+1. 打开 `app/build.gradle`，在 android 内部加：
+
+```
+buildTypes {
+    release {
+        signingConfig signingConfigs.release
+        // ...
+    }
+}
+```
+
+2. 在 AS 右侧 Gradle → Task → 执行 signingReport，就可以查看证书信息了。
 
 
 
@@ -174,6 +191,38 @@ https://blog.51cto.com/u_16117621/6292772
 iOS证书证书申请：https://blog.csdn.net/qq_39196447/article/details/136877424
 
 IOS隐私信息访问的许可描述：https://blog.csdn.net/2301_81028896/article/details/145042464
+
+
+
+## 应用上架
+
+### 应用宝
+
+* [申请账号](https://open.tencent.com/) ，完成个人/企业认证
+* 软著
+
+
+
+
+
+### 华为应用市场
+
+* [申请账号](https://developer.huawei.com/) ，完成个人/企业认证
+* 软著
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -886,6 +886,40 @@ git reset --hard 版本号
 
 
 
+## 提交到 github
+
+一、先在 GitHub 上创建空仓库
+
+1. 打开 [github.com](https://github.com) → 右上角 **+ → New repository**
+2. 输入仓库名（比如 `my-project`）
+3. **不要勾选** README、.gitignore、License
+4. 点 **Create repository**
+5. 创建后会看到一个页面，里面有一段 `https://github.com/xxx/xxx.git` 地址，**复制下来**
+
+
+
+本地终端执行命令：
+
+```sh
+cd 你的项目路径
+git remote add origin https://github.com/你的用户名/你的仓库名.git
+git add .
+git commit -m "first commit"
+# 把你当前所在的分支，强制重命名为 main
+git branch -M main
+git push -u origin main
+
+
+# 以后修改代码，只需要 3 条命令
+git add .
+git commit -m "更新内容"
+git push
+```
+
+
+
+
+
 ## 实用技巧
 
 拷贝最近一次的记录，文件会小一点 `git clone (git项目网址.git结尾) project-name --depth 1    `

@@ -146,7 +146,7 @@ cd ~/Desktop && unzip -q app.ipa "Payload/*.app/embedded.mobileprovision" -d . &
 mv /Users/a1234/Desktop/dev/code/BloodSugar/SDK /Users/a1234/Desktop/dev/SDK
 
 # 2. 在原位置创建软链接
-ln -s /Users/a1234/Desktop/dev/SDK /Users/a1234/Desktop/dev/code/BloodSugar/SDK
+ln -s /Users/a1234/Desktop/dev/SDK /Users/a1234/Desktop/dev/code/svn/BloodSugar/SDK
 ```
 
 
@@ -163,10 +163,16 @@ shift + command + .
 ## 权限许可描述
 
 ```
-<key>NSPhotoLibraryUsageDescription</key>
-<string>用于扫描设备二维码完成绑定</string>
-<key>NSUserTrackingUsageDescription</key>
-<string>请放心，开启权限不会获取您在其他站点的隐私信息，该权限仅用于标识设备并保障服务安全与提示浏览体验</string>
+Privacy - Bluetooth Always Usage Description  		需要蓝牙权限来实现设备连接
+Privacy - Bluetooth Peripheral Usage Description	蓝牙用于连接智能设备
+
+Privacy - Camera Usage Description					用于扫描设备二维码、上传图片
+Privacy - Photo Library Usage Description			需要访问您的相册，用于选择图片，仅用于App功能使用
+
+Privacy - Tracking Usage Description				请放心，开启权限不会获取您在其他站点的隐私信息，该权限仅用于标识设备并保障服务安全与提示浏览体验
+
+
+
 ```
 
 
