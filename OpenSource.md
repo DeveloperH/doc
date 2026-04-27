@@ -48,7 +48,17 @@
   * [电子书](https://github.com/search?q=free-program&type=repositories) 
   * [fonteditor 字体编辑器](https://github.com/ecomfe/fonteditor) 
   * [rustdesk 远程桌面](https://github.com/rustdesk/rustdesk)
-  * [firecrawl 网页转为markdown](https://github.com/mendableai/firecrawl)
+  * [firecrawl 网页转为markdown](https://github.com/mendableai/firecrawl) 
+* AI
+  * [将复杂文档如 PDF 和 Office 文档转换为 LLM 支持的标记/JSON 格式，支持你的代理式工作流程](https://github.com/opendatalab/MinerU) 
+  * [用 React 程序化制作视频](https://github.com/remotion-dev/remotion) 
+  * 搞懂 AI 大模型
+    * [《动手学大模型Dive into LLMs》系列编程实践教程](https://github.com/Lordog/dive-into-llms) 
+    * [《开源大模型食用指南》针对中国宝宝量身打造的基于Linux环境快速微调（全参数/Lora）、部署国内外开源大模型（LLM）/多模态大模型（MLLM）教程](https://github.com/datawhalechina/self-llm) 
+    * [从零开始构建大模型](https://github.com/datawhalechina/happy-llm) 
+    * [LLM Universe | 动手学大模型应用开发](https://github.com/datawhalechina/llm-universe) 
+    * [《从零开始构建智能体》——从零开始的智能体原理与实践教程](https://github.com/datawhalechina/hello-agents) 
+    * [学习 Claude 代码](https://github.com/shareAI-lab/learn-claude-code) 
 
 
 
