@@ -1881,6 +1881,14 @@ PDFKit 是一个用于 Node 和浏览器的 PDF 文档生成库，可以轻松�
 
 
 
+#### vue-pdf
+
+vue.js PDF 查看器是 Vue 的一个软件包，让你可以通过 Vue 组件轻松显示和查看 PDF。
+
+文档地址：https://github.com/FranckFreiburger/vue-pdf
+
+
+
 ### 图片
 
 #### sharp

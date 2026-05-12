@@ -17,10 +17,14 @@
 * React Native https://reactnative.dev/
 * html5plus https://www.html5plus.org/doc/
 * Android https://developer.android.google.cn/reference/packages
+  * Gradle https://mirrors.cloud.tencent.com/gradle/
+  * Kotlin https://kotlinlang.org/
 * Apple https://developer.apple.com/cn/
-* MyBatis Plus https://baomidou.com/
-* Java8 中文文档：https://www.matools.com/api/java8
-* EasyExcel https://easyexcel.opensource.alibaba.com/
+* Java
+  * MyBatis Plus https://baomidou.com/
+  * Spring https://spring.io/
+  * Java8 中文文档：https://www.matools.com/api/java8
+  * EasyExcel https://easyexcel.opensource.alibaba.com/
 * docker https://www.docker.com/
 * docker hub https://hub.docker.com/
 * tailwindcss https://tailwindcss.com/
@@ -31,13 +35,12 @@
 
 * DeepSeek https://chat.deepseek.com/
 * 文心一言 https://yiyan.baidu.com/
-  * 
 
 
 
 ## 版本存储
 
-* Gradle https://mirrors.cloud.tencent.com/gradle/
+
 
 
 
