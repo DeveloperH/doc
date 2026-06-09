@@ -1520,6 +1520,36 @@ new Date().toLocaleTimeString("zh-CN", {hour12: false})
 
 
 
+JavaScript 引擎解析非标准字符串时，行为可能不一致：
+
+```js
+// ✅ 推荐：标准格式（UTC）
+new Date("2026-05-11T06:51:00Z")
+
+// ✅ 推荐：标准格式（本地时区）
+new Date("2026-05-11T06:51:00")
+
+// ⚠️ 有风险：非标准格式（某些浏览器可能返回 Invalid Date），比如 Safari
+new Date("2026-05-11 06:51:00")
+
+// 安全写法。强烈建议：使用 ISO 格式 "2026-05-11T06:51:00" 或手动构造
+// 方法1：替换空格为 T（推荐）
+const start = new Date("2026-05-11 06:51:00".replace(" ", "T"));
+// 结果：当作本地时间解析
+
+// 方法2：手动构造（最安全）
+const [datePart, timePart] = "2026-05-11 06:51:00".split(" ");
+const [year, month, day] = datePart.split("-");
+const [hour, minute, second] = timePart.split(":");
+const start = new Date(year, month - 1, day, hour, minute, second);
+// 结果：确定是本地时间
+
+// 方法3：明确指定 UTC
+const start = new Date("2026-05-11T06:51:00Z");
+```
+
+
+
 ### Number 数字类
 
 * toFixed(digits) : 使用定点表示法来格式化一个数值，并返回格式化后的给定数字的字符串。也就是将数值保留多少位小数，该数值在必要时进行四舍五入，另外在必要时会用 0 来填充小数部分。

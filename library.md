@@ -2717,6 +2717,24 @@ module.exports = {
 
 
 
+## DOM 截图
+
+### html2canvas
+
+该脚本允许您对网页或其部分进行"截图"，直接在用户浏览器上进行。截图基于 DOM，因此可能与实际显示不完全一致，因为它不是进行实际截图，而是根据页面上的可用信息构建截图。
+
+文档地址：https://github.com/niklasvh/html2canvas
+
+
+
+### SnapDOM
+
+它可以将任何 DOM 子树转换为自包含的表示形式，并通过插件导出到 SVG、PNG、JPG、WebP、Canvas、Blob 或任何自定义格式。
+
+文档地址：https://github.com/zumerlab/snapdom
+
+
+
 ## 懒加载
 
 ### vue-lazyload
