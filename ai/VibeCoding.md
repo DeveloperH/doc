@@ -1,14 +1,11 @@
 ## AI 知识库导航
 
-### 新手入门
+## 链接
 
-| 资源 | 链接 |
-|:---|:---|
-| AI 基础概念 | [动画解释大模型](https://ai.codefather.cn/course/1935993640975368194/section/1939618416083517441?type=) |
-| 关于 DeepSeek | [什么是 DeepSeek](https://ai.codefather.cn/course/1935993640975368194/section/1936010131284197378?type=) ｜ [快速上手指南](https://ai.codefather.cn/course/1935993640975368194/section/1936010134115352577?type=) |
-| 本地部署 | [DeepSeek 本地部署](https://ai.codefather.cn/course/1935993640975368194/section/1936010134094381057?type=) ｜ [API 调用教程](https://ai.codefather.cn/course/1935993640975368194/section/1936010134044049410?type=) |
-| 提问技巧 | [DeepSeek 提问技巧](https://ai.codefather.cn/course/1935993640975368194/section/1936010133884665858?type=) ｜ [去除文章 AI 味](https://ai.codefather.cn/course/1935993640975368194/section/1939613141913882625?type=) |
-| 学习资料 | [清华大学 DeepSeek 指南](https://ai.codefather.cn/course/1935993640975368194/section/1936010134908076034?type=) ｜ [免费 AI 学习资源](https://ai.codefather.cn/library/2010958562586652674) |
+* [免费 AI 学习资源](https://ai.codefather.cn/library/2010958562586652674)
+* 
+
+
 
 
 
@@ -715,6 +712,23 @@ Monica 最大的优势是集成度高，几乎所有常用的 AI 功能都有。
 团队的一些知识库就用它来管理。比如我们有很多技术文档，用百炼的 RAG 功能可以很方便地让 AI 基于这些文档回答问题。
 
 而且百炼提供了可视化的流程编排功能，不用写代码就能构建复杂的 AI 工作流。
+
+
+
+## 提示词模板
+
+### 写代码
+
+```
+【语言】Python
+【功能】自动下载网页图片
+【要求】
+- 处理SSL证书错误
+- 显示下载进度条
+- 保存到指定文件夹
+```
+
+
 
 
 
