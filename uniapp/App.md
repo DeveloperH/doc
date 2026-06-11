@@ -214,13 +214,188 @@ IOS隐私信息访问的许可描述：https://blog.csdn.net/2301_81028896/artic
 
 
 
+## 原生插件
+
+### 扩展 Module
+
+下面以TestModule为例，源码请查看 UniPlugin-Hello-AS 工程中的`uniplugin_module`模块。
+
+```java
+//Module 扩展必须继承 UniModule 类
+public class TestModule extends UniModule {}
+```
 
 
 
+- 扩展方法必须加上 `@UniJSMethod (uiThread = false or true)` 注解。UniApp 会根据注解来判断当前方法是否要运行在 UI 线程，和当前方法是否是扩展方法。
+  - `uiThread` 的值决定了 JS 调用原生代码时，这段原生代码是跑在 **主线程（UI 线程）** 还是 **子线程（非 UI 线程）**。
+  - 需要操作 UI，例如更新界面、弹出对话框、修改 View 属性等，用 true，否则都用 false。
+- UniApp是根据反射来进行调用 Module 扩展方法，所以Module中的扩展方法必须是 public 类型。
+- Module 扩展的方法可以使用 int, double, float, String, Map, List ,com.alibaba.fastjson.JSONObject 类型的参数
+
+```java
+//run ui thread
+@UniJSMethod(uiThread = true)
+public void testAsyncFunc(JSONObject options, UniJSCallback callback) {
+    Log.e(TAG, "testAsyncFunc--"+options);
+    if(callback != null) {
+        JSONObject data = new JSONObject();
+        data.put("code", "success");
+        callback.invoke(data);
+    }
+}
+
+//run JS thread
+@UniJSMethod (uiThread = false)
+public JSONObject testSyncFunc(){
+    JSONObject data = new JSONObject();
+    data.put("code", "success");
+    return data;
+}
+```
 
 
 
+### UniJSCallback 结果回调
 
+JS 调用时，有的场景需要返回一些数据，比如以下例子，返回x、y坐标。
+
+```
+void invoke(Object data);
+void invokeAndKeepAlive(Object data);
+```
+
+- `invoke` 调用 javascript 回调方法，此方法将在调用后被销毁。
+- `invokeAndKeepAlive`  调用 javascript 回调方法并保持回调活动以备以后使用。
+
+
+
+### globalEvent 事件
+
+用于页面监听持久性事件，例如定位信息，陀螺仪等的变化。
+
+**注意**：globalEvent 事件只能通过页面的 UniSDKInstance 实例给当前页面发送 globalEvent 事件。其他页面无法接受。所以经常在 App.vue 中设置监听全局事件。
+
+
+
+```js
+// 页面监听event事件
+var globalEvent = uni.requireNativePlugin('globalEvent');
+globalEvent.addEventListener('myEvent', function(e) {
+  console.log('myEvent'+JSON.stringify(e));
+});
+
+// 或者在 App.vue 中监听。myEvent 是原生插件中发出事件的名称
+plus.globalEvent.addEventListener('myEvent', (res) => {
+  console.log(res);
+});
+```
+
+
+
+```java
+// 插件 原生代码发出myEvent事件
+Map<String,Object> params=new HashMap<>();
+params.put("type","typeName");
+params.put("key","value");
+mUniSDKInstance.fireGlobalEventCallback("myEvent", params);
+```
+
+
+
+### mUniSDKInstance
+
+```java
+if(mUniSDKInstance.getContext() != null) {
+  	Context context = mUniSDKInstance.getContext();
+    Activity activity = (Activity) mUniSDKInstance.getContext();
+    Context appContext = (Context) mUniSDKInstance.getContext().getApplicationContext();
+}
+
+Map<String,Object> params=new HashMap<>();
+params.put("type","typeName");
+params.put("key","value");
+mUniSDKInstance.fireGlobalEventCallback("myEvent", params);
+```
+
+
+
+### 常见问题
+
+**如何查看如何查看uniapp console日志：**
+
+修改项目中assets/data/dcloud_control.xml 内部信息。将syncDebug改为true，开启调试模式。 注意正式版需要改为false!!! 查看log.TAG为console
+
+
+
+### 自定义基座
+
+1. 需要把插件 module 打包为 aar，放在 app 下的 libs 中，并在 build.gradle 引用
+
+2. 需要将 app 打包为 debug 包，选择 Build -> Generate App Bundles or APKs -> Generate APKs
+
+3. 需要在 manifest.json 中设置包名
+
+   ```
+   {
+     "app-plus" : {
+         "distribute" : {
+             "android" : {
+                 "packageName" : "com.example.yourapp"
+             }
+         }
+     }
+   }
+   ```
+
+   
+
+4. 如果之前有安装过相同包名的app，在自定义基座下运行可能会没效果，需要卸载之前的app后重试。
+
+
+
+## build.gradle
+
+### repositories
+
+```groovy
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+```
+
+这段配置的意思是：**在 Gradle 构建时，将当前项目下的 `libs` 文件夹声明为一个本地依赖仓库**。
+
+简单来说，Gradle 会去 `libs` 目录里查找 `.jar` 或 `.aar` 文件，让你可以直接依赖它们，而不用从 Maven 远程仓库下载。
+
+主要场景是：**引入未发布到远程仓库的本地库文件**。
+
+- **`repositories`**：配置依赖项的来源（仓库）。Gradle 支持多种仓库，如 `mavenCentral()`、`google()`。
+- **`flatDir`**：声明一个“扁平目录”仓库。这种仓库没有元数据（如 pom 文件），只是简单地在一个文件夹中搜索文件。
+- **`dirs 'libs'`**：指定仓库的目录路径。路径是相对当前 `build.gradle` 文件所在的模块目录。因此它会指向 `模块名/libs/`。
+
+
+
+通常，你需要先在模块的 `libs` 目录中放入一个库文件（如 `weex_sdk.aar`），然后在 `dependencies` 中这样引用：
+
+```groovy
+dependencies {
+    // 引用 libs 目录下的 weex_sdk.aar（name 不写扩展名）
+    implementation(name: 'weex_sdk', ext: 'aar')
+}
+```
+
+Gradle 会在 `flatDir` 配置的 `libs` 目录下找到 `weex_sdk.aar` 并引入工程。
+
+
+
+注意事项：
+
+- **不支持传递依赖**：`flatDir` 仓库不会自动解析这个 `aar` 内部依赖的其他库。你需要手动在 `dependencies` 中补齐它需要的所有依赖（比如 Weex 可能依赖 `support-v4`、`okhttp` 等）。这是它和远程仓库最大的不同。
+- **名称严格匹配**：引用时 `name` 必须和文件名（不含扩展名）完全一致，且文件需直接放在配置的目录下，不能有子目录。
+- **可以指定多个目录**：`dirs 'libs', 'other_libs'` 会让 Gradle 同时在这两个目录下查找。
 
 
 
