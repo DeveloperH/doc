@@ -110,13 +110,15 @@ main.startActivity(new Intent('android.settings.BLUETOOTH_SETTINGS'));
 
 
 
+### 创建证书
+
 * App离线SDK下载：[最新android平台SDK下载](https://nativesupport.dcloud.net.cn/AppDocs/download/android.html) ，sdk 版本要和 HBuilder 版本一致，否则运行有提示
 
 * 申请Appkey，具体请点击[链接](https://nativesupport.dcloud.net.cn/AppDocs/usesdk/appkey.html)
 
 * 创建证书 
 
-  * ```
+  * ```sh
     keytool -genkey -alias testalias -keyalg RSA -keysize 2048 -validity 36500 -keystore test.keystore
     ```
 
@@ -126,9 +128,9 @@ main.startActivity(new Intent('android.settings.BLUETOOTH_SETTINGS'));
 
   * 36500是证书的有效期，表示100年有效期，单位天，建议时间设置长一点，避免证书过期
 
-* 查看证书信息，修改应用的 SHA1值 为解析出来的值。保存后会更新Appkey。
+* 查看证书 SHA1，SHA256 信息，修改应用的 SHA1值 为解析出来的值。保存后会更新Appkey。
 
-  * ```
+  * ```sh
     keytool -list -v -keystore test.keystore  
     ```
 
@@ -150,6 +152,42 @@ buildTypes {
 ```
 
 2. 在 AS 右侧 Gradle → Task → 执行 signingReport，就可以查看证书信息了。
+
+
+
+
+
+### 获取MD5
+
+```sh
+# 获取der文件
+keytool -exportcert -keystore 证书名称.keystore -alias 你的别名 -storepass 你的密码 -file cert.der
+
+# 获取MD5
+openssl x509 -in cert.der -inform DER -md5 -noout -fingerprint
+```
+
+如果这条命令成功，会输出类似：`MD5 Fingerprint=XX:XX:XX:...` 。
+
+
+
+### 获取公钥
+
+```sh
+# 获取der文件
+keytool -exportcert -keystore 证书名称.keystore -alias 你的别名 -storepass 你的密码 -file cert.der
+
+# 获取公钥
+openssl x509 -in cert.der -inform DER -modulus -noout
+```
+
+它会输出类似：
+
+```
+Modulus=C732EEED692C6916F309DDA86B673A1A0E53F7F4E43288669F89B3345349227BAE907FC9A320650EF8A27FBDB7CFA7E843C08E4A1AB8E6479ADDB414022BC143F809DD003F813EAEBD35C2048C885A654BF8A65E51758F380EB38B9DF5A81F125018B26B3F0971D6D6BE6E27E0017DABCE5D7F68B538B9DA442F05C39204ECDB40A6DA0CD05A420FB71B95679F216534D0AA0C537D26D545C43200F161981A02D0556AF59ADA728C2172A0D6BFB2ACCA11F89CCA6BAF584A16FB2DE791927D69F26821A41BF34914484DB58D8A4B591916E10CED7370E8CC2799EF3BA32A1B014144155A5FCBBA92F9963EFD652EFE78EC81B792D00C5A2DA2DF60993EF0AF85
+```
+
+等号后面那串 **512 个十六进制字符**就是你需要的**公钥模数** 。
 
 
 
