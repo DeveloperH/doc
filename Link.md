@@ -103,12 +103,15 @@
 * 占位图片 https://picsum.photos/
 * ⭐️⭐️⭐️ NATAPP 内网穿透 https://natapp.cn/
 * ⭐️⭐️⭐️ YOPmail 接码邮箱 https://yopmail.net/
+* ⭐️⭐️⭐️ 10minutemail https://10minutemail.com/
+* ⭐️⭐️⭐️ 邮箱接码Temp Mail https://temp-mail.org/
 * ⭐️ 视频下载 datatool https://www.datatool.vip/
 * ⭐️⭐️⭐️ 视频下载 snapany https://snapany.com/zh/bilibili
 * ⭐️⭐️⭐️ 安娜的档案 https://zh.annas-archive.org/
 * ⭐️⭐️⭐️ 百度识图 https://graph.baidu.com/pcpage/index
 * ⭐️⭐️⭐️ 改图宝 https://www.gaitubao.com/
 * ⭐️⭐️⭐️ 音乐下载 https://www.6002255.com/
+* ⭐️⭐️ 图表实例集 isqqw https://www.isqqw.com/
 * 将 GitHub 项目转化为结构清晰的使用手册 https://zread.ai/
 * tinyurl 转短链 https://tinyurl.com/
 * 转短链⭐️  https://www.ft12.com/
