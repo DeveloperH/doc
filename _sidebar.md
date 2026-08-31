@@ -94,6 +94,8 @@
   - [基础](/TypeScript/BASE)
 - AI
   - [VibeCoding](/ai/VibeCoding)
+  - [ClaudeCode](/ai/ClaudeCode)
+  - [Tool](/ai/Tool)
 - [webpack](/webpack/README)
 - [AI](AI)
 - [运维](DevOps)

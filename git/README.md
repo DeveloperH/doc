@@ -1011,6 +1011,75 @@ doc/**/*.pdf
 
 
 
+## 为 GitHub 和 Gitee 配置独立的 SSH 密钥
+
+在 Windows 上为 GitHub 和 Gitee 配置独立的 SSH 密钥，核心方法是为每个平台生成不同的密钥，然后通过一个 `config` 文件让 Git 自动“对号入座”。
+
+
+
+1. 在 Git Bash 中分别执行以下命令，为 GitHub 和 Gitee 生成独立的密钥对
+
+   ```sh
+   # 为 GitHub 生成密钥，保存为 id_ed25519_github
+   ssh-keygen -t ed25519 -C "你的GitHub邮箱" -f ~/.ssh/id_ed25519_github
+   
+   # 为 Gitee 生成密钥，保存为 id_ed25519_gitee
+   ssh-keygen -t ed25519 -C "你的Gitee邮箱" -f ~/.ssh/id_ed25519_gitee
+   ```
+
+   **说明**：`-f` 参数指定了文件名，方便区分。执行时如果提示输入密码，可以直接按回车跳过。
+
+2. 你需要把生成的公钥（`.pub`文件）内容，分别复制粘贴到对应的代码托管平台。
+
+3. 创建 SSH 配置文件
+
+   在 `~/.ssh` 目录下，创建一个名为 `config` 的**无后缀名**文件。
+
+   ```sh
+   # 配置 GitHub
+   Host github.com
+       HostName github.com
+       User git
+       IdentityFile ~/.ssh/id_ed25519_github
+       IdentitiesOnly yes
+   
+   # 配置 Gitee
+   Host gitee.com
+       HostName gitee.com
+       User git
+       IdentityFile ~/.ssh/id_ed25519_gitee
+       IdentitiesOnly yes
+   ```
+
+   **说明**：`IdentityFile` 指向了对应的私钥文件。Git 连接时，会根据你 clone 或操作的仓库域名（`github.com` 或 `gitee.com`），自动选择配置文件里指定的密钥。
+
+4. 验证配置是否成功
+
+   在 Git Bash 中执行以下命令，测试与两个平台的连接。
+
+   ```sh
+   ssh -T git@github.com
+   ssh -T git@gitee.com
+   ```
+
+   如果看到类似 `Hi (你的用户名)! You've successfully authenticated...` 的提示，就说明配置成功了。
+
+5. 配置成功后，你可以正常使用 SSH 地址来克隆或操作仓库。例如：
+
+   ```sh
+   # 克隆 GitHub 仓库
+   git clone git@github.com:用户名/仓库名.git
+   
+   # 克隆 Gitee 仓库
+   git clone git@gitee.com:用户名/仓库名.git
+   ```
+
+   Git 会自动根据 URL 里的域名，匹配 `config` 文件中对应的密钥，无需你手动切换。
+
+
+
+
+
 ## 标签
 
 标签指的是**某个分支某个特定时间点的状态**，通过标签可以很方便的了解到标记时的状态。
