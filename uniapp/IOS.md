@@ -260,3 +260,13 @@ Privacy - Tracking Usage Description				请放心，开启权限不会获取您�
 
 
 
+## 爱思助手查看app数据
+
+需要在 `Info.plist` 中开启：
+
+```
+<key>UIFileSharingEnabled</key>
+<true/>
+```
+
+作用：开启后，App 的 Documents 目录会暴露给 iTunes 和爱思助手这类工具，允许用户通过电脑直接存取该目录下的文件。

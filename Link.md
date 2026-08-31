@@ -109,6 +109,9 @@
 * ⭐️⭐️⭐️ 百度识图 https://graph.baidu.com/pcpage/index
 * ⭐️⭐️⭐️ 改图宝 https://www.gaitubao.com/
 * ⭐️⭐️⭐️ 音乐下载 https://www.6002255.com/
+* ⭐️⭐️⭐️ videocompressors 本地视频压缩 https://videocompressors.com/zh
+* ⭐️⭐️⭐️ tools.video 视频压缩 https://tools.video/zh-CN
+* ⭐️⭐️⭐️ dojoclip 视频压缩 https://dojoclip.com/en/video-compressor
 * 将 GitHub 项目转化为结构清晰的使用手册 https://zread.ai/
 * tinyurl 转短链 https://tinyurl.com/
 * 转短链⭐️  https://www.ft12.com/
