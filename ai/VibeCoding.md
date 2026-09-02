@@ -314,6 +314,8 @@ MCP 的全称是 Model Context Protocol 模型上下文协议。简单来说，�
 * [Anthropic 官方技能仓库](https://github.com/anthropics/skills) 
 * [鱼皮 AI 导航 - Skills 大全](https://ai.codefather.cn/skills) 
 * [Claude Skills Hub](https://www.claudeskill.site/)：社区技能市场
+* [Vercel skills.sh](https://www.skills.sh/) 
+* [skillsmp.com](https://skillsmp.com/) 
 
 
 
@@ -610,6 +612,14 @@ Vercel 出品的 Skills 发现工具，帮你快速找到和安装需要的 Skil
 > 指路：https://github.com/squirrelscan/skills
 
 
+
+### 其他
+
+#### excalidraw-diagram-skill
+
+这项技能让 Claude Code（以及任何编码工具）能够生成美观且实用的 Excalidraw 图表。
+
+> 指路：https://github.com/coleam00/excalidraw-diagram-skill
 
 
 

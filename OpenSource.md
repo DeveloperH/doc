@@ -19,6 +19,8 @@
   * [aqchat 匿名聊天室](https://aqchat.run/) 
   * [chatgpt-on-wechat 聊天机器人](https://github.com/zhayujie/chatgpt-on-wechat) 
   * [chat-uikit-uniapp 腾讯uniapp 聊天室ui](https://github.com/TencentCloud/chat-uikit-uniapp)
+* 设计
+  * [awesome-design-md 一系列由知名品牌设计系统生成的 DESIGN.md 文件分析结果](https://github.com/VoltAgent/awesome-design-md) 
 * 前端项目
   * [Vue3 + Pinia 仿抖音](https://github.com/zyronon/douyin) 
 * 界面
@@ -44,6 +46,7 @@
   * [syncthing 文件同步](https://github.com/syncthing/syncthing) 
   * [jenkins](https://github.com/jenkinsci/jenkins) 
   * [fd “find”替代方案](https://github.com/sharkdp/fd)
+  * [Locust 接口/API并发压测的开源工具](https://github.com/locustio/locust) 
 * 其他
   * [电子书](https://github.com/search?q=free-program&type=repositories) 
   * [fonteditor 字体编辑器](https://github.com/ecomfe/fonteditor) 
@@ -59,6 +62,9 @@
     * [LLM Universe | 动手学大模型应用开发](https://github.com/datawhalechina/llm-universe) 
     * [《从零开始构建智能体》——从零开始的智能体原理与实践教程](https://github.com/datawhalechina/hello-agents) 
     * [学习 Claude 代码](https://github.com/shareAI-lab/learn-claude-code) 
+* 可视化大屏
+  * ⭐️⭐️⭐️ [基于 Vue 3 + TypeScript + Vite 构建的前端可视化学习项目，集成了多种主流可视化技术栈，涵盖 3D 地球、3D 场景、数据图表、实时通信等方向](https://github.com/194048210liang/ThreeJS-Cesium-Stream) 
+* 
 
 
 
