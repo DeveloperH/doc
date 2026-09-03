@@ -17,6 +17,7 @@
 
 * [system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) ：专门收集和汇总各类主流 AI 工具系统提示词（System Prompts） 与 模型配置（Model Configurations） 的开源知识库。可以用来参考学习顶级工具内部是怎么写提示词的。
 * ⭐️⭐️⭐️ [Datawhale 是一个专注于AI领域的开源组织，致力于分享最前沿的AI知识](https://github.com/datawhalechina) 
+  * https://github.com/datawhalechina/hello-agents 从零开始构建智能体
 * [吴恩达机器学习](https://github.com/fengdu78) 
 * [以 Andrej Karpathy 的 AI 思想体系为纲领的“AI 时代程序员修炼指南”](https://github.com/multica-ai/andrej-karpathy-skills) 
 
