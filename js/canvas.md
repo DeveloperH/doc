@@ -231,8 +231,8 @@ function draw() {
 * `getLineDash()` ：返回一个包含当前虚线样式，长度为非负偶数的数组。
 * `setLineDash(segments)` ：设置当前虚线样式。
 * `lineDashOffset` ：设置虚线样式的起始偏移量。
-* `` ：
-* `` ：
+
+  
 
 
 
@@ -534,6 +534,34 @@ context.stroke()
 
 
 ![画圆示意图](http://qiniu.huangyihui.cn/doc/202511262240663.png)
+
+
+
+
+
+Canvas 的角度起点（即 **0 弧度**）位于圆心的**正右方（3 点钟方向）**。
+
+- **0**：正右方（3点钟）
+- **0.5 π**：正下方（6点钟）
+- **1.0 π**：正左方（9点钟）
+- **1.5 π**：正上方（12点钟）
+- **2.0 π**：回到正右方（转完一圈）
+
+> 默认情况下，绘制方向是**顺时针**方向（Clockwise）。
+
+Canvas 不接受角度（Degree，如 90°、180°）作为参数，只接受弧度（Radian）。
+
+角度与弧度的转换公式非常简单：`弧度=角度*(PI / 180)`
+
+```JS
+function degToRad(degrees) {
+  return degrees * (Math.PI / 180);
+}
+```
+
+
+
+示例：
 
 ```js
 var canvas = document.getElementById('canvas')

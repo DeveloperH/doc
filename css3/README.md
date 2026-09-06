@@ -1248,6 +1248,31 @@ width/height 的默认值是 auto。max- 系列的初始值是 none。min- 系�
 
 
 
+font-family：
+
+* serif : 衬线字体。
+* sans-serif : 无衬线字体。
+* monospace : 等宽字体。
+* cursive : 手写字体。
+* fantasy : 奇幻字体。
+* system-ui : 系统UI字体。
+
+
+
+中文字体和英文名称：
+
+虽然一些常见中文字体，如宋体、微软雅黑等，直接使用中文名称作为 CSS font-family 的属性值也能生效，但我们一般都不使用中文名称，而是使用英文名称，主要是为了规避乱码的风险。还有一些中文字体直接使用中文名称作为 CSS font-family 的属性值是没有效果的，如思源黑体、兰亭黑体等，需要使用字体对应的英文名称才可以生效。
+
+| 中文名     | 英文名             |
+| :--------- | :----------------- |
+| 宋体       | SimSun             |
+| 黑体       | SimHei             |
+| 微软雅黑   | Microsoft Yahei    |
+| 微软正黑体 | Microsoft JhengHei |
+| 楷体       | KaiTi              |
+| 新宋体     | NSimSun            |
+| 仿宋       | FangSong           |
+
 
 
 ## 文本样式
@@ -1292,6 +1317,11 @@ width/height 的默认值是 auto。max- 系列的初始值是 none。min- 系�
 * word-spacing : 文本中单词之间的间距
 * white-space : 指定元素内部空白的处理方式。
   * normal(默认，自动换行) / pre(按原格式，可能会超出界限) / pre-wrap(按原格式，并且不够一行时自动换号)/ nowrap(禁用换行，强制在同一行显示)
+  * normal : 合并空白字符和换行符。
+  * pre : 空白字符不合并，并且内容只在有换行符的地方换行。
+  * nowrap : 该值和normal一样会合并空白字符，但不允许文本环绕。
+  * pre-wrap : 空白字符不合并，并且内容只在有换行符的地方换行，同时允许文本环绕。
+  * pre-line : 合并空白字符，但只在有换行符的地方换行，允许文本环绕。
 * vertical-align : 垂直对齐方式。只能作用在 display 计算值为 `inline、inline-block、inline-table、inline-cell` 元素上。
   * baseline(默认值) / bottom / top / middle / sub / super / text-top / text-bottom / 数值(如 20px、2em、20%)
   * 百分比值是相对于 line-height 的计算值计算的
