@@ -924,6 +924,12 @@ git push
 
 拷贝最近一次的记录，文件会小一点 `git clone (git项目网址.git结尾) project-name --depth 1    `
 
+```sh
+git clone --depth=1 https://github.com/deepseek-ai/deepseek-harness.git
+```
+
+
+
 
 
 ## 可能遇到的问题解决方法：

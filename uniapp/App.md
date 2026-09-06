@@ -191,6 +191,18 @@ Modulus=C732EEED692C6916F309DDA86B673A1A0E53F7F4E43288669F89B3345349227BAE907FC9
 
 
 
+### 没有 openssl
+
+方法1：将 Git 的 OpenSSL 添加到系统 PATH。
+
+1. 找到 openssl.exe 的位置：它通常在 `C:\Program Files\Git\usr\bin` 目录下；
+2. 在环境变量的 Path 中，将 `openssl.exe` 所在的文件夹路径（例如 `C:\Program Files\Git\usr\bin`）粘贴进去；
+3. 验证：重新打开一个 CMD 窗口，输入 `openssl version`，如果配置成功，就会显示版本信息。
+
+
+
+方法2：如果你不想修改系统环境变量，可以直接在 Git Bash 中使用。Git Bash 模拟了 Linux 环境，它的内部路径已经配置好了，所以可以直接运行 `openssl` 命令。
+
 
 
 ### 运行报错
