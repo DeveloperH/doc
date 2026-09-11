@@ -16,10 +16,18 @@
 ### 提示词
 
 * [system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) ：专门收集和汇总各类主流 AI 工具系统提示词（System Prompts） 与 模型配置（Model Configurations） 的开源知识库。可以用来参考学习顶级工具内部是怎么写提示词的。
+* [一个名为 CLAUDE.md 的文件，旨在改进 Claude 代码的行为](https://github.com/multica-ai/andrej-karpathy-skills) 
+
+
+
+
+
+### 教程
+
 * ⭐️⭐️⭐️ [Datawhale 是一个专注于AI领域的开源组织，致力于分享最前沿的AI知识](https://github.com/datawhalechina) 
   * https://github.com/datawhalechina/hello-agents 从零开始构建智能体
+  * https://github.com/datawhalechina/easy-vibe vibe 编程入门｜AI 原生产品构建者的第一门课程
 * [吴恩达机器学习](https://github.com/fengdu78) 
-* [以 Andrej Karpathy 的 AI 思想体系为纲领的“AI 时代程序员修炼指南”](https://github.com/multica-ai/andrej-karpathy-skills) 
 
 
 
@@ -52,7 +60,9 @@ ollama rm <模型名称>
 
 ## RAG
 
-RAG（Retrieval-Augmented Generation，检索增强生成） 是一种将外部知识库检索与大语言模型（LLM）生成能力相结合的技术架构。
+检索增强生成（Retrieval-Augmented Generation，RAG）是一种结合了信息检索和文本生成的技术。它的核心思想是：在生成回答之前，先从外部知识库中检索相关信息，然后将检索到的信息作为上下文提供给大语言模型，从而生成更准确、更可靠的回答。
+
+因此，检索增强生成可以拆分为三个词汇。检索是指从知识库中查询相关内容；增强是将检索结果融入提示词，辅助模型生成；生成则输出兼具准确性与透明度的答案。
 
 简单来说，它的工作原理就像是给大模型配了一个可以随时查阅的“外挂资料库”。在回答问题前，它先去资料库里翻阅最新的相关文档，然后再结合这些资料来精准回答。
 
