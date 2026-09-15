@@ -12,6 +12,7 @@
 * 文档处理
   * [onlyoffice 支持私有化部署的办公套件。可以在web上协同编辑word，excel 文档等](https://github.com/ONLYOFFICE/) 
   * [MinerU PDF转换成Markdown和JSON格式](https://github.com/opendatalab/MinerU) 
+  * [kkFileView](https://github.com/kekingcn/kkFileView) ：基于 Spring-Boot 的通用文件在线预览项目
 * 多媒体
   * [FFmpeg 用于处理多媒体内容](https://github.com/FFmpeg/FFmpeg)
 * 即时聊天

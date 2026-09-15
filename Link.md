@@ -200,6 +200,7 @@
 ## 新闻
 
 * tiobe 编程语言热门排行 https://www.tiobe.com/tiobe-index/ 
+* ⭐️⭐️实时更新热门新闻动态 https://newsnow.busiyi.world/
 
 
 

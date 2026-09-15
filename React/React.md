@@ -16,7 +16,7 @@ React 最新版本：v19.1
 
 ## JSX
 
- JSX 允许你在 JavaScript 中嵌入标签。
+JSX 是 JavaScript XML 的缩写，是 React 生态中用来描述 UI 结构的一种语法扩展。它让你能在 JavaScript 代码里直接写类似 HTML 的标签，让界面结构更直观。
 
 没有括号包裹的话，任何在 `return` 下一行的代码都将被忽略！
 
@@ -32,6 +32,12 @@ function AboutPage() {
   );
 }
 ```
+
+
+
+在 React 组件里用 `()` 把 JSX 括起来，纯粹是为了 JavaScript 的语法正确性，不是 React 的特殊要求。核心原因是 return 后面的换行会自动插入分号（ASI）。
+
+JavaScript 有一条规则：`return`、`throw`、`break`、`continue` 后面如果直接换行，引擎会自动在换行处补一个分号。
 
 
 

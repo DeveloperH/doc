@@ -1,4 +1,4 @@
-连连控：远程控制电脑手机，https://www.asklink.com/
+
 
 
 
@@ -14,13 +14,11 @@
 
 
 
-rustdesk：专为自托管而设计的开源远程桌面应用程序，作为 TeamViewer 的替代方案。
-
-https://github.com/rustdesk/rustdesk
 
 
 
-[kkFileView](https://github.com/kekingcn/kkFileView) ：基于 Spring-Boot 的通用文件在线预览项目
+
+
 
 [newsnow](https://github.com/ourongxing/newsnow) ：优雅阅读实时最热门新闻
 
