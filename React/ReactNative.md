@@ -454,6 +454,58 @@ npx create-expo-app@latest
 
 
 
+| **对比维度** | **Expo**                                         | **React Native CLI**                                 |
+| ------------ | ------------------------------------------------ | ---------------------------------------------------- |
+| **上手难度** | 极低，无需配置原生环境                           | 较高，需配置 Android Studio / Xcode                  |
+| **开发效率** | 高，支持无线热更新与快速预览                     | 中等，原生编译较耗时                                 |
+| **原生扩展** | 常用原生功能支持完备，复杂定制需 `expo prebuild` | 无限制，可直接修改 `android` 与 `ios` 原生工程代码   |
+| **适用场景** | 中小型应用、原型验证、无特殊原生依赖的项目       | 大型复杂项目、已有原生工程集成、重度依赖特定原生 SDK |
+
+
+
+### 创建应用
+
+```
+npx create-expo-app MyProject
+cd MyProject
+npx expo start
+```
+
+
+
+Expo Go App 安装：
+
+```
+# 方式1：google play
+https://play.google.com/store/apps/details?id=host.exp.exponent&hl=zh
+
+# 方式2：apkcube 下载apks
+https://apkcube.com/expo-go/host.exp.exponent/download
+解压apks后，用powershell进入目录，执行 adb install-multiple (Get-ChildItem *.apk)
+```
+
+
+
+打包 apk：
+
+```
+# 导出原生 Android 工程 (Prebuild)。执行后，根目录下会自动生成一个包含完整原生代码的 android/ 目录。
+npx expo prebuild
+cd android
+
+# 打 Debug 调试版 APK。生成路径：android/app/build/outputs/apk/debug/app-debug.apk
+# debug 包可以不用配置证书，自带了默认的测试证书
+gradlew assembleDebug
+
+# 打 Release 正式版 APK。生成路径：android/app/build/outputs/apk/release/app-release.apk
+gradlew assembleRelease
+
+# 打 AAB 包。生成路径：android/app/build/outputs/bundle/release/app-release.aab
+gradlew bundleRelease
+```
+
+
+
 
 
 ### Snack Player
