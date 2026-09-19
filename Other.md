@@ -14,14 +14,6 @@
 
 
 
-
-
-
-
-
-
-[newsnow](https://github.com/ourongxing/newsnow) ：优雅阅读实时最热门新闻
-
 [caddy](https://github.com/caddyserver/caddy) ：对标nginx，快速且可扩展的多平台 HTTP/1-2-3 Web 服务器，具有自动 HTTPS
 
 [electron-egg](https://github.com/dromara/electron-egg) ：一个入门简单、跨平台、企业级桌面软件开发框架

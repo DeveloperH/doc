@@ -1,19 +1,5 @@
 # AI
 
-## GLM
-
-General Language Model ，这是由智谱AI等机构开发的一系列大型语言模型。你可以把它理解为与 OpenAI 的 GPT、Google 的 PaLM 等模型相媲美的中国顶尖大模型。
-
-
-
-## ClaudeCode
-
-Claude Code 是一款存在于终端中的代理编码工具，能理解你的代码库，并通过自然语言命令帮助你执行例行任务、解释复杂代码和处理 git 工作流程，从而加快编码速度。
-
-https://github.com/anthropics/claude-code
-
-
-
 ## 官网
 
 * chatgpt https://chatgpt.com/
@@ -23,11 +9,17 @@ https://github.com/anthropics/claude-code
 
 
 
+## IDE
+
+### GLM 智谱
+
+General Language Model ，这是由智谱AI等机构开发的一系列大型语言模型。
+
+官网：https://bigmodel.cn/
 
 
 
-
-## Trae
+### Trae
 
 Trae 是国内首个 AI IDE，深度理解中文开发场景。AI 高度集成于 IDE 环境之中，为你带来比 AI 插件更加流畅、准确、优质的开发体验。
 
@@ -35,49 +27,21 @@ Trae 是国内首个 AI IDE，深度理解中文开发场景。AI 高度集成�
 
 
 
-## Cursor
+### ClaudeCode
+
+Claude Code 是一款存在于终端中的代理编码工具，能理解你的代码库，并通过自然语言命令帮助你执行例行任务、解释复杂代码和处理 git 工作流程，从而加快编码速度。
+
+https://github.com/anthropics/claude-code
+
+
+
+### Cursor
 
 官网：https://www.cursor.com
 
 
 
-## BigModel 智谱
-
-几行代码接入大模型，极速构建变革性AI体验。用于快速实现 AI 需求。
-
-官网：https://bigmodel.cn/
-
-
-
-## CosyVoice 多语言大型语音生成模型
-
-多语言大型语音生成模型，提供推理、训练和部署全栈能力。
-
-文档：https://github.com/FunAudioLLM/CosyVoice
-
-
-
-## ChatTTS
-
-AI 日常对话语音生成模型。
-
-文档：https://github.com/2noise/ChatTTS
-
-
-
-
-
-## 英博云 (收费)
-
-高效益、多样化的GPU智算产品及服务
-
-https://www.ebcloud.com/
-
-
-
-
-
-## cherry-studio 桌面客户端
+### cherry-studio
 
 Cherry Studio 是一个支持多个LLM提供商的桌面客户端。
 
@@ -119,6 +83,16 @@ Cherry Studio 是一个支持多个LLM提供商的桌面客户端。
 * https://github.com/langchain4j/langchain4j
 * [100 多种人工智能代理、代理技能以及 RAG 应用程序](https://github.com/Shubhamsaboo/awesome-llm-apps) 
 * [PandaWiki 是一款 AI 大模型驱动的开源知识库搭建系统，帮助你快速构建智能化的 产品文档、技术文档、FAQ、博客系统，借助大模型的力量为你提供 AI 创作、AI 问答、AI 搜索等能力](https://github.com/chaitin/PandaWiki) 
+* 文本转语音
+  * [ChatTTS 是一个专门为对话场景（如 LLM 助手）设计的文本转语音模型](https://github.com/2noise/ChatTTS) 
+
+
+
+
+
+## 付费服务
+
+* [英博云：高效益、多样化的GPU智算产品及服务](https://www.ebcloud.com/) 
 
 
 
