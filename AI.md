@@ -51,6 +51,28 @@ Cherry Studio 是一个支持多个LLM提供商的桌面客户端。
 
 
 
+### OpenCode
+
+文档：https://github.com/anomalyco/opencode
+
+
+
+### Gemini CLI
+
+文档：https://github.com/google-gemini/gemini-cli
+
+
+
+## 在线ai
+
+https://bolt.new/
+
+百度秒哒 https://www.miaoda.cn/
+
+ 美团 NoCode  https://nocode.cn/
+
+
+
 ## 本地部署框架
 
 * [vLLM](https://github.com/vllm-project/vllm) ：适合公司大算力部署

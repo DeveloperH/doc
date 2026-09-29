@@ -2,19 +2,17 @@
 
 
 
-## Link
+## 开源
 
-* http://prompts.chat/  全球最大的开源 AI 提示词（Prompt）库与社区平台
+### 工具
+
 * [VoxCPM 开源的一个高质量、高逼真度的语音生成与大语言模型（TTS / Speech LLM）开源框架](https://github.com/OpenBMB/VoxCPM) 
 
 
 
-
-
-## 开源
-
 ### 提示词
 
+* [全球最大的开源 AI 提示词（Prompt）库与社区平台](https://github.com/f/prompts.chat) http://prompts.chat/ 
 * [system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) ：专门收集和汇总各类主流 AI 工具系统提示词（System Prompts） 与 模型配置（Model Configurations） 的开源知识库。可以用来参考学习顶级工具内部是怎么写提示词的。
 * [一个名为 CLAUDE.md 的文件，旨在改进 Claude 代码的行为](https://github.com/multica-ai/andrej-karpathy-skills) 
 
@@ -28,6 +26,7 @@
   * https://github.com/datawhalechina/hello-agents 从零开始构建智能体
   * https://github.com/datawhalechina/easy-vibe vibe 编程入门｜AI 原生产品构建者的第一门课程
 * [吴恩达机器学习](https://github.com/fengdu78) 
+* [claude-cookbooks Anthropic 官方提供的 Claude 使用技巧和代码示例集合，包含工具调用、RAG、分类、摘要、多模态等各种实用场景的教程](https://github.com/anthropics/claude-cookbooks) 
 
 
 
@@ -90,7 +89,25 @@ ollama rm <模型名称>
 
 
 
+LangChain RAG项目实战 init 提示词：
 
+```
+我的毕设是，通过langchain框架，开发RAG企业级知识库问答系统，用户可以通过浏览器进行知识库问答操作；
+问答系统主要是针对电商平台售卖商品进行回答，提供的知识库多数是商品相关信息，帮助更好的回答用户关于商品的问题；
+技术选型上，我听说AI领域langchain是非常知名的开发框架，所以必须选择langchain，其余技术栈你来决定；
+
+我需要有如下功能：
+1. 能够支持用户在浏览器中进行知识库管理
+2. 能够支持用户在浏览器中和模型进行知识库问答，问答的时候要尽量引用知识库内容作为参考，在回答中能够显示引用的知识库片段是哪些
+3. 能够支持多用户多会话管理，每个用户有每个用户的独立会话
+4. 能够保持用户的会话记录，用户不同时间段登录都能找回历史对话
+5. 支持基础的用户注册登录功能，支持用户修改密码
+6. 管理员用户名admin，密码123456，只有管理员能够打开知识库管理页面，进行知识库管理，其他用户只能进行知识库问答
+7. 不仅仅实现基础功能，也要应用各类技术做性能优化，达到企业级使用的效果
+8. 其余你觉得有必要可以添加的功能点
+
+你帮我列出来方案计划，我们先讨论；
+```
 
 
 

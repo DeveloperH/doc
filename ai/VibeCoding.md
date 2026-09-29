@@ -1,9 +1,8 @@
 ## AI 知识库导航
 
-## 链接
+## codefather 链接
 
 * [免费 AI 学习资源](https://ai.codefather.cn/library/2010958562586652674)
-* 
 
 
 
@@ -53,27 +52,7 @@ https://github.com/liyupi/ai-guide/tree/main/Vibe%20Coding%20%E9%9B%B6%E5%9F%BA%
 
 
 
-## 其他链接
-
-opencode https://github.com/anomalyco/opencode
-
-gemini-cli https://github.com/google-gemini/gemini-cli
-
-
-
-Claude Code 搭配国产大模型：既能正常使用，成本也不高。快速搭建中小型项目、或者进行文件批处理操作。
-
-OpenCode：完全免费开源，支持多模型切换，没有地区限制，适合预算有限的学生和个人开发者。
-
-
-
- [鱼皮的保姆级 GitHub 学习路线](https://www.codefather.cn/course/1789189862986850306/section/1789190804671012866)
-
-
-
-推荐一个学习资源 [Claude Cookbooks](https://github.com/anthropics/claude-cookbooks)，这是 Anthropic 官方提供的 Claude 使用技巧和代码示例集合，包含工具调用、RAG、分类、摘要、多模态等各种实用场景的教程，非常值得学习。
-
-
+### 其他链接
 
 鱼皮分享过多种快速部署上线项目的视频教程：
 
@@ -82,22 +61,6 @@ OpenCode：完全免费开源，支持多模型切换，没有地区限制，适
 - [Nginx + 宝塔 2 种方式部署个人博客](https://www.bilibili.com/video/BV1rU4y1J785)
 - [WordPress 搭建个人博客](https://www.bilibili.com/video/BV14q4y1R7XM)
 - [4 种主流前后端项目部署](https://www.codefather.cn/course/1790943469757837313/section/1791075571845345281?contentType=video&tabKey=videoList)
-
-
-
-
-
-
-
-
-
-### 在线ai
-
-https://bolt.new/
-
-百度秒哒 https://www.miaoda.cn/
-
- 美团 NoCode  https://nocode.cn/
 
 
 
