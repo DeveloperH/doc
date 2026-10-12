@@ -2954,20 +2954,28 @@ console.log(arr1)   // [1, 2, 3, 6, 7, 8]
 
 ### ?? 空值合并操作符
 
-只有 ?? 左边为 null 或 undefined时才返回右边的值：
+只有 `??` 左边为 `null` 或 `undefined` 时才返回右边的值：
 
 ```js
 const dogName = false; 
 const name =  dogName ?? 'default';  // name = false;
+
+undefined ?? 3  // 3
+null ?? 3  // 3
+0 ?? 3	// 0
 ```
 
 
 
 ### ?. 可选链操作符
 
-可选链操作符( ?. )允许读取位于连接对象链深处的属性的值，而不必明确验证链中的每个引用是否有效。?. 操作符的功能类似于 . 链式操作符，**不同之处在于，在引用为null 或 undefined 的情况下不会引起错误**，该表达式短路返回值是 undefined。与函数调用一起使用时，如果给定的函数不存在，则返回 undefined。
+可选链操作符( `?.` )允许读取位于连接对象链深处的属性的值，而不必明确验证链中的每个引用是否有效。`?.` 操作符的功能类似于 `.` 链式操作符，**不同之处在于，在引用为 null 或 undefined 的情况下不会抛出错误**，该表达式短路返回值是 `undefined`。与函数调用一起使用时，如果给定的函数不存在，则返回 `undefined`。
 
 ```js
+let a = 1;
+let b = a.value?.v;	// undefined
+let c = a.value.v;	// 报错
+
 const name = (system && system.user && system.user.addr && system.user.addr.province && system.user.addr.province.name) || 'default';
 
 const name = system?.user?.addr?.province?.name || 'default';

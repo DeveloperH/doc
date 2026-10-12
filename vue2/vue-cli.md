@@ -355,6 +355,10 @@ created(){
 
 ## vue.config.js
 
+配置文件修改就要重启项目。
+
+
+
 ### proxy 代理
 
 ```js

@@ -179,6 +179,294 @@ console.log(Person.count) // 2  调用静态属性
 
 
 
+## 原型链
+
+JavaScript 的原型链是理解 JS 对象继承、属性查找和 `class` 本质的核心。下面从基础概念到实际应用完整拆解。
+
+
+
+### 一、三个核心概念
+
+理解原型链，先要分清这三个东西：
+
+**1. `prototype`（原型对象）**
+只有**函数**才有的属性。每个函数被创建时，都会自动获得一个 `prototype` 属性，它指向一个对象，这个对象就是将来由该函数创建的实例的“原型”。
+
+```js
+function Person(name) {
+  this.name = name;
+}
+console.log(Person.prototype); // { constructor: Person }
+```
+
+
+
+**2. `__proto__`（隐式原型）**
+**几乎所有对象**都有的属性（除了 `Object.create(null)` 创建的对象）。它指向创建该对象的构造函数的 `prototype`。
+
+```js
+const p = new Person('Tom');
+console.log(p.__proto__ === Person.prototype); // true
+```
+
+
+
+**3. `constructor`（构造函数）**
+原型对象上默认有一个 `constructor` 属性，指回它所属的构造函数。
+
+```js
+console.log(Person.prototype.constructor === Person); // true
+```
+
+
+
+三者的关系可以概括为：
+
+```
+实例 p  --__proto__-->  Person.prototype  --constructor-->  Person
+```
+
+
+
+### 二、原型链是什么
+
+当你访问一个对象的属性时，JS 引擎会按以下顺序查找：
+
+1. 先看对象**自身**有没有这个属性
+2. 没有，就去它的 `__proto__`（即构造函数的 `prototype`）上找
+3. 还没有，就继续沿着 `__proto__` 往上找
+4. 直到找到 `Object.prototype`
+5. 再往上就是 `null`，查找结束，返回 `undefined`
+
+这条由 `__proto__` 串联起来的链式结构，就是**原型链**。
+
+```js
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.sayHi = function () {
+  console.log('Hi, ' + this.name);
+};
+
+const p = new Person('Tom');
+p.sayHi(); // Hi, Tom
+// p 自身没有 sayHi，沿着 __proto__ 找到 Person.prototype.sayHi
+```
+
+
+
+### 三、完整的一条原型链
+
+以一个普通对象为例：
+
+```js
+const obj = { a: 1 };
+
+obj.__proto__ === Object.prototype;              // true
+Object.prototype.__proto__ === null;             // true
+```
+
+
+
+链的结构：
+
+```
+obj  →  Object.prototype  →  null
+```
+
+
+
+再以数组为例：
+
+```js
+const arr = [1, 2, 3];
+
+arr.__proto__ === Array.prototype;               // true
+Array.prototype.__proto__ === Object.prototype;  // true
+Object.prototype.__proto__ === null;             // true
+```
+
+
+
+链的结构：
+
+```
+arr → Array.prototype → Object.prototype → null
+```
+
+
+
+这就是为什么数组能调用 `push`（来自 `Array.prototype`），也能调用 `hasOwnProperty`（来自 `Object.prototype`）。
+
+
+
+### 四、函数也是对象
+
+函数本身也是对象，它的 `__proto__` 指向 `Function.prototype`。
+
+```js
+function Foo() {}
+Foo.__proto__ === Function.prototype;            // true
+Function.prototype.__proto__ === Object.prototype; // true
+```
+
+
+
+注意：`Function.__proto__ === Function.prototype` 也为 `true`，这是 JS 中一个自引用的特例。
+
+
+
+### 五、原型链与继承
+
+ES5 时代通过原型链实现继承：
+
+```js
+function Animal(name) {
+  this.name = name;
+}
+Animal.prototype.eat = function () {
+  console.log(this.name + ' is eating');
+};
+
+function Dog(name) {
+  Animal.call(this, name); // 继承实例属性
+}
+Dog.prototype = Object.create(Animal.prototype); // 继承原型方法
+Dog.prototype.constructor = Dog;                 // 修复 constructor
+
+const d = new Dog('Wang');
+d.eat(); // Wang is eating
+```
+
+
+
+链的结构：
+
+```
+d → Dog.prototype → Animal.prototype → Object.prototype → null
+```
+
+
+
+ES6 的 `class` 本质上是这套机制的语法糖：
+
+```js
+class Animal {
+  constructor(name) { this.name = name; }
+  eat() { console.log(this.name + ' is eating'); }
+}
+class Dog extends Animal {}
+```
+
+
+
+`extends` 内部做的就是设置 `Dog.prototype.__proto__ = Animal.prototype`，`super` 则调用父类构造函数。
+
+
+
+### 六、几个关键判断方法
+
+**`instanceof`**：检查构造函数的 `prototype` 是否在对象的原型链上。
+
+```js
+d instanceof Dog;     // true
+d instanceof Animal;  // true
+d instanceof Object;  // true
+```
+
+
+
+**`isPrototypeOf`**：判断某个对象是否是另一个对象的原型。
+
+```js
+Animal.prototype.isPrototypeOf(d); // true
+```
+
+
+
+**`hasOwnProperty`**：只检查对象**自身**属性，不查原型链。
+
+```js
+d.hasOwnProperty('name'); // true（自身属性）
+d.hasOwnProperty('eat');  // false（来自原型）
+```
+
+
+
+**`Object.getPrototypeOf()`**：标准方法获取原型，替代 `__proto__`。
+
+```js
+Object.getPrototypeOf(d) === Dog.prototype; // true
+```
+
+
+
+### 七、常见易错点
+
+**1. 修改原型会影响所有实例**
+
+```js
+Person.prototype.newMethod = function () {};
+// 所有已创建和将来创建的 Person 实例都能访问
+```
+
+
+
+**2. 直接替换 prototype 会断开 constructor**
+
+```js
+Dog.prototype = { bark() {} };
+// 此时 Dog.prototype.constructor 不再是 Dog，需要手动修复
+```
+
+
+
+**3. 原型上的引用类型属性会被共享**
+
+```js
+function Foo() {}
+Foo.prototype.arr = [];
+const a = new Foo();
+const b = new Foo();
+a.arr.push(1);
+console.log(b.arr); // [1] —— 被共享了
+```
+
+所以实例独有的数据应放在构造函数里，方法才放在原型上。
+
+
+
+**4. `__proto__` 是访问器属性**
+
+它本质是 `Object.prototype` 上的 getter/setter，不是所有对象都有。规范推荐用 `Object.getPrototypeOf()` 和 `Object.setPrototypeOf()`。
+
+
+
+### 八、一张图总结
+
+```
+实例对象
+   │ __proto__
+   ▼
+构造函数.prototype
+   │ __proto__
+   ▼
+父构造函数.prototype
+   │ __proto__
+   ▼
+   ...
+   │ __proto__
+   ▼
+Object.prototype
+   │ __proto__
+   ▼
+  null
+```
+
+属性查找沿着这条链向上进行，直到找到属性或到达 `null`。理解这条链，就理解了 JS 对象系统的底层逻辑。
+
+
+
 ## 闭包
 
 所谓闭包，指的是一个拥有许多变量和绑定了这些变量的环境的表达式(通常是一个函数)，因而这些变量也是该表达式的一部分。**也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域。**
@@ -953,7 +1241,7 @@ console.log(baz.a)	// 3
 
 ## call() 和 apply()
 
-`call()`和`apply()`的作用都是：改变函数中的this指向并执行该函数。区别：传参列表不同。
+`call()` 和`apply()` 的作用都是：改变函数中的 this 指向并执行该函数。区别：传参列表不同。
 
 在JS中，函数的调用形式:
 
