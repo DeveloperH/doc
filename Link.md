@@ -276,6 +276,7 @@
 * 七牛云 https://www.qiniu.com/
 * 上海汇付 https://www.huifu.com/
   * 斗拱 https://paas.huifu.com/
+* 百望云  开票服务 https://open.baiwang.com/openplatform-ui/home
 
 
 

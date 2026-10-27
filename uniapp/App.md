@@ -262,6 +262,14 @@ IOS隐私信息访问的许可描述：https://blog.csdn.net/2301_81028896/artic
 
 
 
+### Google Play
+
+“AAB 包”通常指 **Android App Bundle**，是 Google 推出的一种 Android 应用发布格式，文件扩展名为 `.aab`。它本身不能直接安装到手机上，而是一个用于上传到 Google Play 的“源文件”，由 Google Play 根据用户设备情况生成优化后的 APK。
+
+[Google Play上传应用要求Android App Bundle (AAB) 格式的相关说明](https://ask.dcloud.net.cn/article/39052) 
+
+
+
 
 
 ## 原生插件

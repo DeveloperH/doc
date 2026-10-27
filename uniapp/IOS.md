@@ -422,3 +422,25 @@ Guideline 5.6 - Developer Code of Conduct
 ```
 
 作用：开启后，App 的 Documents 目录会暴露给 iTunes 和爱思助手这类工具，允许用户通过电脑直接存取该目录下的文件。
+
+
+
+
+
+## 链接
+
+* [App Store](https://apps.apple.com/) 
+* [成为开发者 Apple Developer Program](https://developer.apple.com/cn/programs/enroll/) 
+
+
+
+
+
+
+
+
+
+
+
+
+
