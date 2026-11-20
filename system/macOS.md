@@ -76,6 +76,53 @@ macOS 自带截屏功能，快捷键很直接，不需要装任何软件。
 
 
 
+## Homebrew 安装（USTC 镜像）
+
+```
+# 1) 校验并缓存 sudo 凭据（密码用占位符代替）
+printf '%s\n' '<你的密码>' | sudo -S -v
+
+# 2) 下载安装脚本
+curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh -o /tmp/brew_install.sh
+
+# 3) 这台机器的 /etc/sudoers 里 includedir 未启用 + 无 tty 导致 sudo -n 不可用，
+#    临时加一条免密规则（安装完成后立即删除）
+printf '%s\n' '<你的密码>' | sudo -S bash -c \
+  'echo "a1234 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99-brew-temp && \
+   chmod 440 /etc/sudoers.d/99-brew-temp && \
+   visudo -c -f /etc/sudoers.d/99-brew-temp'
+sudo -n true     # 验证免密已生效
+
+# 4) 非交互安装（国内镜像）
+export HOMEBREW_INSTALL_FROM_API=1 \
+       HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git" \
+       HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api" \
+       HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+NONINTERACTIVE=1 /bin/bash /tmp/brew_install.sh
+
+# 5) 删除临时免密规则并确认已失效
+sudo rm -f /etc/sudoers.d/99-brew-temp
+sudo -n true        # 预期返回非 0（恢复需要密码）
+
+# 6) 持久化到 zsh 配置
+cat >> ~/.zprofile <<'EOF'
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+EOF
+
+# 7) 校验
+zsh -lc 'which brew && brew --version'
+zsh -lc 'brew doctor'
+
+# 8) 清理
+rm -f /tmp/brew_install.sh /tmp/brew_install.log
+
+```
+
 
 
 
